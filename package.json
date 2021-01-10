@@ -37,6 +37,8 @@
         "mongoose": "^5.10.11",
         "node-fetch": "^2.6.1",
         "react": "^16.5.2",
+        "react-bootstrap": "^1.4.3",
+        "react-card-flip": "^1.0.11",
         "react-dom": "^16.5.2",
         "react-redux": "^7.2.2",
         "regenerator-runtime": "^0.13.7",
