@@ -1,4 +1,3 @@
-
 import express, { Router } from 'express';
 import bodyParser from 'body-parser';
 import { api } from './route/routes/index';

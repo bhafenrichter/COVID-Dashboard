@@ -23,12 +23,12 @@ class VaccineProvider implements ICOVIDVaccineProvider {
         (json) => {
           let vaccinationDate = moment(json.date);
           if (
-            json.location.toLowerCase() === country &&
+            json.location.toLowerCase() === country.toLowerCase() &&
             vaccinationDate > cutoffDate
           ) {
             let currentVaccine: VaccineDay = {
               day: vaccinationDate,
-              vaccines: json.daily_vaccinations as number,
+              vaccines: Number(json.daily_vaccinations) as number,
             };
             results.push(currentVaccine);
           }

@@ -1,4 +1,3 @@
-import { router as vaccinations } from './vaccinations';
-import { router as covid } from './covid';
+import { router as country } from './country';
 
-export const api = { vaccinations, covid };
+export const api = { country };

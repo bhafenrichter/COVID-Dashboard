@@ -63,4 +63,4 @@ class COVIDDataProvider implements ICOVIDDataProvider {
   };
 }
 
-export const covidData = new COVIDDataProvider();
+export const covidDataProvider = new COVIDDataProvider();

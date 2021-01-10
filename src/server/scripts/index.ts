@@ -2,8 +2,7 @@
     Provides the implementations of the scripts to the controllers
 */
 
-import { covidData } from "./covidProvider";
+import { covidDataProvider } from './covidProvider';
+import { vaccineProvider } from './vaccineProvider';
 
-export {
-    covidData
-}
+export { covidDataProvider, vaccineProvider };
