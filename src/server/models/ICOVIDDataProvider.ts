@@ -1,18 +1,23 @@
+import { Moment } from 'moment';
+
 /*
     Interface for grabbing needed cases and deaths data to populate the COVID Dashboard
 */
 export interface ICOVIDDataProvider {
-    getCOVIDDataByDay: (country: string, days: number) => Promise<Array<COVIDDay>>;
-    getCOVIDDataForCountry: (country: string) => Promise<COVIDCountry>;
+  getCOVIDDataByDay: (
+    country: string,
+    days: number
+  ) => Promise<Array<COVIDDay>>;
+  getCOVIDDataForCountry: (country: string) => Promise<COVIDCountry>;
 }
 
 export interface COVIDDay {
-    day: Date;
-    cases: number;
-    deaths: number;
+  day: Moment;
+  cases: number;
+  deaths: number;
 }
 
 export interface COVIDCountry {
-    cases: number;
-    deaths: number;
+  cases: number;
+  deaths: number;
 }
