@@ -11,8 +11,8 @@ import {
 
 class COVIDDataProvider implements ICOVIDDataProvider {
   BASE_URL = 'https://api.covid19api.com/';
-  CASE_URL = 'country/{country}/status/confirmed';
-  DEATH_URL = 'country/{country}/status/deaths';
+  CASE_URL = 'total/country/{country}/status/confirmed';
+  DEATH_URL = 'total/country/{country}/status/deaths';
   URL_DATE_FORMAT = 'YYYY-MM-DD';
 
   constructor() {}
@@ -52,14 +52,26 @@ class COVIDDataProvider implements ICOVIDDataProvider {
       }
     }
 
+    results.sort((a, b) => (a.day > b.day ? -1 : 1));
+
     return results;
   };
   getCOVIDDataForCountry = async (country: string) => {
-    let results: COVIDCountry = {
-      cases: 0,
-      deaths: 0,
+    const results = await this.getCOVIDDataByDay(country, 9999);
+
+    let totalCases = 0;
+    let totalDeaths = 0;
+
+    results.forEach((entry) => {
+      totalCases += entry.cases;
+      totalDeaths += entry.deaths;
+    });
+
+    let result: COVIDCountry = {
+      cases: totalCases,
+      deaths: totalDeaths,
     };
-    return results;
+    return result;
   };
 }
 

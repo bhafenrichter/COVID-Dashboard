@@ -23,28 +23,43 @@ class CalculationsProvider implements ICalculationsProvider {
       deathsTrending: this.getDeathsTrendingDirection(cases),
       populationImmunity: this.getPopulationImmunity(
         population,
-        totalVaccinations
+        totalVaccinations,
+        totalCases,
+        totalDeaths
       ),
       deathRate: this.getDeathRate(totalDeaths, totalCases),
     };
   };
   getCasesTrendingDirection = (cases: COVIDDay[]) => {
-    return TRENDING_STATE.UP;
+    const thisWeek = cases.slice(0, 6).map((x) => x.cases);
+    const lastWeek = cases.slice(7, 13).map((x) => x.cases);
+    return thisWeek > lastWeek ? TRENDING_STATE.UP : TRENDING_STATE.DOWN;
   };
   getDeathsTrendingDirection = (cases: COVIDDay[]) => {
-    return TRENDING_STATE.UP;
+    const thisWeek = cases.slice(0, 6).map((x) => x.deaths);
+    const lastWeek = cases.slice(7, 13).map((x) => x.deaths);
+    return thisWeek > lastWeek ? TRENDING_STATE.UP : TRENDING_STATE.DOWN;
   };
   getCasesThisWeek = (cases: COVIDDay[]) => {
-    return 0;
+    const thisWeek = cases.slice(0, 6).map((x) => x.cases);
+    return thisWeek.reduce((x, y) => x + y);
   };
   getDeathsThisWeek = (cases: COVIDDay[]) => {
-    return 0;
+    const thisWeek = cases.slice(0, 6).map((x) => x.deaths);
+    return thisWeek.reduce((x, y) => x + y);
   };
-  getPopulationImmunity = (population: number, totalVaccinations: number) => {
-    return 0;
+  getPopulationImmunity = (
+    population: number,
+    totalVaccinations: number,
+    totalCases: number,
+    totalDeaths: number
+  ) => {
+    let immunityRate =
+      (totalVaccinations + (totalCases - totalDeaths)) / population;
+    return immunityRate.toFixed(3);
   };
   getDeathRate = (totalDeaths: number, totalCases: number) => {
-    return 0;
+    return (totalDeaths / totalCases).toFixed(3);
   };
 }
 

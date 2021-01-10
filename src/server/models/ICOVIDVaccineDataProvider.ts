@@ -9,6 +9,7 @@ export interface ICOVIDVaccineProvider {
     country: string,
     days: number
   ) => Promise<Array<VaccineDay>>;
+  getVaccinationsByCountry: (country: string) => Promise<number>;
 }
 
 export type VaccineDay = {

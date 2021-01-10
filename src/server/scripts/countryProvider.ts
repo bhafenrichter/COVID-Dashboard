@@ -6,6 +6,9 @@ import fetch from 'node-fetch';
 class CountryProvider implements ICountryDataProvider {
   BASE_URL = 'https://restcountries.eu/rest/v2/alpha/{COUNTRY_CODE}';
   createRequest = async (country: string) => {
+    if (country === 'United States') {
+      country += ' of America';
+    }
     let countryCode = getAlpha2Code(country, 'en');
     let requestUrl = this.BASE_URL.replace('{COUNTRY_CODE}', countryCode);
 

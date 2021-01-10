@@ -14,9 +14,11 @@ export interface ICalculationsProvider {
   getDeathsTrendingDirection: (cases: Array<COVIDDay>) => TRENDING_STATE;
   getPopulationImmunity: (
     population: number,
-    totalVaccinations: number
-  ) => number;
-  getDeathRate: (totalDeaths: number, totalCases: number) => number;
+    totalVaccinations: number,
+    totalCases: number,
+    totalDeaths: number
+  ) => string;
+  getDeathRate: (totalDeaths: number, totalCases: number) => string;
 }
 
 export enum TRENDING_STATE {

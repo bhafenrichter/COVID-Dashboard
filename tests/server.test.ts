@@ -31,10 +31,12 @@ describe('COVID Data Provider', () => {
     async () => {
       const dataProvider = require('./../src/server/scripts/countryProvider');
 
-      const req = await dataProvider.countryProvider.getPopulation('Germany');
+      const req = await dataProvider.countryProvider.getPopulation(
+        'United States'
+      );
       expect(req).toBeDefined();
 
-      const req2 = await dataProvider.countryProvider.getLogo('Germany');
+      const req2 = await dataProvider.countryProvider.getLogo('United States');
       expect(req2).toBeDefined();
     },
     TIMEOUT

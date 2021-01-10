@@ -15,17 +15,16 @@ router.post('/country', async (req, res) => {
   const covidData = await covidDataProvider.getCOVIDDataByDay(country, days);
   const population = await countryProvider.getPopulation(country);
 
-  let totalCases = 0;
-  let totalDeaths = 0;
-  let totalVaccines = 0;
-  covidData.forEach((entry) => {
-    totalCases += entry.cases;
-    totalDeaths += entry.deaths;
-  });
+  const countryCOVIDTotals = await covidDataProvider.getCOVIDDataForCountry(
+    country
+  );
+  const countryVaccinationTotal = await vaccineProvider.getVaccinationsByCountry(
+    country
+  );
 
-  vaccines.forEach((entry) => {
-    totalVaccines += entry.vaccines;
-  });
+  let totalCases = countryCOVIDTotals.cases;
+  let totalDeaths = countryCOVIDTotals.deaths;
+  let totalVaccines = countryVaccinationTotal;
 
   const calculations = await calculationsProvider.getCalculations(
     covidData,

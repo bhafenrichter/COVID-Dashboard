@@ -43,6 +43,14 @@ class VaccineProvider implements ICOVIDVaccineProvider {
 
     return results;
   };
+  getVaccinationsByCountry = async (country: string) => {
+    const vaccines = await this.getVaccinationByDay(country, 9999);
+    let totalVaccines = 0;
+    vaccines.forEach((entry) => {
+      totalVaccines += entry.vaccines;
+    });
+    return totalVaccines;
+  };
 }
 
 export const vaccineProvider = new VaccineProvider();
