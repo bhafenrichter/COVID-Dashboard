@@ -4,5 +4,6 @@
 
 import { covidDataProvider } from './covidProvider';
 import { vaccineProvider } from './vaccineProvider';
+import { countryProvider } from './countryProvider';
 
-export { covidDataProvider, vaccineProvider };
+export { covidDataProvider, vaccineProvider, countryProvider };

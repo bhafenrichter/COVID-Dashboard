@@ -6,7 +6,10 @@ describe('COVID Data Provider', () => {
     'Connect to COVID Data Provider',
     async () => {
       const dataProvider = require('./../src/server/scripts/covidProvider');
-      const req = await dataProvider.covidData.getCOVIDDataByDay('germany', 30);
+      const req = await dataProvider.covidDataProvider.getCOVIDDataByDay(
+        'germany',
+        30
+      );
       expect(req).toBeDefined();
     },
     TIMEOUT
@@ -15,12 +18,24 @@ describe('COVID Data Provider', () => {
     'Connect to COVID Vaccination Provider',
     async () => {
       const dataProvider = require('./../src/server/scripts/vaccineProvider');
-      console.log(dataProvider);
       const req = await dataProvider.vaccineProvider.getVaccinationByDay(
         'germany',
         30
       );
       expect(req).toBeDefined();
+    },
+    TIMEOUT
+  );
+  it(
+    'Connect to Country Provider',
+    async () => {
+      const dataProvider = require('./../src/server/scripts/countryProvider');
+
+      const req = await dataProvider.countryProvider.getPopulation('Germany');
+      expect(req).toBeDefined();
+
+      const req2 = await dataProvider.countryProvider.getLogo('Germany');
+      expect(req2).toBeDefined();
     },
     TIMEOUT
   );
