@@ -8,18 +8,24 @@ import {
   calculationsProvider,
 } from './../../scripts/index';
 
-router.post('/country', async (req, res) => {
-  const { country, days } = req.body;
+router.get('/country', async (req, res) => {
+  const { country, days } = req.query;
 
-  const vaccines = await vaccineProvider.getVaccinationByDay(country, days);
-  const covidData = await covidDataProvider.getCOVIDDataByDay(country, days);
-  const population = await countryProvider.getPopulation(country);
+  const vaccines = await vaccineProvider.getVaccinationByDay(
+    country as string,
+    Number(days)
+  );
+  const covidData = await covidDataProvider.getCOVIDDataByDay(
+    country as string,
+    Number(days)
+  );
+  const population = await countryProvider.getPopulation(country as string);
 
   const countryCOVIDTotals = await covidDataProvider.getCOVIDDataForCountry(
-    country
+    country as string
   );
   const countryVaccinationTotal = await vaccineProvider.getVaccinationsByCountry(
-    country
+    country as string
   );
 
   let totalCases = countryCOVIDTotals.cases;

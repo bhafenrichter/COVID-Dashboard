@@ -2,6 +2,8 @@ import express, { Router } from 'express';
 import bodyParser from 'body-parser';
 import { api } from './route/routes/index';
 
+import { Cache } from './middlewares/cache';
+
 // call express
 const app = express(); // define our app using express
 
@@ -22,6 +24,7 @@ app.get('/', (req, res) => {
 // REGISTER OUR ROUTES -------------------------------
 // all of our routes will be prefixed with /api
 const routes: Router[] = Object.values(api);
+app.use('/api', Cache);
 app.use('/api', routes);
 
 // START THE SERVER
