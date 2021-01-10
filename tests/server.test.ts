@@ -7,7 +7,7 @@ describe('COVID Data Provider', () => {
     async () => {
       const dataProvider = require('./../src/server/scripts/covidProvider');
       const req = await dataProvider.covidData.getCOVIDDataByDay('germany', 30);
-      expect(true).toBe(true);
+      expect(req).toBeDefined();
     },
     TIMEOUT
   );
