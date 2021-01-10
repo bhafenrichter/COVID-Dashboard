@@ -50,8 +50,6 @@ class COVIDDataProvider implements ICOVIDDataProvider {
         };
         results.push(currentDay);
       }
-    } else {
-      return null;
     }
 
     return results;

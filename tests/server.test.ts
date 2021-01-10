@@ -11,4 +11,17 @@ describe('COVID Data Provider', () => {
     },
     TIMEOUT
   );
+  it(
+    'Connect to COVID Vaccination Provider',
+    async () => {
+      const dataProvider = require('./../src/server/scripts/vaccineProvider');
+      console.log(dataProvider);
+      const req = await dataProvider.vaccineProvider.getVaccinationByDay(
+        'germany',
+        30
+      );
+      expect(req).toBeDefined();
+    },
+    TIMEOUT
+  );
 });
