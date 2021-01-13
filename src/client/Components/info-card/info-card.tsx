@@ -23,6 +23,7 @@ export default function InfoCard(props: InfoCardProps) {
       <div className={wrapperClass + ' info-card'}>
         <HelpButton
           text={'How is this calculated?'}
+          direction="bottomright"
           onClick={() => setFlipped(!flipped)}
         />
 

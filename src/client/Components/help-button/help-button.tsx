@@ -12,7 +12,7 @@ export function HelpButton(props: HelpButtonProps) {
   const { text, direction, onClick } = props;
 
   return (
-    <div className="help-icon" onClick={onClick}>
+    <div className={'help-icon-' + direction} onClick={onClick}>
       <OverlayTrigger
         key={'0'}
         overlay={<Tooltip id={`tooltip-${'0'}`}>{text}</Tooltip>}>
