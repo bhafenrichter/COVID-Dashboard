@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import '../style/app.less';
 
 import { Col, Container, Row } from 'react-bootstrap';
@@ -8,7 +8,19 @@ import { CountrySelector } from './country-selector/country-selector';
 import { DataCard } from './data-card/dataCard';
 import { LineChart } from './line-chart/lineChart';
 import { CountryList } from './country-list/countryList';
+
+import { api } from './../scripts/api';
+import { COVIDDataModel } from '../../../types';
 export function App() {
+  const [country, setCountry] = useState('Germany');
+  let [data, setCOVIDData] = useState({ calculations: {} } as COVIDDataModel);
+  let { calculations } = data;
+  // @ts-ignore
+  useEffect(async () => {
+    let results: COVIDDataModel = await api.getCOVIDDate(country);
+    setCOVIDData(results);
+  }, []);
+
   return (
     <div>
       <Navbar />
@@ -18,22 +30,22 @@ export function App() {
         </Row>
         <Row className="covid-row">
           <InfoCard
-            content={'1'}
+            content={calculations.casesThisWeek || ''}
             description={'Cases this Week'}
             helpText={'test'}
             wrapperClass="purple-gradient"></InfoCard>
           <InfoCard
-            content={'1'}
+            content={calculations.deathsThisWeek || ''}
             description={'Deaths this Week'}
             helpText={'test'}
             wrapperClass="blue-gradient"></InfoCard>
           <InfoCard
-            content={'1'}
+            content={calculations.populationImmunity || ''}
             description={'Immunity Percent'}
             helpText={'test'}
             wrapperClass="red-gradient"></InfoCard>
           <InfoCard
-            content={'1'}
+            content={calculations.deathRate || ''}
             description={'Death Rate'}
             helpText={'test'}
             wrapperClass="green-gradient"></InfoCard>
@@ -44,7 +56,9 @@ export function App() {
             <DataCard
               title="Cases by Day"
               description="as of Jan. 3rd 2021 at 10:25pm">
-              <LineChart></LineChart>
+              <LineChart
+                keys={['cases', 'deaths']}
+                data={data.covidData}></LineChart>
             </DataCard>
           </Col>
           <Col lg="3">
@@ -56,7 +70,9 @@ export function App() {
             <DataCard
               title="Vaccinations by Day"
               description="as of Jan. 3rd 2021 at 10:25pm">
-              <LineChart></LineChart>
+              <LineChart
+                keys={['vaccines', '']}
+                data={data.vaccines}></LineChart>
             </DataCard>
           </Col>
           <Col lg="3">

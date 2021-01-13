@@ -12,6 +12,7 @@ const CACHE_TIMEOUT = 1800000;
 
 // gets called for every request
 Cache.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', '*');
   if (req.method === 'GET') {
     let key = '_cache_' + req.originalUrl || req.url;
     let cachedResponse = mcache.get(key);

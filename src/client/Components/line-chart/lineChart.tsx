@@ -12,11 +12,12 @@ import {
 } from 'recharts';
 
 export interface LineChartProps {
+  keys: Array<string>;
   data?: Array<any>;
 }
 
 export const LineChart: React.SFC<LineChartProps> = (props) => {
-  const { data } = props;
+  const { data, keys } = props;
   const [renderedData, setRenderedData] = useState([
     { name: 'a', uv: 400, pv: 2400, amt: 3600 },
     { name: 'a', uv: 400, pv: 2400, amt: 3600 },
@@ -25,7 +26,12 @@ export const LineChart: React.SFC<LineChartProps> = (props) => {
 
   useEffect(() => {
     if (data === []) {
-      // setRenderedData([{name: 'a', value: 12}]);
+      // @ts-ignore
+      setRenderedData([{ name: 'a', value: 12 }]);
+    } else {
+      console.log('triggered');
+      // @ts-ignore
+      setRenderedData(data);
     }
   }, [data]);
 
@@ -34,11 +40,11 @@ export const LineChart: React.SFC<LineChartProps> = (props) => {
       <Rechart
         data={renderedData}
         margin={{ top: 5, right: 20, left: 10, bottom: 5 }}>
-        <Line type="monotone" dataKey="uv" stroke="#DFE0EB" />
-        <Line type="monotone" dataKey="pv" stroke="rgba(55, 81, 255, 1)" />
-        <CartesianGrid strokeDasharray="3 3" />
+        <Line type="monotone" dataKey={keys[0]} stroke="rgba(55, 81, 255, 1)" />
+        <Line type="monotone" dataKey={keys[1]} stroke="#DFE0EB" />
         <XAxis dataKey="name" />
-        <Tooltip />
+        <YAxis />
+        <Tooltip wrapperClassName="tooltip-wrapper" />
       </Rechart>
     </ResponsiveContainer>
   );

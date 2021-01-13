@@ -19,7 +19,7 @@ class CalculationsProvider implements ICalculationsProvider {
     return {
       casesThisWeek: this.getCasesThisWeek(cases),
       casesTrending: this.getCasesTrendingDirection(cases),
-      getDeathsThisWeek: this.getDeathsThisWeek(cases),
+      deathsThisWeek: this.getDeathsThisWeek(cases),
       deathsTrending: this.getDeathsTrendingDirection(cases),
       populationImmunity: this.getPopulationImmunity(
         population,
@@ -54,8 +54,7 @@ class CalculationsProvider implements ICalculationsProvider {
     totalCases: number,
     totalDeaths: number
   ) => {
-    let immunityRate =
-      (totalVaccinations + (totalCases - totalDeaths)) / population;
+    let immunityRate = totalVaccinations / population;
     return immunityRate.toFixed(3);
   };
   getDeathRate = (totalDeaths: number, totalCases: number) => {

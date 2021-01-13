@@ -52,7 +52,7 @@ class COVIDDataProvider implements ICOVIDDataProvider {
       }
     }
 
-    results.sort((a, b) => (a.day > b.day ? -1 : 1));
+    // results.sort((a, b) => (a.day > b.day ? -1 : 1));
 
     return results;
   };

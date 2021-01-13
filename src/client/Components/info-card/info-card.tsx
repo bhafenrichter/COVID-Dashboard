@@ -7,7 +7,7 @@ import { HelpButton } from './../help-button/help-button';
 interface InfoCardProps {
   helpText: string;
   wrapperClass: string;
-  content?: string;
+  content?: string | number;
   description?: string;
 }
 

@@ -9,6 +9,7 @@ import {
 } from './../../scripts/index';
 
 router.get('/country', async (req, res) => {
+  res.header('Access-Control-Allow-Origin', '*');
   const { country, days } = req.query;
 
   const vaccines = await vaccineProvider.getVaccinationByDay(
