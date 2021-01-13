@@ -4,12 +4,15 @@ import '../style/app.less';
 import { Container, Row } from 'react-bootstrap';
 import InfoCard from './info-card/info-card';
 import { Navbar } from './navbar/navbar';
-import { Modal } from './modal/modal';
+import { CountrySelector } from './country-selector/country-selector';
 export function App() {
   return (
     <div>
       <Navbar />
       <Container className="app-container">
+        <Row>
+          <CountrySelector country={'Germany'} />
+        </Row>
         <Row>
           <InfoCard
             content={'1'}
@@ -33,7 +36,6 @@ export function App() {
             wrapperClass="green-gradient"></InfoCard>
         </Row>
       </Container>
-      <Modal></Modal>
     </div>
   );
 }

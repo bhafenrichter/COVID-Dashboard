@@ -96,11 +96,7 @@ module.exports = {
         new MiniCssExtractPlugin({
             filename: "./css/[name].css",
             chunkFilename: "./css/[id].css",
-        }),
-        new CopyPlugin([{
-            from: "./src/client/Assets",
-            to: "assets"
-        }, ])
+        })
     ],
     optimization: {
         minimizer: [new UglifyJsPlugin()],

@@ -1,17 +1,26 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Rodal from 'rodal';
+import { createPortal } from "react-dom";
 
 interface ModalProps {
+  visible: boolean;
   content?: any;
+  onClose: () => void;
 }
 
-export function Modal(props: ModalProps) {
-  const [visible, setVisible] = useState(true);
-  const { content } = props;
+const modalElement = document.getElementById('modal-root') as Element;
 
-  return (
-    <Rodal visible={visible} onClose={() => setVisible(false)}>
+export function Modal(props: ModalProps) {
+  const { content, onClose, visible } = props;
+  const [visibility, setVisibility] = useState(false);
+
+  useEffect(() => {
+    setVisibility(visible);
+  }, [visible]);
+
+  return createPortal(
+    <Rodal visible={visibility} onClose={onClose}>
       <div>{content}</div>
-    </Rodal>
+    </Rodal>, modalElement
   );
 }
