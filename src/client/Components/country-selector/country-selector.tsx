@@ -5,7 +5,7 @@ import { Modal } from './../modal/modal';
 import { CountryListModal } from './../country-list/countryListModal';
 import { Country } from '../../../server/models/ICOVIDDataProvider';
 interface CountrySelectorProps {
-  country: string;
+  country: Country;
   countries: Array<Country>;
 }
 
@@ -21,10 +21,10 @@ export function CountrySelector(props: CountrySelectorProps) {
     <div className="country-selector">
       <h3 className="text country-selector-text" onClick={toggleModal}>
         COVID-19 Figures for {modalVisible}
-        <span className="country-selector-country">{country}</span>
+        <span className="country-selector-country">{country.name}</span>
       </h3>
       <div className="country-flag" onClick={toggleModal}>
-        <img src="https://restcountries.eu/data/deu.svg" />
+        <img src={country.logo} />
       </div>
       <div className="country-select" onClick={toggleModal}>
         <FaCaretDown />

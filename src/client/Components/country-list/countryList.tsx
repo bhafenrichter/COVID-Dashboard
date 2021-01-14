@@ -24,8 +24,7 @@ export const CountryList = function (props: CountryListProps) {
       for (let j = 0; j < itemsPerRow; j++) {
         if (i * itemsPerRow + j < countries.length) {
           renderedCountries[i].push(
-            <CountryRow
-              country={countries[i * itemsPerRow + j]?.name}></CountryRow>
+            <CountryRow country={countries[i * itemsPerRow + j]}></CountryRow>
           );
         }
       }

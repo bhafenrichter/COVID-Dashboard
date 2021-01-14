@@ -3,9 +3,12 @@ import bodyParser from 'body-parser';
 import { api } from './route/routes/index';
 
 import { Cache } from './middlewares/cache';
+import path from 'path';
 
 // call express
 const app = express(); // define our app using express
+
+app.use('/static', express.static(path.join(__dirname, 'static')));
 
 // configure app to use bodyParser()
 // this will let us get the data from a POST

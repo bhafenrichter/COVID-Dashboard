@@ -15,21 +15,23 @@ import { COVIDDataModel } from '../../../types';
 import { Country } from '../../server/models/ICOVIDDataProvider';
 
 export function App() {
-  const [country, setCountry] = useState('Germany');
+  const [country, setCountry] = useState({
+    name: 'Germany',
+    logo: '',
+  });
   let [data, setCOVIDData] = useState({ calculations: {} } as COVIDDataModel);
   let [countries, setCountries] = useState([] as Array<Country>);
 
   let { calculations } = data;
   // @ts-ignore
   useEffect(() => {
-    const fetchCountryData = async () => {
-      console.log('setting country');
-      let results: COVIDDataModel = await api.getCOVIDDate(country);
+    const fetchCountryData = async (newCountry: Country) => {
+      let results: COVIDDataModel = await api.getCOVIDDate(country.name);
       let fetchedCountries: Array<Country> = await api.getCountries();
       setCOVIDData(results);
       setCountries(fetchedCountries);
     };
-    fetchCountryData();
+    fetchCountryData(country);
   }, [country]);
 
   ee.subscribe(EVTS.CHANGE_COUNTRY, (args) => {
