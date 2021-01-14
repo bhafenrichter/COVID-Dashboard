@@ -8,6 +8,11 @@ import {
   calculationsProvider,
 } from './../../scripts/index';
 
+router.get('/countries', async (req, res) => {
+  const countries = await covidDataProvider.getCOVIDCountries();
+  res.send(countries);
+});
+
 router.get('/country', async (req, res) => {
   res.header('Access-Control-Allow-Origin', '*');
   const { country, days } = req.query;

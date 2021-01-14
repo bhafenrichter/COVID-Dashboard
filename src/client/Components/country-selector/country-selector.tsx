@@ -2,22 +2,20 @@ import React, { useCallback, useEffect, useState } from 'react';
 import { FaCaretDown } from 'react-icons/fa';
 
 import { Modal } from './../modal/modal';
-
+import { CountryListModal } from './../country-list/countryListModal';
+import { Country } from '../../../server/models/ICOVIDDataProvider';
 interface CountrySelectorProps {
   country: string;
+  countries: Array<Country>;
 }
 
 export function CountrySelector(props: CountrySelectorProps) {
-  const { country } = props;
+  const { country, countries } = props;
   const [modalVisible, setVisible] = useState(false);
 
   const toggleModal = () => {
     setVisible((prevVisible) => !prevVisible);
   };
-
-  useEffect(() => {
-    console.log('re-render triggered: ' + modalVisible);
-  }, [modalVisible]);
 
   return (
     <div className="country-selector">
@@ -33,7 +31,7 @@ export function CountrySelector(props: CountrySelectorProps) {
       </div>
       <Modal
         visible={modalVisible}
-        content={<div>test testington</div>}
+        content={<CountryListModal countries={countries} />}
         onClose={toggleModal}></Modal>
     </div>
   );

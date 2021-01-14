@@ -17,3 +17,30 @@
         color: white;
     }
 }
+
+.country-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.rodal-dialog {
+    overflow-y: scroll;
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+    -webkit-scrollbar {
+        display: none;
+    }
+    .country-row {
+        justify-content: flex-start;
+        cursor: pointer;
+
+        .text:hover {
+            color: white;
+        }
+    }
+    .country-flag {
+        margin-right: 15px;
+        margin-top: 0.25em;
+    }
+}

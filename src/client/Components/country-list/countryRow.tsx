@@ -2,7 +2,7 @@ import React from 'react';
 
 export interface CountryRowProps {
   country: string;
-  stat: string;
+  stat?: string;
 }
 
 export const CountryRow = function (props: CountryRowProps) {

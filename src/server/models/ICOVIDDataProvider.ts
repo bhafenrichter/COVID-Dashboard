@@ -9,6 +9,7 @@ export interface ICOVIDDataProvider {
     days: number
   ) => Promise<Array<COVIDDay>>;
   getCOVIDDataForCountry: (country: string) => Promise<COVIDCountry>;
+  getCOVIDCountries: () => Promise<Array<Country>>;
 }
 
 export interface COVIDDay {
@@ -20,4 +21,9 @@ export interface COVIDDay {
 export interface COVIDCountry {
   cases: number;
   deaths: number;
+}
+
+export interface Country {
+  logo: string;
+  name: string;
 }

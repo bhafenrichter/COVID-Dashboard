@@ -11,14 +11,20 @@ import { CountryList } from './country-list/countryList';
 
 import { api } from './../scripts/api';
 import { COVIDDataModel } from '../../../types';
+import { Country } from '../../server/models/ICOVIDDataProvider';
+
 export function App() {
   const [country, setCountry] = useState('Germany');
   let [data, setCOVIDData] = useState({ calculations: {} } as COVIDDataModel);
+  let [countries, setCountries] = useState([] as Array<Country>);
+
   let { calculations } = data;
   // @ts-ignore
   useEffect(async () => {
     let results: COVIDDataModel = await api.getCOVIDDate(country);
+    let fetchedCountries: Array<Country> = await api.getCountries();
     setCOVIDData(results);
+    setCountries(fetchedCountries);
   }, []);
 
   return (
@@ -26,7 +32,7 @@ export function App() {
       <Navbar />
       <Container className="app-container">
         <Row className="covid-row">
-          <CountrySelector country={'Germany'} />
+          <CountrySelector country={country} countries={countries} />
         </Row>
         <Row className="covid-row">
           <InfoCard
@@ -77,7 +83,7 @@ export function App() {
           </Col>
           <Col lg="3">
             <DataCard title="Top Vaccinating Countries">
-              <CountryList></CountryList>
+              <CountryList countries={[]} />
             </DataCard>
           </Col>
         </Row>

@@ -7,5 +7,10 @@ export const api = {
     console.log(results);
     return results;
   },
-  getCountries: async () => {},
+  getCountries: async () => {
+    let request = await fetch(`http://localhost:3001/api/countries`);
+    let results = await request.json();
+    console.log(results);
+    return results;
+  },
 };

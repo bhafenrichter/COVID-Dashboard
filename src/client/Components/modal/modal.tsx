@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Rodal from 'rodal';
-import { createPortal } from "react-dom";
+import { createPortal } from 'react-dom';
 
 interface ModalProps {
   visible: boolean;
@@ -21,6 +21,7 @@ export function Modal(props: ModalProps) {
   return createPortal(
     <Rodal visible={visibility} onClose={onClose}>
       <div>{content}</div>
-    </Rodal>, modalElement
+    </Rodal>,
+    modalElement
   );
 }
