@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { ee, EVTS } from './../scripts/eventEmitter';
 import '../style/app.less';
 
 import { Col, Container, Row } from 'react-bootstrap';
@@ -20,12 +21,20 @@ export function App() {
 
   let { calculations } = data;
   // @ts-ignore
-  useEffect(async () => {
-    let results: COVIDDataModel = await api.getCOVIDDate(country);
-    let fetchedCountries: Array<Country> = await api.getCountries();
-    setCOVIDData(results);
-    setCountries(fetchedCountries);
-  }, []);
+  useEffect(() => {
+    const fetchCountryData = async () => {
+      console.log('setting country');
+      let results: COVIDDataModel = await api.getCOVIDDate(country);
+      let fetchedCountries: Array<Country> = await api.getCountries();
+      setCOVIDData(results);
+      setCountries(fetchedCountries);
+    };
+    fetchCountryData();
+  }, [country]);
+
+  ee.subscribe(EVTS.CHANGE_COUNTRY, (args) => {
+    setCountry(args);
+  });
 
   return (
     <div>

@@ -1,5 +1,5 @@
 import React from 'react';
-
+import { ee, EVTS } from './../../scripts/eventEmitter';
 export interface CountryRowProps {
   country: string;
   stat?: string;
@@ -8,7 +8,12 @@ export interface CountryRowProps {
 export const CountryRow = function (props: CountryRowProps) {
   const { country, stat } = props;
   return (
-    <div className="country-row">
+    <div
+      className="country-row"
+      onClick={() => {
+        ee.dispatch(EVTS.CHANGE_COUNTRY, country);
+        ee.dispatch(EVTS.CLOSE_MODAL, null);
+      }}>
       <div className="country-flag">
         <img src="https://restcountries.eu/data/usa.svg" />
       </div>
