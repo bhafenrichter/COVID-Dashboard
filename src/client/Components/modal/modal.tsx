@@ -18,10 +18,6 @@ export function Modal(props: ModalProps) {
     setVisibility(visible);
   }, [visible]);
 
-  ee.subscribe(EVTS.CLOSE_MODAL, (args) => {
-    setVisibility(false);
-  });
-
   return createPortal(
     <Rodal visible={visibility} onClose={onClose}>
       <div>{content}</div>

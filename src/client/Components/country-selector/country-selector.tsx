@@ -4,6 +4,7 @@ import { FaCaretDown } from 'react-icons/fa';
 import { Modal } from './../modal/modal';
 import { CountryListModal } from './../country-list/countryListModal';
 import { Country } from '../../../server/models/ICOVIDDataProvider';
+import { ee, EVTS } from '../../scripts/eventEmitter';
 interface CountrySelectorProps {
   country: Country;
   countries: Array<Country>;
@@ -16,6 +17,10 @@ export function CountrySelector(props: CountrySelectorProps) {
   const toggleModal = () => {
     setVisible((prevVisible) => !prevVisible);
   };
+
+  ee.subscribe(EVTS.CLOSE_MODAL, (args) => {
+    setVisible(false);
+  });
 
   return (
     <div className="country-selector">
