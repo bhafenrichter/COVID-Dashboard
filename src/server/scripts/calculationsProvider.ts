@@ -7,6 +7,7 @@ import {
   TRENDING_STATE,
 } from '../models/ICalculationsProvider';
 import { COVIDDay } from '../models/ICOVIDDataProvider';
+import { utils } from './utils';
 
 class CalculationsProvider implements ICalculationsProvider {
   getCalculations = (
@@ -17,17 +18,21 @@ class CalculationsProvider implements ICalculationsProvider {
     totalVaccinations: number
   ) => {
     return {
-      casesThisWeek: this.getCasesThisWeek(cases),
+      casesThisWeek: utils.formatNumber(this.getCasesThisWeek(cases)),
       casesTrending: this.getCasesTrendingDirection(cases),
-      deathsThisWeek: this.getDeathsThisWeek(cases),
+      deathsThisWeek: utils.formatNumber(this.getDeathsThisWeek(cases)),
       deathsTrending: this.getDeathsTrendingDirection(cases),
-      populationImmunity: this.getPopulationImmunity(
-        population,
-        totalVaccinations,
-        totalCases,
-        totalDeaths
+      populationImmunity: utils.formatPercent(
+        this.getPopulationImmunity(
+          population,
+          totalVaccinations,
+          totalCases,
+          totalDeaths
+        )
       ),
-      deathRate: this.getDeathRate(totalDeaths, totalCases),
+      deathRate: utils.formatPercent(
+        this.getDeathRate(totalDeaths, totalCases)
+      ),
     };
   };
   getCasesTrendingDirection = (cases: COVIDDay[]) => {
