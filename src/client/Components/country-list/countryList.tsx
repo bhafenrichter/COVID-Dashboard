@@ -23,8 +23,9 @@ export const CountryList = function (props: CountryListProps) {
       // render vertical row by vertical row
       for (let j = 0; j < itemsPerRow; j++) {
         if (i * itemsPerRow + j < countries.length) {
+          let current = countries[i * itemsPerRow + j];
           renderedCountries[i].push(
-            <CountryRow country={countries[i * itemsPerRow + j]}></CountryRow>
+            <CountryRow key={current.name} country={current}></CountryRow>
           );
         }
       }
@@ -33,7 +34,9 @@ export const CountryList = function (props: CountryListProps) {
     // render the columns
     for (let i = 0; i < NUM_COLUMNS; i++) {
       renderedColumns.push(
-        <Col lg={12 / NUM_COLUMNS}>{renderedCountries[i]}</Col>
+        <Col key={i.toString()} lg={12 / NUM_COLUMNS}>
+          {renderedCountries[i]}
+        </Col>
       );
     }
   }

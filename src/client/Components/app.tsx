@@ -74,7 +74,7 @@ export function App() {
               title="Cases by Day"
               description="as of Jan. 3rd 2021 at 10:25pm">
               <LineChart
-                keys={['cases', 'deaths']}
+                keys={['cases', 'deaths', 'case7DayAvg']}
                 data={data.covidData}></LineChart>
             </DataCard>
           </Col>

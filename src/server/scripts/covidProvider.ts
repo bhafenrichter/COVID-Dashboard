@@ -30,6 +30,9 @@ class COVIDDataProvider implements ICOVIDDataProvider {
   };
 
   getCOVIDDataByDay = async (country: string, days: number) => {
+    // for 7 day averages, we need to get data from previous days too
+    days += 7;
+
     const endDate = moment(new Date());
     const startDate = moment(new Date());
     startDate.subtract(days, 'days');
@@ -46,27 +49,56 @@ class COVIDDataProvider implements ICOVIDDataProvider {
     deathUrl = deathUrl.replace('{country}', country);
 
     const cases = await fetch(caseUrl);
-    const caseResults = await cases.json();
+    const caseResults = (await cases.json()) as Array<any>;
 
     const deaths = await fetch(deathUrl);
     const deathResults = await deaths.json();
 
     // merge the data together into a nice array
     if (caseResults.length === deathResults.length) {
-      for (let i = 0; i < caseResults.length; i++) {
+      for (let i = 1; i < caseResults.length; i++) {
         let currentDay: COVIDDay = {
           day: moment(caseResults[i].Date),
-          cases: i != 0 ? caseResults[i].Cases - caseResults[i - 1].Cases : 0,
-          deaths:
-            i != 0 ? deathResults[i].Cases - deathResults[i - 1].Cases : 0,
+          // cases returns the total number of cases, not for that specific day
+          cases: caseResults[i].Cases - caseResults[i - 1].Cases,
+          // will be populated later
+          case7DayAvg: '',
+          // deaths returns the total number of cases, not for that specific day
+          deaths: deathResults[i].Cases - deathResults[i - 1].Cases,
+          death7DayAvg: '',
         };
         results.push(currentDay);
       }
     }
 
+    // calculate the averages
+    for (let i = 0; i < results.length; i++) {
+      results[i].case7DayAvg = this.calculateAverage(i, results, 7).toFixed(0);
+    }
+
+    results = results.slice(7, results.length - 1);
     // results.sort((a, b) => (a.day > b.day ? -1 : 1));
 
     return results;
+  };
+  calculateAverage = (
+    index: number,
+    entries: Array<any>,
+    daysToAverage: number
+  ) => {
+    if (index < daysToAverage) {
+      return 0;
+    }
+
+    let casesToAverage = entries.slice(index - daysToAverage, index);
+    let sum: number = casesToAverage.reduce(
+      (total: number, current: any, i: number) => {
+        return total + current.cases;
+      },
+      0
+    );
+
+    return sum / daysToAverage;
   };
   getCOVIDDataForCountry = async (country: string) => {
     const results = await this.getCOVIDDataByDay(country, 9999);

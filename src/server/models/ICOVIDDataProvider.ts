@@ -16,6 +16,8 @@ export interface COVIDDay {
   day: Moment;
   cases: number;
   deaths: number;
+  case7DayAvg: string;
+  death7DayAvg: string;
 }
 
 export interface COVIDCountry {

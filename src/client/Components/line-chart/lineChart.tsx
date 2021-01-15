@@ -29,7 +29,6 @@ export const LineChart: React.SFC<LineChartProps> = (props) => {
       // @ts-ignore
       setRenderedData([{ name: 'a', value: 12 }]);
     } else {
-      console.log('triggered');
       // @ts-ignore
       setRenderedData(data);
     }
@@ -42,6 +41,10 @@ export const LineChart: React.SFC<LineChartProps> = (props) => {
         margin={{ top: 5, right: 20, left: 10, bottom: 5 }}>
         <Line type="monotone" dataKey={keys[0]} stroke="rgba(55, 81, 255, 1)" />
         <Line type="monotone" dataKey={keys[1]} stroke="#DFE0EB" />
+        {keys.length > 2 ? (
+          <Line type="monotone" dataKey={keys[2]} stroke="green" />
+        ) : null}
+
         <XAxis dataKey="name" />
         <YAxis />
         <Tooltip wrapperClassName="tooltip-wrapper" />
