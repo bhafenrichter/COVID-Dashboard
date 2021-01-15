@@ -14,5 +14,5 @@ export interface ICOVIDVaccineProvider {
 
 export type VaccineDay = {
   vaccines: number;
-  day: Moment;
+  day: Moment | string;
 };

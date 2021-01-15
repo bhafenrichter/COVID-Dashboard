@@ -74,7 +74,20 @@ export function App() {
               title="Cases by Day"
               description="as of Jan. 3rd 2021 at 10:25pm">
               <LineChart
-                keys={['cases', 'deaths', 'case7DayAvg']}
+                keys={[
+                  {
+                    key: 'cases',
+                    displayName: 'Cases',
+                  },
+                  {
+                    key: 'deaths',
+                    displayName: 'Deaths',
+                  },
+                  {
+                    key: 'case7DayAvg',
+                    displayName: '7 Day Average',
+                  },
+                ]}
                 data={data.covidData}></LineChart>
             </DataCard>
           </Col>
@@ -88,7 +101,12 @@ export function App() {
               title="Vaccinations by Day"
               description="as of Jan. 3rd 2021 at 10:25pm">
               <LineChart
-                keys={['vaccines', '']}
+                keys={[
+                  {
+                    displayName: 'Vaccines Administered',
+                    key: 'vaccines',
+                  },
+                ]}
                 data={data.vaccines}></LineChart>
             </DataCard>
           </Col>

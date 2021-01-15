@@ -58,7 +58,7 @@ class COVIDDataProvider implements ICOVIDDataProvider {
     if (caseResults.length === deathResults.length) {
       for (let i = 1; i < caseResults.length; i++) {
         let currentDay: COVIDDay = {
-          day: moment(caseResults[i].Date),
+          day: moment(caseResults[i].Date).format('DD/MM'),
           // cases returns the total number of cases, not for that specific day
           cases: caseResults[i].Cases - caseResults[i - 1].Cases,
           // will be populated later

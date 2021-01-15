@@ -12,7 +12,7 @@ import {
 } from 'recharts';
 
 export interface LineChartProps {
-  keys: Array<string>;
+  keys: Array<{ key: string; displayName: string }>;
   data?: Array<any>;
 }
 
@@ -39,13 +39,30 @@ export const LineChart: React.SFC<LineChartProps> = (props) => {
       <Rechart
         data={renderedData}
         margin={{ top: 5, right: 20, left: 10, bottom: 5 }}>
-        <Line type="monotone" dataKey={keys[0]} stroke="rgba(55, 81, 255, 1)" />
-        <Line type="monotone" dataKey={keys[1]} stroke="#DFE0EB" />
+        <Line
+          type="monotone"
+          dataKey={keys[0].key}
+          name={keys[0].displayName}
+          stroke="rgba(55, 81, 255, 1)"
+        />
+        {keys.length > 1 ? (
+          <Line
+            type="monotone"
+            name={keys[1].displayName}
+            dataKey={keys[1].key}
+            stroke="#DFE0EB"
+          />
+        ) : null}
         {keys.length > 2 ? (
-          <Line type="monotone" dataKey={keys[2]} stroke="green" />
+          <Line
+            type="monotone"
+            name={keys[2].displayName}
+            dataKey={keys[2].key}
+            stroke="green"
+          />
         ) : null}
 
-        <XAxis dataKey="name" />
+        <XAxis dataKey="day" />
         <YAxis />
         <Tooltip wrapperClassName="tooltip-wrapper" />
       </Rechart>

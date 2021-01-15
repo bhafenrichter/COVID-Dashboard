@@ -13,7 +13,7 @@ export interface ICOVIDDataProvider {
 }
 
 export interface COVIDDay {
-  day: Moment;
+  day: Moment | string;
   cases: number;
   deaths: number;
   case7DayAvg: string;
