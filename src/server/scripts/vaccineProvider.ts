@@ -22,6 +22,10 @@ class VaccineProvider implements ICOVIDVaccineProvider {
       .subscribe(
         (json) => {
           let vaccinationDate = moment(json.date);
+          if (country === 'United States of America') {
+            country = 'United States';
+          }
+
           if (
             json.location?.toLowerCase() === country?.toLowerCase() &&
             vaccinationDate > cutoffDate
