@@ -1,5 +1,8 @@
 import express from 'express';
+import { COVIDTrend } from '../../jobs/trendingCountries';
 import { utils } from '../../scripts/utils';
+import { fileProvider } from "./../../scripts/fileProvider";
+
 export const router = express.Router();
 
 import {
@@ -35,6 +38,9 @@ router.get('/country', async (req, res) => {
     country as string
   );
 
+  let trendingCountries = fileProvider.readJSON('covid.json') as Array<COVIDTrend>;
+  trendingCountries.slice(0, 10);
+
   let totalCases = countryCOVIDTotals.cases;
   let totalDeaths = countryCOVIDTotals.deaths;
   let totalVaccines = countryVaccinationTotal;
@@ -52,5 +58,6 @@ router.get('/country', async (req, res) => {
     covidData,
     population,
     calculations,
+    trendingCountries,
   });
 });

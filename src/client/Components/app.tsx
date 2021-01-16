@@ -9,6 +9,7 @@ import { CountrySelector } from './country-selector/country-selector';
 import { DataCard } from './data-card/dataCard';
 import { LineChart } from './line-chart/lineChart';
 import { CountryList } from './country-list/countryList';
+import { CountryTrendList } from './country-list/countryTrendList';
 import { LoadingIndicator } from './loading-indicator/loadingIndicator';
 
 import { api } from './../scripts/api';
@@ -98,7 +99,12 @@ export function App() {
             </DataCard>
           </Col>
           <Col lg="3">
-            <DataCard title="Top Hotspot Countries"></DataCard>
+            <DataCard min={true} title="Hotspot Countries">
+              <CountryTrendList countries={data.trendingCountries?.slice(5, 9).reverse()}></CountryTrendList>
+            </DataCard>
+            <DataCard min={true} title="Recovering Countries">
+              <CountryTrendList countries={data.trendingCountries?.slice(0, 5)}></CountryTrendList>
+            </DataCard>
           </Col>
         </Row>
         <Row className="covid-row">

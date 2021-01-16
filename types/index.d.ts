@@ -1,4 +1,4 @@
-import { COVIDDay } from '../src/server/models/ICOVIDDataProvider';
+import { COVIDCountry, COVIDDay } from '../src/server/models/ICOVIDDataProvider';
 
 declare type COVIDDataModel = {
   vaccines: Array<COVIDDay>;
@@ -10,4 +10,5 @@ declare type COVIDDataModel = {
     casesThisWeek: number;
     deathsThisWeek: number;
   };
+  trendingCountries: Array<COVIDTrend>;
 };

@@ -28,4 +28,5 @@ export interface COVIDCountry {
 export interface Country {
   logo: string;
   name: string;
+  trend?: number | string;
 }

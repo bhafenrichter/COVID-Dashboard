@@ -2,7 +2,7 @@ import { IFileProvider } from '../models/IFileProvider';
 import { readFileSync, writeFileSync } from 'fs';
 import { unlinkSync } from 'fs';
 
-const BASE_PATH = __dirname + '\\..\\data\\';
+const BASE_PATH = __dirname + '/../data/';
 
 class FileProvider implements IFileProvider {
   readJSON = (path: string) => {

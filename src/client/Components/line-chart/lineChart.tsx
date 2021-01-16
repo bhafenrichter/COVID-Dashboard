@@ -44,13 +44,15 @@ export const LineChart: React.SFC<LineChartProps> = (props) => {
           dataKey={keys[0].key}
           name={keys[0].displayName}
           stroke="rgba(55, 81, 255, 1)"
+          dot={false}
         />
         {keys.length > 1 ? (
           <Line
             type="monotone"
             name={keys[1].displayName}
             dataKey={keys[1].key}
-            stroke="#DFE0EB"
+            stroke="#DFE0EB" 
+            dot={false}
           />
         ) : null}
         {keys.length > 2 ? (
@@ -58,7 +60,9 @@ export const LineChart: React.SFC<LineChartProps> = (props) => {
             type="monotone"
             name={keys[2].displayName}
             dataKey={keys[2].key}
-            stroke="green"
+            stroke="green" 
+            strokeWidth={3}
+            dot={false}
           />
         ) : null}
 

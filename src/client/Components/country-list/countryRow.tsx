@@ -3,7 +3,7 @@ import { Country } from '../../../server/models/ICOVIDDataProvider';
 import { ee, EVTS } from './../../scripts/eventEmitter';
 export interface CountryRowProps {
   country: Country;
-  stat?: string;
+  stat?: string | number;
   logo?: string;
 }
 

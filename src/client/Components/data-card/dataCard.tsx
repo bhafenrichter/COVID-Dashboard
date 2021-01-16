@@ -7,11 +7,12 @@ export interface DataCardProps {
   description?: string;
   helpText?: string;
   children?: any;
+  min?: boolean;
 }
 
 export const DataCard = (props: DataCardProps) => {
   const [flipped, setFlipped] = useState(false);
-  const { children, title, description, helpText } = props;
+  const { children, title, description, helpText, min } = props;
 
   return (
     <ReactCardFlip isFlipped={flipped} flipDirection="horizontal">
@@ -24,7 +25,9 @@ export const DataCard = (props: DataCardProps) => {
           />
           {title !== null ? (
             <div>
-              <h3 className="card-title">{title}</h3>
+
+              {min ? <h4 className="card-title">{title}</h4> : <h3 className="card-title">{title}</h3> }
+              
               <p className="card-description">{description}</p>
             </div>
           ) : null}

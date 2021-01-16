@@ -5,3 +5,5 @@ dist
 .idea
 server/**
 src/server/data/**
+src/.DS_Store
+src/server/.DS_Store
