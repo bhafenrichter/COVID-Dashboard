@@ -23,7 +23,7 @@ export const CountryRowMin = function (props: CountryRowProps) {
       <p className="text">{country}</p>
       <div className={trendClass + ' stat-body'}>
         <p className="text">{stat}%</p>
-        {Number(stat) < 0 ? <FaCaretDown color="green"></FaCaretDown> : <FaCaretUp color="red"></FaCaretUp>}
+        {Number(stat) < 0 ? <FaCaretDown color="rgba(150, 230, 161, 1)"></FaCaretDown> : <FaCaretUp color="rgba(255, 154, 158, 1)"></FaCaretUp>}
       </div>
     </div>
   );
