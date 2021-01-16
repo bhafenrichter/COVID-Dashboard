@@ -1,17 +1,29 @@
 import React, { useEffect, useState } from 'react';
 import Rodal from 'rodal';
 import { createPortal } from 'react-dom';
-import { ee, EVTS } from './../../scripts/eventEmitter';
+
 interface ModalProps {
   visible: boolean;
-  content?: any;
+  children: any;
+  className?: string;
   onClose: () => void;
+  width?: number;
+  height?: number;
+  hideCloseButton?: boolean;
 }
 
 const modalElement = document.getElementById('modal-root') as Element;
 
 export function Modal(props: ModalProps) {
-  const { content, onClose, visible } = props;
+  const {
+    children,
+    onClose,
+    visible,
+    className,
+    width,
+    height,
+    hideCloseButton,
+  } = props;
   const [visibility, setVisibility] = useState(false);
 
   useEffect(() => {
@@ -19,8 +31,14 @@ export function Modal(props: ModalProps) {
   }, [visible]);
 
   return createPortal(
-    <Rodal visible={visibility} onClose={onClose}>
-      <div>{content}</div>
+    <Rodal
+      visible={visibility}
+      onClose={onClose}
+      className={className}
+      width={width}
+      height={height}
+      showCloseButton={!hideCloseButton}>
+      <div>{children}</div>
     </Rodal>,
     modalElement
   );

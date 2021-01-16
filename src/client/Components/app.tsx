@@ -9,6 +9,7 @@ import { CountrySelector } from './country-selector/country-selector';
 import { DataCard } from './data-card/dataCard';
 import { LineChart } from './line-chart/lineChart';
 import { CountryList } from './country-list/countryList';
+import { LoadingIndicator } from './loading-indicator/loadingIndicator';
 
 import { api } from './../scripts/api';
 import { COVIDDataModel } from '../../../types';
@@ -26,17 +27,22 @@ export function App() {
   // @ts-ignore
   useEffect(() => {
     const fetchCountryData = async (newCountry: Country) => {
+      ee.dispatch(EVTS.SHOW_LOADING);
       let results: COVIDDataModel = await api.getCOVIDDate(country.name);
       let fetchedCountries: Array<Country> = await api.getCountries();
       setCOVIDData(results);
       setCountries(fetchedCountries);
+      ee.dispatch(EVTS.HIDE_LOADING);
     };
     fetchCountryData(country);
   }, [country]);
 
-  ee.subscribe(EVTS.CHANGE_COUNTRY, (args) => {
-    setCountry(args);
-  });
+  // initialize events
+  useEffect(() => {
+    ee.subscribe(EVTS.CHANGE_COUNTRY, (args) => {
+      setCountry(args);
+    });
+  }, []);
 
   return (
     <div>
@@ -117,6 +123,7 @@ export function App() {
           </Col>
         </Row>
       </Container>
+      <LoadingIndicator></LoadingIndicator>
     </div>
   );
 }

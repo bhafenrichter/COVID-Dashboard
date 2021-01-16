@@ -5,6 +5,7 @@ import { Modal } from './../modal/modal';
 import { CountryListModal } from './../country-list/countryListModal';
 import { Country } from '../../../server/models/ICOVIDDataProvider';
 import { ee, EVTS } from '../../scripts/eventEmitter';
+import { utils } from '../../scripts/utils';
 interface CountrySelectorProps {
   country: Country;
   countries: Array<Country>;
@@ -14,13 +15,19 @@ export function CountrySelector(props: CountrySelectorProps) {
   const { country, countries } = props;
   const [modalVisible, setVisible] = useState(false);
 
+  useEffect(() => {
+    ee.subscribe(EVTS.CLOSE_MODAL, (args) => {
+      setVisible(false);
+    });
+  }, []);
+
   const toggleModal = () => {
     setVisible((prevVisible) => !prevVisible);
   };
 
-  ee.subscribe(EVTS.CLOSE_MODAL, (args) => {
-    setVisible(false);
-  });
+  // calculate the width and height of the modal
+  const width = utils.getPixelWidthByPercent(0.75);
+  const height = utils.getPixelHeightByPercent(0.75);
 
   return (
     <div className="country-selector">
@@ -36,8 +43,11 @@ export function CountrySelector(props: CountrySelectorProps) {
       </div>
       <Modal
         visible={modalVisible}
-        content={<CountryListModal countries={countries} />}
-        onClose={toggleModal}></Modal>
+        onClose={toggleModal}
+        width={width}
+        height={height}>
+        <CountryListModal countries={countries} />
+      </Modal>
     </div>
   );
 }
