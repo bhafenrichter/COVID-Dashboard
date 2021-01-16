@@ -41,7 +41,7 @@ class VaccineProvider implements ICOVIDVaccineProvider {
           console.log('error');
         },
         () => {
-          console.log('complete');
+          // console.log('complete');
         }
       );
 
