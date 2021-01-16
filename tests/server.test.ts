@@ -41,4 +41,26 @@ describe('COVID Data Provider', () => {
     },
     TIMEOUT
   );
+
+  it('Read JSON Data', async () => {
+    const provider = require('./../src/server/scripts/fileProvider');
+    let data = provider.fileProvider.readJSON('test.json');
+    expect(data).toBeDefined();
+  });
+
+  it('Write JSON Data', async () => {
+    const provider = require('./../src/server/scripts/fileProvider');
+    let data = provider.fileProvider.writeJSON('test2.json', {
+      name: 'brandon',
+    });
+    expect(data).toBe(true);
+  });
+
+  it('Delete JSON Data', async () => {
+    const provider = require('./../src/server/scripts/fileProvider');
+    provider.fileProvider.deleteJSON('test2.json');
+
+    let data = provider.fileProvider.readJSON('test2.json');
+    expect(data).toBeNull();
+  });
 });
