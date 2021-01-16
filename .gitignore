@@ -4,3 +4,4 @@ dist
 *.log
 .idea
 server/**
+src/server/data/**

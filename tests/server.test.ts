@@ -63,4 +63,10 @@ describe('COVID Data Provider', () => {
     let data = provider.fileProvider.readJSON('test2.json');
     expect(data).toBeNull();
   });
+
+  it('Run Trending Countries', async () => {
+    const provider = require('./../src/server/jobs/trendingCountries');
+    await provider.trendingCountries(false);
+    expect(true).toBe(true);
+  }, 100000);
 });

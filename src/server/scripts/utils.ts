@@ -6,4 +6,8 @@ export const utils = {
   formatPercent: (x: string) => {
     return (Number(x) * 100).toFixed(2) + '%';
   },
+
+  timeout: (ms: number) => {
+    return new Promise((resolve) => setTimeout(resolve, ms));
+  },
 };
