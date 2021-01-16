@@ -141,9 +141,10 @@ export function App() {
               <CountryTrendList
                 colors={false}
                 icons={false}
-                countries={data.trendingVaccinationCountries
-                  ?.slice(0, 10)
-                  .reverse()}></CountryTrendList>
+                countries={data.trendingVaccinationCountries?.slice(
+                  0,
+                  10
+                )}></CountryTrendList>
             </DataCard>
           </Col>
         </Row>

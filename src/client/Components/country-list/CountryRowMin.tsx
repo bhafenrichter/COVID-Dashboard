@@ -1,5 +1,6 @@
 import React from 'react';
 import { FaCaretDown, FaCaretUp } from 'react-icons/fa';
+import { ee, EVTS } from '../../scripts/eventEmitter';
 
 export interface CountryRowProps {
   country: string;
@@ -20,7 +21,9 @@ export const CountryRowMin = function (props: CountryRowProps) {
   }
 
   return (
-    <div className="country-row country-row-min">
+    <div
+      className="country-row country-row-min"
+      onClick={() => ee.dispatch(EVTS.CHANGE_COUNTRY, { name: country })}>
       <p className="text">{country}</p>
 
       <div className={trendClass + ' stat-body'}>
