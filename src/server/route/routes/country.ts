@@ -41,6 +41,9 @@ router.get('/country', async (req, res) => {
   let trendingCountries = fileProvider.readJSON('covid.json') as Array<COVIDTrend>;
   trendingCountries.slice(0, 10);
 
+  let trendingVaccinationCountries = fileProvider.readJSON('vaccines.json') as Array<COVIDTrend>;
+  trendingVaccinationCountries.slice(trendingVaccinationCountries.length - 10, trendingVaccinationCountries.length - 1);
+
   let totalCases = countryCOVIDTotals.cases;
   let totalDeaths = countryCOVIDTotals.deaths;
   let totalVaccines = countryVaccinationTotal;
@@ -59,5 +62,6 @@ router.get('/country', async (req, res) => {
     population,
     calculations,
     trendingCountries,
+    trendingVaccinationCountries,
   });
 });

@@ -70,9 +70,9 @@ describe('COVID Data Provider', () => {
   //   expect(true).toBe(true);
   // }, 100000);
 
-  // it('Run Vaccinating Countries', async () => {
-  //   const provider = require('./../src/server/jobs/topVaccinatingCountries');
-  //   await provider.getTopVaccinatingCountries();
-  //   expect(true).toBe(true);
-  // }, 100000);
+  it('Run Vaccinating Countries', async () => {
+    const provider = require('./../src/server/jobs/topVaccinatingCountries');
+    await provider.getTopVaccinatingCountries();
+    expect(true).toBe(true);
+  }, 100000);
 });

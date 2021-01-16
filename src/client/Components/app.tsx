@@ -99,11 +99,25 @@ export function App() {
             </DataCard>
           </Col>
           <Col lg="3">
-            <DataCard min={true} title="Hotspot Countries">
-              <CountryTrendList countries={data.trendingCountries?.slice(5, 9).reverse()}></CountryTrendList>
+            <DataCard min={true} title="Recovering">
+              <CountryTrendList
+                colors={true}
+                icons={true}
+                countries={data.trendingCountries
+                  ?.slice(
+                    data.trendingCountries.length - 5,
+                    data.trendingCountries.length
+                  )
+                  .reverse()}></CountryTrendList>
             </DataCard>
-            <DataCard min={true} title="Recovering Countries">
-              <CountryTrendList countries={data.trendingCountries?.slice(0, 5)}></CountryTrendList>
+            <DataCard min={true} title="Hotspots">
+              <CountryTrendList
+                colors={true}
+                icons={true}
+                countries={data.trendingCountries?.slice(
+                  0,
+                  5
+                )}></CountryTrendList>
             </DataCard>
           </Col>
         </Row>
@@ -123,8 +137,13 @@ export function App() {
             </DataCard>
           </Col>
           <Col lg="3">
-            <DataCard title="Top Vaccinating Countries">
-              <CountryList countries={[]} />
+            <DataCard min={true} title="Top Vaccinating Countries">
+              <CountryTrendList
+                colors={false}
+                icons={false}
+                countries={data.trendingVaccinationCountries
+                  ?.slice(0, 10)
+                  .reverse()}></CountryTrendList>
             </DataCard>
           </Col>
         </Row>

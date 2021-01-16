@@ -11,4 +11,5 @@ declare type COVIDDataModel = {
     deathsThisWeek: number;
   };
   trendingCountries: Array<COVIDTrend>;
+  trendingVaccinationCountries: Array<COVIDTrend>;
 };
