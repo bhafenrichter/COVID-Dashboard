@@ -36,20 +36,24 @@ class CalculationsProvider implements ICalculationsProvider {
     };
   };
   getCasesTrendingDirection = (cases: COVIDDay[]) => {
+    if (cases.length === 0) { return 0;}
     const thisWeek = cases.slice(0, 6).map((x) => x.cases);
     const lastWeek = cases.slice(7, 13).map((x) => x.cases);
     return thisWeek > lastWeek ? TRENDING_STATE.UP : TRENDING_STATE.DOWN;
   };
   getDeathsTrendingDirection = (cases: COVIDDay[]) => {
+    if (cases.length === 0) { return 0;}
     const thisWeek = cases.slice(0, 6).map((x) => x.deaths);
     const lastWeek = cases.slice(7, 13).map((x) => x.deaths);
     return thisWeek > lastWeek ? TRENDING_STATE.UP : TRENDING_STATE.DOWN;
   };
   getCasesThisWeek = (cases: COVIDDay[]) => {
+    if (cases.length === 0) { return 0;}
     const thisWeek = cases.slice(0, 6).map((x) => x.cases);
     return thisWeek.reduce((x, y) => x + y);
   };
   getDeathsThisWeek = (cases: COVIDDay[]) => {
+    if (cases.length === 0) { return 0;}
     const thisWeek = cases.slice(0, 6).map((x) => x.deaths);
     return thisWeek.reduce((x, y) => x + y);
   };

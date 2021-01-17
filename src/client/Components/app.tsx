@@ -8,7 +8,6 @@ import { Navbar } from './navbar/navbar';
 import { CountrySelector } from './country-selector/country-selector';
 import { DataCard } from './data-card/dataCard';
 import { LineChart } from './line-chart/lineChart';
-import { CountryList } from './country-list/countryList';
 import { CountryTrendList } from './country-list/countryTrendList';
 import { LoadingIndicator } from './loading-indicator/loadingIndicator';
 
@@ -19,7 +18,7 @@ import { Country } from '../../server/models/ICOVIDDataProvider';
 export function App() {
   const [country, setCountry] = useState({
     name: 'Germany',
-    logo: '',
+    logo: 'http://localhost:3001/static/svg/DE.svg',
   });
   let [data, setCOVIDData] = useState({ calculations: {} } as COVIDDataModel);
   let [countries, setCountries] = useState([] as Array<Country>);

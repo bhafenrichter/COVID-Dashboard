@@ -25,14 +25,20 @@ export const LineChart: React.SFC<LineChartProps> = (props) => {
   ]);
 
   useEffect(() => {
-    if (data === []) {
-      // @ts-ignore
-      setRenderedData([{ name: 'a', value: 12 }]);
-    } else {
+    if (data !== []) {
       // @ts-ignore
       setRenderedData(data);
     }
   }, [data]);
+
+  if (data && data.length === 0) {
+    console.log('no data reported');
+    return (
+      <div className="chart-wrapper">
+        <p className="centered text">No Data Reported</p>
+      </div>
+    );
+  }
 
   return (
     <ResponsiveContainer height="100%" width="100%" aspect={2}>
@@ -51,7 +57,7 @@ export const LineChart: React.SFC<LineChartProps> = (props) => {
             type="monotone"
             name={keys[1].displayName}
             dataKey={keys[1].key}
-            stroke="#DFE0EB" 
+            stroke="#DFE0EB"
             dot={false}
           />
         ) : null}
@@ -60,7 +66,7 @@ export const LineChart: React.SFC<LineChartProps> = (props) => {
             type="monotone"
             name={keys[2].displayName}
             dataKey={keys[2].key}
-            stroke="green" 
+            stroke="green"
             strokeWidth={3}
             dot={false}
           />
