@@ -9,10 +9,11 @@ import { utils } from '../../scripts/utils';
 interface CountrySelectorProps {
   country: Country;
   countries: Array<Country>;
+  translations: any;
 }
 
 export function CountrySelector(props: CountrySelectorProps) {
-  const { country, countries } = props;
+  const { country, countries, translations } = props;
   const [modalVisible, setVisible] = useState(false);
 
   useEffect(() => {
@@ -32,7 +33,7 @@ export function CountrySelector(props: CountrySelectorProps) {
   return (
     <div className="country-selector">
       <h3 className="text country-selector-text" onClick={toggleModal}>
-        COVID-19 Figures for {modalVisible}
+        {translations['covidFiguresFor']} {modalVisible}
         <span className="country-selector-country">{country.name}</span>
       </h3>
       <div className="country-flag" onClick={toggleModal}>
@@ -46,7 +47,7 @@ export function CountrySelector(props: CountrySelectorProps) {
         onClose={toggleModal}
         width={width}
         height={height}>
-        <CountryListModal countries={countries} />
+        <CountryListModal translations={translations} countries={countries} />
       </Modal>
     </div>
   );

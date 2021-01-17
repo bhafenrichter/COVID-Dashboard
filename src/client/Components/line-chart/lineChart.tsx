@@ -1,8 +1,6 @@
-import React, { useCallback, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useState } from 'react';
 import {
-  CartesianGrid,
-  Legend,
   Line,
   LineChart as Rechart,
   ResponsiveContainer,

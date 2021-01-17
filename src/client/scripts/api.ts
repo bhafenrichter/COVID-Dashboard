@@ -12,4 +12,9 @@ export const api = {
     let results = await request.json();
     return results;
   },
+  getLanguage: async (lang: string) => {
+    let request = await fetch(`http://localhost:3001/api/language?lang=${lang}`);
+    let results = await request.json();
+    return results;
+  }
 };

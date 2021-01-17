@@ -22,9 +22,12 @@ export function App() {
   });
   let [data, setCOVIDData] = useState({ calculations: {} } as COVIDDataModel);
   let [countries, setCountries] = useState([] as Array<Country>);
+  let [lang, setLang] = useState('en');
+  let [trans, setTranslations]: any = useState({});
 
   let { calculations } = data;
-  // @ts-ignore
+
+  // fetch covid and vaccine data
   useEffect(() => {
     const fetchCountryData = async (newCountry: Country) => {
       ee.dispatch(EVTS.SHOW_LOADING);
@@ -36,6 +39,18 @@ export function App() {
     };
     fetchCountryData(country);
   }, [country]);
+
+  // fetch translation data
+  useEffect(() => {
+    const fetchTranslations = async () => {
+      ee.dispatch(EVTS.SHOW_LOADING);
+      let translations = await api.getLanguage('en');
+      console.log(translations);
+      setTranslations(translations);
+      ee.dispatch(EVTS.HIDE_LOADING);
+    };
+    fetchTranslations();
+  }, [lang]);
 
   // initialize events
   useEffect(() => {
@@ -49,27 +64,31 @@ export function App() {
       <Navbar />
       <Container className="app-container">
         <Row className="covid-row">
-          <CountrySelector country={country} countries={countries} />
+          <CountrySelector
+            translations={trans}
+            country={country}
+            countries={countries}
+          />
         </Row>
         <Row className="covid-row">
           <InfoCard
             content={calculations.casesThisWeek || ''}
-            description={'Cases this Week'}
+            description={trans['casesThisWeek']}
             helpText={'test'}
             wrapperClass="purple-gradient"></InfoCard>
           <InfoCard
             content={calculations.deathsThisWeek || ''}
-            description={'Deaths this Week'}
+            description={trans['deathsThisWeek']}
             helpText={'test'}
             wrapperClass="blue-gradient"></InfoCard>
           <InfoCard
             content={calculations.populationImmunity || ''}
-            description={'Immunity Percent'}
+            description={trans['immunityPercent']}
             helpText={'test'}
             wrapperClass="red-gradient"></InfoCard>
           <InfoCard
             content={calculations.deathRate || ''}
-            description={'Death Rate'}
+            description={trans['deathRate']}
             helpText={'test'}
             wrapperClass="green-gradient"></InfoCard>
         </Row>
@@ -77,28 +96,28 @@ export function App() {
         <Row className="covid-row">
           <Col lg="9">
             <DataCard
-              title="Cases by Day"
+              title={trans['casesByDay']}
               description="as of Jan. 3rd 2021 at 10:25pm">
               <LineChart
                 keys={[
                   {
                     key: 'cases',
-                    displayName: 'Cases',
+                    displayName: trans['cases'],
                   },
                   {
                     key: 'deaths',
-                    displayName: 'Deaths',
+                    displayName: trans['deaths'],
                   },
                   {
                     key: 'case7DayAvg',
-                    displayName: '7 Day Average',
+                    displayName: trans['7DayAverage'],
                   },
                 ]}
                 data={data.covidData}></LineChart>
             </DataCard>
           </Col>
           <Col lg="3">
-            <DataCard min={true} title="Recovering">
+            <DataCard min={true} title={trans['recovering']}>
               <CountryTrendList
                 colors={true}
                 icons={true}
@@ -109,7 +128,7 @@ export function App() {
                   )
                   .reverse()}></CountryTrendList>
             </DataCard>
-            <DataCard min={true} title="Hotspots">
+            <DataCard min={true} title={trans['hotspots']}>
               <CountryTrendList
                 colors={true}
                 icons={true}
@@ -123,12 +142,12 @@ export function App() {
         <Row className="covid-row">
           <Col lg="9">
             <DataCard
-              title="Vaccinations by Day"
+              title={trans['vaccinationsByDay']}
               description="as of Jan. 3rd 2021 at 10:25pm">
               <LineChart
                 keys={[
                   {
-                    displayName: 'Vaccines Administered',
+                    displayName: trans['vaccinesAdministered'],
                     key: 'vaccines',
                   },
                 ]}
@@ -136,7 +155,7 @@ export function App() {
             </DataCard>
           </Col>
           <Col lg="3">
-            <DataCard min={true} title="Top Vaccinating Countries">
+            <DataCard min={true} title={trans['topVaccinatingCountries']}>
               <CountryTrendList
                 colors={false}
                 icons={false}

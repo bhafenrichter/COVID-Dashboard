@@ -4,13 +4,14 @@ import { CountryList } from './countryList';
 
 export interface CountryListProps {
   countries: Array<Country>;
+  translations: any;
 }
 
 export const CountryListModal = function (props: CountryListProps) {
-  const { countries } = props;
+  const { countries, translations } = props;
   return (
     <div>
-      <h3 className="centered">Select a Country</h3>
+      <h3 className="centered">{translations['selectACountry']}</h3>
       <CountryList countries={countries}></CountryList>
     </div>
   );

@@ -1,5 +1,6 @@
 import express from 'express';
 import { COVIDTrend } from '../../jobs/trendingCountries';
+import { languageProvider } from '../../scripts/languageProvider';
 import { utils } from '../../scripts/utils';
 import { fileProvider } from "./../../scripts/fileProvider";
 
@@ -16,6 +17,15 @@ router.get('/countries', async (req, res) => {
   const countries = await covidDataProvider.getCOVIDCountries();
   res.send(countries);
 });
+
+router.get('/language', async (req, res) => {
+  const {lang} = req.query;
+
+  if (lang) {
+    const translation = languageProvider.getLanguage(lang.toString());
+    res.send(translation); 
+  }
+})
 
 router.get('/country', async (req, res) => {
   res.header('Access-Control-Allow-Origin', '*');

@@ -63,6 +63,10 @@ class CalculationsProvider implements ICalculationsProvider {
     totalCases: number,
     totalDeaths: number
   ) => {
+
+    if (totalVaccinations === 0) {
+      return "Unknown";
+    }
     let immunityRate = totalVaccinations / population;
     return immunityRate.toFixed(3);
   };
