@@ -22,7 +22,7 @@ export function App() {
   });
   let [data, setCOVIDData] = useState({ calculations: {} } as COVIDDataModel);
   let [countries, setCountries] = useState([] as Array<Country>);
-  let [lang, setLang] = useState('en');
+  let [lang, setLang] = useState('de');
   let [trans, setTranslations]: any = useState({});
 
   let { calculations } = data;
@@ -44,7 +44,7 @@ export function App() {
   useEffect(() => {
     const fetchTranslations = async () => {
       ee.dispatch(EVTS.SHOW_LOADING);
-      let translations = await api.getLanguage('en');
+      let translations = await api.getLanguage(lang);
       console.log(translations);
       setTranslations(translations);
       ee.dispatch(EVTS.HIDE_LOADING);
