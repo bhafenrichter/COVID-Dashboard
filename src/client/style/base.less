@@ -30,11 +30,24 @@
     }
 }
 
-.card-wrapper {
-    height: 500px;
-}
-
-.mini-card-wrapper {
+.dropdown-button {
+    button {
+        background-color: transparent !important;
+        border-color: transparent;
+        color: @text-color;
+    }
+    button:hover {
+        border-color: @primary-color;
+    }
+    .dropdown-menu {
+        background-color: @primary-color;
+        .dropdown-item {
+            color: @text-color
+        }
+        .dropdown-item:hover {
+            background-color: @background-color;
+        }
+    }
 }
 
 .text {

@@ -57,11 +57,14 @@ export function App() {
     ee.subscribe(EVTS.CHANGE_COUNTRY, (args) => {
       setCountry(args);
     });
+    ee.subscribe(EVTS.CHANGE_LANGUAGE, (args) => {
+      setLang(args);
+    });
   }, []);
 
   return (
     <div>
-      <Navbar />
+      <Navbar translations={trans} language={lang} />
       <Container className="app-container">
         <Row className="covid-row">
           <CountrySelector

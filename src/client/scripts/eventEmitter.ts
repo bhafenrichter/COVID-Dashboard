@@ -15,4 +15,5 @@ export const EVTS = {
   CLOSE_MODAL: 'Close Modal',
   SHOW_LOADING: 'Show Loading',
   HIDE_LOADING: 'Hide Loading',
+  CHANGE_LANGUAGE: 'Change Language',
 };
