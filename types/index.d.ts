@@ -12,4 +12,5 @@ declare type COVIDDataModel = {
   };
   trendingCountries: Array<COVIDTrend>;
   trendingVaccinationCountries: Array<COVIDTrend>;
+  createdOn: moment;
 };

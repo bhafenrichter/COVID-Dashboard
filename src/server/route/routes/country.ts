@@ -1,4 +1,5 @@
 import express from 'express';
+import moment from 'moment';
 import { COVIDTrend } from '../../jobs/trendingCountries';
 import { languageProvider } from '../../scripts/languageProvider';
 import { utils } from '../../scripts/utils';
@@ -66,6 +67,8 @@ router.get('/country', async (req, res) => {
     totalVaccines
   );
 
+  const createdOn = moment();
+
   res.send({
     vaccines,
     covidData,
@@ -73,5 +76,6 @@ router.get('/country', async (req, res) => {
     calculations,
     trendingCountries,
     trendingVaccinationCountries,
+    createdOn
   });
 });

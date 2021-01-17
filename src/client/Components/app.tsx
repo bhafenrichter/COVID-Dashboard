@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { ee, EVTS } from './../scripts/eventEmitter';
 import '../style/app.less';
+import moment from 'moment';
 
 import { Col, Container, Row } from 'react-bootstrap';
 import InfoCard from './info-card/info-card';
@@ -14,6 +15,7 @@ import { LoadingIndicator } from './loading-indicator/loadingIndicator';
 import { api } from './../scripts/api';
 import { COVIDDataModel } from '../../../types';
 import { Country } from '../../server/models/ICOVIDDataProvider';
+import { utils } from '../scripts/utils';
 
 export function App() {
   const [country, setCountry] = useState({
@@ -98,7 +100,7 @@ export function App() {
           <Col lg="9">
             <DataCard
               title={trans['casesByDay']}
-              description="as of Jan. 3rd 2021 at 10:25pm">
+              description={utils.getTimeDescription(data.createdOn)}>
               <LineChart
                 keys={[
                   {
@@ -150,7 +152,7 @@ export function App() {
           <Col lg="9">
             <DataCard
               title={trans['vaccinationsByDay']}
-              description="as of Jan. 3rd 2021 at 10:25pm">
+              description={utils.getTimeDescription(data.createdOn)}>
               <LineChart
                 keys={[
                   {
