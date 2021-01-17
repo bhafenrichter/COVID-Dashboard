@@ -22,7 +22,7 @@ export function App() {
   });
   let [data, setCOVIDData] = useState({ calculations: {} } as COVIDDataModel);
   let [countries, setCountries] = useState([] as Array<Country>);
-  let [lang, setLang] = useState('de');
+  let [lang, setLang] = useState('en');
   let [trans, setTranslations]: any = useState({});
 
   let { calculations } = data;
@@ -74,22 +74,20 @@ export function App() {
           <InfoCard
             content={calculations.casesThisWeek || ''}
             description={trans['casesThisWeek']}
-            helpText={'test'}
             wrapperClass="purple-gradient"></InfoCard>
           <InfoCard
             content={calculations.deathsThisWeek || ''}
             description={trans['deathsThisWeek']}
-            helpText={'test'}
             wrapperClass="blue-gradient"></InfoCard>
           <InfoCard
             content={calculations.populationImmunity || ''}
             description={trans['immunityPercent']}
-            helpText={'test'}
+            helpText={trans['immunityPercentHelp']}
             wrapperClass="red-gradient"></InfoCard>
           <InfoCard
             content={calculations.deathRate || ''}
             description={trans['deathRate']}
-            helpText={'test'}
+            helpText={trans['deathRateHelp']}
             wrapperClass="green-gradient"></InfoCard>
         </Row>
 
@@ -117,7 +115,10 @@ export function App() {
             </DataCard>
           </Col>
           <Col lg="3">
-            <DataCard min={true} title={trans['recovering']}>
+            <DataCard
+              min={true}
+              title={trans['recovering']}
+              helpText={trans['recoveringHelp']}>
               <CountryTrendList
                 colors={true}
                 icons={true}
@@ -128,7 +129,10 @@ export function App() {
                   )
                   .reverse()}></CountryTrendList>
             </DataCard>
-            <DataCard min={true} title={trans['hotspots']}>
+            <DataCard
+              min={true}
+              title={trans['hotspots']}
+              helpText={trans['hotspotHelp']}>
               <CountryTrendList
                 colors={true}
                 icons={true}
@@ -155,7 +159,10 @@ export function App() {
             </DataCard>
           </Col>
           <Col lg="3">
-            <DataCard min={true} title={trans['topVaccinatingCountries']}>
+            <DataCard
+              min={true}
+              title={trans['topVaccinatingCountries']}
+              helpText={trans['vaccinationHelp']}>
               <CountryTrendList
                 colors={false}
                 icons={false}

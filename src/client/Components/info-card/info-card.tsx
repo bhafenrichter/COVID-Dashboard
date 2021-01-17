@@ -5,7 +5,7 @@ import { Col } from 'react-bootstrap';
 import { HelpButton } from './../help-button/help-button';
 
 interface InfoCardProps {
-  helpText: string;
+  helpText?: string;
   wrapperClass: string;
   content?: string | number;
   description?: string;
@@ -20,7 +20,7 @@ export default function InfoCard(props: InfoCardProps) {
   const right = useRef<HTMLDivElement>(null);
   const [height, setHeight] = useState('');
   const [flipped, setFlipped] = useState(false);
-  const { wrapperClass, content, description } = props;
+  const { wrapperClass, content, description, helpText } = props;
 
   // sets the height of the back of the card to be the same
   useLayoutEffect(() => {
@@ -31,31 +31,38 @@ export default function InfoCard(props: InfoCardProps) {
 
   return (
     <Col lg="3">
-      <ReactCardFlip isFlipped={flipped} flipDirection="horizontal">
-        <div ref={left} className={wrapperClass + ' info-card'}>
-          <HelpButton
-            text={'How is this calculated?'}
-            direction="bottomright"
-            onClick={() => setFlipped(!flipped)}
-          />
+      <div className="info-card-wrapper">
+        <ReactCardFlip isFlipped={flipped} flipDirection="horizontal">
+          <div ref={left} className={wrapperClass + ' info-card'}>
+            {helpText ? (
+              <HelpButton
+                text={'How is this calculated?'}
+                direction="bottomright"
+                onClick={() => setFlipped(!flipped)}
+              />
+            ) : null}
 
-          <div>
-            <p className="info-box-description">{description}</p>
-            <h3 className="info-box-content">{content}</h3>
+            <div>
+              <p className="info-box-description">{description}</p>
+              <h3 className="info-box-content">{content}</h3>
+            </div>
           </div>
-        </div>
-        <div ref={right} className={wrapperClass + ' info-card'}>
-          <HelpButton
-            text={'How is this calculated?'}
-            direction="bottomright"
-            onClick={() => setFlipped(!flipped)}
-          />
+          <div ref={right} className={wrapperClass + ' info-card'}>
+            <HelpButton
+              text={'How is this calculated?'}
+              direction="bottomright"
+              onClick={() => setFlipped(!flipped)}
+            />
 
-          <div ref={right} style={{ height: height }}>
-            <p className="info-box-description">{description}</p>
+            <div
+              ref={right}
+              className="info-box-description"
+              style={{ height: height }}>
+              <p className="text">{helpText}</p>
+            </div>
           </div>
-        </div>
-      </ReactCardFlip>
+        </ReactCardFlip>
+      </div>
     </Col>
   );
 }

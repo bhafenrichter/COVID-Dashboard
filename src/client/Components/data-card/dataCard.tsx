@@ -29,11 +29,14 @@ export const DataCard = (props: DataCardProps) => {
     <ReactCardFlip isFlipped={flipped} flipDirection="horizontal">
       <div ref={left} className={`card ${customClass}`}>
         <div className="card-body">
-          <HelpButton
-            text={'How is this calculated?'}
-            direction="topright"
-            onClick={() => setFlipped(!flipped)}
-          />
+          {helpText ? (
+            <HelpButton
+              text={'How is this calculated?'}
+              direction="topright"
+              onClick={() => setFlipped(!flipped)}
+            />
+          ) : null}
+
           {title !== null ? (
             <div>
               {min ? (
@@ -52,13 +55,13 @@ export const DataCard = (props: DataCardProps) => {
         ref={right}
         className={`card ${customClass}`}
         style={{ height: height }}>
-        <div className="card-body">
+        <div className="card-body info-box-description">
           <HelpButton
             text={'How is this calculated?'}
             direction="topright"
             onClick={() => setFlipped(!flipped)}
           />
-          {helpText}
+          <p className="text centered">{helpText}</p>
         </div>
       </div>
     </ReactCardFlip>
