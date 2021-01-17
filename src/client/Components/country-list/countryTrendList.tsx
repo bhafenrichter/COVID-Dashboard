@@ -20,6 +20,7 @@ export const CountryTrendList = function (props: CountryListProps) {
         country={country.country}
         stat={country.trend}
         colors={colors}
+        logo={country.logo}
         icons={icons}></CountryRowMin>
     ));
   }

@@ -20,9 +20,9 @@ class CountryProvider implements ICountryDataProvider {
     let countryData = await this.createRequest(country);
     return countryData.population;
   };
-  getLogo = async (country: string) => {
-    let countryData = await this.createRequest(country);
-    return countryData.flag;
+  getLogo = (country: string) => {
+    let countryCode = getAlpha2Code(country, 'en');
+    return `http://localhost:3001/static/svg/${countryCode}.svg`;
   };
 }
 

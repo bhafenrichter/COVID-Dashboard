@@ -1,10 +1,12 @@
 import { fileProvider } from '../scripts/fileProvider';
 import { utils } from '../scripts/utils';
 import { covidDataProvider } from './../scripts/covidProvider';
+import { countryProvider } from './../scripts/countryProvider';
 
 export type COVIDTrend = {
   country: string;
   trend: number | string;
+  logo: string;
 };
 
 export const trendingCountries = async (allCountries: boolean) => {
@@ -34,6 +36,7 @@ export const trendingCountries = async (allCountries: boolean) => {
     let result: COVIDTrend = {
       country: country,
       trend: (trend * 100).toFixed(2),
+      logo: countryProvider.getLogo(country),
     };
     results.push(result);
   }

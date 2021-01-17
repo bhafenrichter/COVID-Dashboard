@@ -20,7 +20,6 @@ class COVIDDataProvider implements ICOVIDDataProvider {
   getCOVIDCountries = async () => {
     let request = await fetch(`${this.BASE_URL}countries`);
     let response: Array<any> = await request.json();
-    // response.splice(0, response.length - 50);
     return response
       .map((x: any) => ({
         name: x.Country,

@@ -5,13 +5,13 @@ import { ee, EVTS } from '../../scripts/eventEmitter';
 export interface CountryRowProps {
   country: string;
   stat?: string | number;
-  logo?: string;
+  logo: string;
   colors?: boolean;
   icons?: boolean;
 }
 
 export const CountryRowMin = function (props: CountryRowProps) {
-  const { country, stat, colors, icons } = props;
+  const { country, stat, colors, icons, logo } = props;
   let trendClass;
 
   if (Number(stat) >= 0 && colors) {
@@ -23,7 +23,7 @@ export const CountryRowMin = function (props: CountryRowProps) {
   return (
     <div
       className="country-row country-row-min"
-      onClick={() => ee.dispatch(EVTS.CHANGE_COUNTRY, { name: country })}>
+      onClick={() => ee.dispatch(EVTS.CHANGE_COUNTRY, { name: country, logo })}>
       <p className="text">{country}</p>
 
       <div className={trendClass + ' stat-body'}>

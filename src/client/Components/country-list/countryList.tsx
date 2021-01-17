@@ -17,7 +17,6 @@ export const CountryList = function (props: CountryListProps) {
   let renderedCountries: Array<Array<JSX.Element>> = [[]];
   let renderedColumns: Array<JSX.Element> = [];
   if (countries) {
-
     if (!singleCol) {
       // generate the columns
       let itemsPerRow = Math.floor(countries.length / NUM_COLUMNS);
@@ -33,7 +32,7 @@ export const CountryList = function (props: CountryListProps) {
           }
         }
       }
-  
+
       // render the columns
       for (let i = 0; i < NUM_COLUMNS; i++) {
         renderedColumns.push(
@@ -43,10 +42,14 @@ export const CountryList = function (props: CountryListProps) {
         );
       }
     } else {
-      let content = countries.map(country => <CountryRowMin key={country.name} country={country.name} stat={country.trend}></CountryRowMin>)
-      renderedColumns.push(<Col lg={12}>
-        {content}
-      </Col>);
+      let content = countries.map((country) => (
+        <CountryRowMin
+          key={country.name}
+          country={country.name}
+          logo={country.logo}
+          stat={country.trend}></CountryRowMin>
+      ));
+      renderedColumns.push(<Col lg={12}>{content}</Col>);
       renderedCountries.push(renderedColumns);
     }
   }
