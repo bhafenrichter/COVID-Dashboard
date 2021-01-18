@@ -5,6 +5,8 @@ import { api } from './route/routes/index';
 import { Cache } from './middlewares/cache';
 import path from 'path';
 
+import compression from 'compression';
+
 // call express
 const app = express(); // define our app using express
 
@@ -18,6 +20,19 @@ app.use(bodyParser.urlencoded({ extended: true }));
 const port: number = Number(process.env.PORT) || 3001; // set our port
 
 app.use(express.static('dist'));
+
+app.use(compression());
+/*
+STATIC CONTENT
+  serve static content via gzip compression relies
+  on compression-webpack-plugin creates a .gz clone of
+  the file that gets unzipped and served to the user
+*/
+app.get('*.js', (req, res, next) => {
+    req.url += '.gz';
+    res.set('Content-Encoding', 'gzip');
+    next();
+});
 
 app.get('/', (req, res) => {
   console.log('sending index.html');

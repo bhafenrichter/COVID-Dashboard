@@ -22,6 +22,11 @@ class CountryProvider implements ICountryDataProvider {
   getPopulation = async (country: string) => {
     // check the cache
     let cache = fileProvider.readJSON('populations.json');
+
+    if (!cache) {
+      cache = {};
+    }
+
     if (cache[country]) {
       return cache[country];
     }
@@ -36,7 +41,7 @@ class CountryProvider implements ICountryDataProvider {
   };
   getLogo = (country: string) => {
     let countryCode = getAlpha2Code(country, 'en');
-    return `http://localhost:3001/static/svg/${countryCode}.svg`;
+    return `/static/svg/${countryCode}.svg`;
   };
 }
 

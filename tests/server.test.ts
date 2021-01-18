@@ -68,11 +68,11 @@ describe('COVID Data Provider', () => {
     const provider = require('./../src/server/jobs/trendingCountries');
     await provider.trendingCountries(false);
     expect(true).toBe(true);
-  }, 1000000);
+  }, 10000000);
 
   it('Run Vaccinating Countries', async () => {
     const provider = require('./../src/server/jobs/topVaccinatingCountries');
     await provider.getTopVaccinatingCountries();
     expect(true).toBe(true);
-  }, 1000000);
+  }, 10000000);
 });

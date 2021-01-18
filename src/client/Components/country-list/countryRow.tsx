@@ -1,6 +1,8 @@
 import React from 'react';
 import { Country } from '../../../server/models/ICOVIDDataProvider';
 import { ee, EVTS } from './../../scripts/eventEmitter';
+import LazyLoad from 'react-lazyload';
+
 export interface CountryRowProps {
   country: Country;
   stat?: string | number;
@@ -17,7 +19,9 @@ export const CountryRow = function (props: CountryRowProps) {
         ee.dispatch(EVTS.CLOSE_MODAL, null);
       }}>
       <div className="country-flag">
-        <img src={country.logo} />
+        <LazyLoad>
+          <img src={country.logo} />
+        </LazyLoad>
       </div>
       <p className="text">{country.name}</p>
       <p className="text">{stat}</p>

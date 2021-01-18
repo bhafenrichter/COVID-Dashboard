@@ -25,10 +25,7 @@ export const LoadingIndicator = () => {
       height={100}
       hideCloseButton={true}>
       <div className="loading-indicator">
-        <img
-          src="http://localhost:3001/static/gif/loading.gif"
-          className="loading-img"
-        />
+        <img src="/static/gif/loading.gif" className="loading-img" />
         <p>Loading...</p>
       </div>
     </Modal>

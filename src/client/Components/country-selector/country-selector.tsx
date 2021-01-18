@@ -6,6 +6,7 @@ import { CountryListModal } from './../country-list/countryListModal';
 import { Country } from '../../../server/models/ICOVIDDataProvider';
 import { ee, EVTS } from '../../scripts/eventEmitter';
 import { utils } from '../../scripts/utils';
+import { forceVisible } from 'react-lazyload';
 interface CountrySelectorProps {
   country: Country;
   countries: Array<Country>;
@@ -24,6 +25,7 @@ export function CountrySelector(props: CountrySelectorProps) {
 
   const toggleModal = () => {
     setVisible((prevVisible) => !prevVisible);
+    forceVisible();
   };
 
   // calculate the width and height of the modal

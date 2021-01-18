@@ -17,6 +17,7 @@ export const getTopVaccinatingCountries = async () => {
     vaccineResults.push({
       country: current,
       trend: ((data / population) * 100).toFixed(2),
+      logo: '',
     });
   }
 

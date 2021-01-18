@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { ee, EVTS } from './../scripts/eventEmitter';
 import '../style/app.less';
-import moment from 'moment';
+import { tracking } from './../scripts/ga';
 
 import { Col, Container, Row } from 'react-bootstrap';
 import InfoCard from './info-card/info-card';
@@ -20,7 +20,7 @@ import { utils } from '../scripts/utils';
 export function App() {
   const [country, setCountry] = useState({
     name: 'Germany',
-    logo: 'http://localhost:3001/static/svg/DE.svg',
+    logo: '/static/svg/DE.svg',
   });
   let [data, setCOVIDData] = useState({ calculations: {} } as COVIDDataModel);
   let [countries, setCountries] = useState([] as Array<Country>);
@@ -58,10 +58,15 @@ export function App() {
   useEffect(() => {
     ee.subscribe(EVTS.CHANGE_COUNTRY, (args) => {
       setCountry(args);
+      tracking.track('Selected Country', args);
     });
     ee.subscribe(EVTS.CHANGE_LANGUAGE, (args) => {
       setLang(args);
     });
+
+    // initialize google analytics
+    tracking.init();
+    tracking.page('/');
   }, []);
 
   return (

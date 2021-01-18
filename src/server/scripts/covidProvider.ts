@@ -23,7 +23,7 @@ class COVIDDataProvider implements ICOVIDDataProvider {
     return response
       .map((x: any) => ({
         name: x.Country,
-        logo: `http://localhost:3001/static/svg/${x.ISO2}.svg`,
+        logo: `/static/svg/${x.ISO2}.svg`,
       }))
       .sort((x, y) => (x.name > y.name ? 1 : -1));
   };
