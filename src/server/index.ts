@@ -10,7 +10,7 @@ import compression from 'compression';
 // call express
 const app = express(); // define our app using express
 
-app.use('/static', express.static(path.join(__dirname, 'static')));
+
 
 // configure app to use bodyParser()
 // this will let us get the data from a POST
@@ -19,7 +19,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 const port: number = Number(process.env.PORT) || 3001; // set our port
 
-app.use(express.static('dist'));
+
 
 app.use(compression());
 /*
@@ -31,8 +31,12 @@ STATIC CONTENT
 app.get('*.js', (req, res, next) => {
     req.url += '.gz';
     res.set('Content-Encoding', 'gzip');
+    res.set('Content-Type', 'application/javascript');
     next();
 });
+
+app.use('/static', express.static(path.join(__dirname, 'static')));
+app.use(express.static('dist'));
 
 app.get('/', (req, res) => {
   console.log('sending index.html');

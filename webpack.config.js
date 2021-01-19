@@ -3,6 +3,8 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 const CleanWebpackPlugin = require("clean-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const TerserPlugin = require("terser-webpack-plugin");
+const CompressionPlugin = require("compression-webpack-plugin");
+const webpack = require("webpack");
 
 const outputDirectory = "dist";
 
@@ -84,8 +86,7 @@ module.exports = {
         //         "NODE_ENV": JSON.stringify("production")
         //     }
         // }),
-        // new webpack.optimize.DedupePlugin(), //dedupe similar code
-        // new webpack.optimize.AggressiveMergingPlugin(), //Merge chunks
+        new webpack.optimize.AggressiveMergingPlugin(), //Merge chunks
         new CleanWebpackPlugin([outputDirectory]),
         new HtmlWebpackPlugin({
             template: "./public/index.html",
@@ -95,7 +96,8 @@ module.exports = {
         new MiniCssExtractPlugin({
             filename: "./css/[name].css",
             chunkFilename: "./css/[id].css",
-        })
+        }),
+        new CompressionPlugin()
     ],
     optimization: {
         minimize: true,

@@ -66,7 +66,7 @@ export function App() {
 
     // initialize google analytics
     tracking.init();
-    tracking.page('/');
+    tracking.page(window.location.pathname);
   }, []);
 
   return (
