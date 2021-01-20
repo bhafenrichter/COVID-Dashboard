@@ -9,12 +9,13 @@
     "proxy": "http://localhost:3001",
     "scripts": {
         "copy-dependencies": "copyfiles -a src/server/data/**/* dist/data -u 3 && copyfiles -a src/server/data/* dist/data -u 3 && copyfiles -a src/server/static/**/* dist/static -u 3",
-        "build": "webpack --mode production && yarn run copy-dependencies",
+        "build": "webpack --mode production --config webpack.dev.js && yarn run copy-dependencies",
         "start": "npm run build && tsc -p tsconfig.server.json && npm run server",
-        "client": "webpack-dev-server --mode development --devtool inline-source-map --hot",
+        "client": "webpack-dev-server --mode development --devtool inline-source-map --hot --config webpack.dev.js",
         "dev-server": "tsc -p tsconfig.server.json && yarn run copy-dependencies && ts-node dist/",
         "server": "ts-node dist/",
-        "dev": "concurrently \"nodemon\" \"npm run client\" -n browser,server -c \"bgBlue.bold,bgMagenta.bold\""
+        "dev": "concurrently \"nodemon\" \"npm run client\" -n browser,server -c \"bgBlue.bold,bgMagenta.bold\"",
+        "deploy": "webpack --mode production --config webpack.prd.js && tsc -p tsconfig.server.json && yarn run copy-dependencies"
     },
     "author": "Brandon Hafenrichter",
     "license": "MIT",
