@@ -81,13 +81,13 @@ module.exports = {
         }
     },
     plugins: [
-        // new webpack.DefinePlugin({ // <-- key to reducing React's size
-        //     "process.env": {
-        //         "NODE_ENV": JSON.stringify("production")
-        //     }
-        // }),
-        new webpack.optimize.AggressiveMergingPlugin(), //Merge chunks
-        new CleanWebpackPlugin([outputDirectory]),
+        new webpack.DefinePlugin({ // <-- key to reducing React's size
+            "process.env": {
+                "NODE_ENV": JSON.stringify("production")
+            }
+        }),
+        // new webpack.optimize.AggressiveMergingPlugin(), //Merge chunks
+        // new CleanWebpackPlugin([outputDirectory]),
         new HtmlWebpackPlugin({
             template: "./public/index.html",
             favicon: "./public/favicon.ico",
@@ -97,11 +97,11 @@ module.exports = {
             filename: "./css/[name].css",
             chunkFilename: "./css/[id].css",
         }),
-        new CompressionPlugin()
+        // new CompressionPlugin()
     ],
     optimization: {
-        minimize: true,
-        minimizer: [new TerserPlugin()],
+        // minimize: true,
+        // minimizer: [new TerserPlugin()],
         splitChunks: {
             cacheGroups: {
                 commons: {
