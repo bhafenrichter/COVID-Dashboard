@@ -8,6 +8,6 @@
   "watch": [
     "src/server"
   ],
-  "exec": "tsc -p tsconfig.server.json && node server/",
+  "exec": "tsc -p tsconfig.server.json && yarn run copy-dependencies && ts-node dist/",
   "ext": "ts"
 }
