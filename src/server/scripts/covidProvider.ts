@@ -75,7 +75,7 @@ class COVIDDataProvider implements ICOVIDDataProvider {
       results[i].case7DayAvg = this.calculateAverage(i, results, 7).toFixed(0);
     }
 
-    results = results.slice(7, results.length - 1);
+    results = results.slice(7, results.length);
     // results.sort((a, b) => (a.day > b.day ? -1 : 1));
 
     return results;
@@ -89,7 +89,7 @@ class COVIDDataProvider implements ICOVIDDataProvider {
       return 0;
     }
 
-    let casesToAverage = entries.slice(index - daysToAverage, index);
+    let casesToAverage = entries.slice(index - daysToAverage + 1, index + 1);
     let sum: number = casesToAverage.reduce(
       (total: number, current: any, i: number) => {
         return total + current.cases;

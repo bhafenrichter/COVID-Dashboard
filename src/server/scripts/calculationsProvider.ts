@@ -26,8 +26,6 @@ class CalculationsProvider implements ICalculationsProvider {
         this.getPopulationImmunity(
           population,
           totalVaccinations,
-          totalCases,
-          totalDeaths
         )
       ),
       deathRate: utils.formatPercent(
@@ -49,19 +47,17 @@ class CalculationsProvider implements ICalculationsProvider {
   };
   getCasesThisWeek = (cases: COVIDDay[]) => {
     if (cases.length === 0) { return 0;}
-    const thisWeek = cases.slice(0, 6).map((x) => x.cases);
+    const thisWeek = cases.slice(cases.length - 6, cases.length).map((x) => x.cases);
     return thisWeek.reduce((x, y) => x + y);
   };
   getDeathsThisWeek = (cases: COVIDDay[]) => {
     if (cases.length === 0) { return 0;}
-    const thisWeek = cases.slice(0, 6).map((x) => x.deaths);
+    const thisWeek = cases.slice(cases.length - 6, cases.length).map((x) => x.deaths);
     return thisWeek.reduce((x, y) => x + y);
   };
   getPopulationImmunity = (
     population: number,
     totalVaccinations: number,
-    totalCases: number,
-    totalDeaths: number
   ) => {
 
     if (totalVaccinations === 0) {
