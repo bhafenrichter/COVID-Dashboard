@@ -1,8 +1,9 @@
 import * as React from 'react';
-import { Col } from 'react-bootstrap';
+import { Col, Row } from 'react-bootstrap';
 import { Country } from '../../../server/models/ICOVIDDataProvider';
 import { CountryRow } from './countryRow';
 import { CountryRowMin } from './countryRowMin';
+import { CountryRowDivider } from './countryRowDivider';
 
 export interface CountryListProps {
   countries: Array<Country>;
@@ -14,20 +15,21 @@ const NUM_COLUMNS = 3;
 export const CountryList = function (props: CountryListProps) {
   const { countries, singleCol } = props;
 
-  console.log('countrylist rendered');
-
-  let renderedCountries: Array<Array<JSX.Element>> = [[]];
-  let renderedColumns: Array<JSX.Element> = [];
-  if (countries) {
+  let renderRows = (countriesToRender: Array<Country>) => {
+    let renderedCountries: Array<Array<JSX.Element>> = [[]];
+    let renderedColumns: Array<JSX.Element> = [];
     if (!singleCol) {
       // generate the columns
-      let itemsPerRow = Math.floor(countries.length / NUM_COLUMNS);
+      let itemsPerRow =
+        countriesToRender.length > NUM_COLUMNS
+          ? Math.ceil(countriesToRender.length / NUM_COLUMNS)
+          : NUM_COLUMNS;
       for (let i = 0; i < NUM_COLUMNS; i++) {
         renderedCountries[i] = [];
         // render vertical row by vertical row
         for (let j = 0; j < itemsPerRow; j++) {
-          if (i * itemsPerRow + j < countries.length) {
-            let current = countries[i * itemsPerRow + j];
+          if (i * itemsPerRow + j < countriesToRender.length) {
+            let current = countriesToRender[i * itemsPerRow + j];
             renderedCountries[i].push(
               <CountryRow key={current.name} country={current}></CountryRow>
             );
@@ -54,6 +56,26 @@ export const CountryList = function (props: CountryListProps) {
       renderedColumns.push(<Col lg={12}>{content}</Col>);
       renderedCountries.push(renderedColumns);
     }
+
+    return renderedColumns;
+  };
+
+  if (countries) {
+    // separate favorite and non-favorite countries
+    let favoriteCountries = countries.filter((x) => x.isFavorite === true);
+    let nonFavoriteCountries = countries.filter((x) => x.isFavorite !== true);
+
+    let renderedFavorites = renderRows(favoriteCountries);
+    let renderedNonFavorites = renderRows(nonFavoriteCountries);
+
+    return (
+      <div>
+        <CountryRowDivider title="Favorites"></CountryRowDivider>
+        <Row>{renderedFavorites}</Row>
+        <CountryRowDivider title="All Countries"></CountryRowDivider>
+        <Row>{renderedNonFavorites}</Row>
+      </div>
+    );
   }
-  return <div className="country-list">{renderedColumns}</div>;
+  return null;
 };

@@ -18,17 +18,6 @@
     }
 }
 
-.country-list {
-    display: flex;
-    flex-direction: row;
-    .country {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        align-items: center;
-    }
-}
-
 .rodal-dialog {
     overflow-y: scroll;
     -ms-overflow-style: none;  /* IE and Edge */
@@ -39,6 +28,13 @@
     .country-row {
         justify-content: space-between;
         cursor: pointer;
+        
+        .country {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+        }
     }
     .country-flag {
         margin-right: 15px;
@@ -76,4 +72,23 @@
 .country-row-min:hover {
     color: white;
     cursor: pointer;
+}
+
+.divider {
+    margin-top: 15px;
+    margin-bottom: 15px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    .divider-text {
+        color: white;
+        font-size: 12px;
+        text-align: center;
+        margin: 0px;
+        padding: 10px;
+    }
+    hr {
+        flex: 1;
+        border-top-color: @text-color;
+    }
 }
