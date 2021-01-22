@@ -21,9 +21,10 @@ export const CountryList = function (props: CountryListProps) {
     if (!singleCol) {
       // generate the columns
       let itemsPerRow =
-        countriesToRender.length > NUM_COLUMNS
+        countriesToRender.length >= NUM_COLUMNS
           ? Math.ceil(countriesToRender.length / NUM_COLUMNS)
           : NUM_COLUMNS;
+
       for (let i = 0; i < NUM_COLUMNS; i++) {
         renderedCountries[i] = [];
         // render vertical row by vertical row
@@ -69,7 +70,7 @@ export const CountryList = function (props: CountryListProps) {
     let renderedNonFavorites = renderRows(nonFavoriteCountries);
 
     return (
-      <div>
+      <div className="country-list">
         <CountryRowDivider title="Favorites"></CountryRowDivider>
         {favoriteCountries.length > 0 ? (
           <Row>{renderedFavorites}</Row>

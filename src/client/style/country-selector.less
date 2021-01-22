@@ -69,27 +69,30 @@
     }
 }
 
-.country-row-min:hover {
-    color: white;
-    cursor: pointer;
-}
-
-.divider {
-    margin-top: 15px;
-    margin-bottom: 15px;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    .divider-text {
+.country-list {
+    margin: 15px;
+    .country-row-min:hover {
         color: white;
-        font-size: 12px;
-        text-align: center;
-        margin: 0px;
-        padding: 10px;
+        cursor: pointer;
     }
-    hr {
-        flex: 1;
-        max-width: 30%;
-        border-top-color: @text-color;
+    
+    .divider {
+        margin-top: 15px;
+        margin-bottom: 15px;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        .divider-text {
+            color: white;
+            font-size: 12px;
+            text-align: center;
+            margin: 0px;
+            padding: 10px;
+        }
+        hr {
+            flex: 1;
+            max-width: 30%;
+            border-top-color: @text-color;
+        }
     }
 }
