@@ -71,7 +71,11 @@ export const CountryList = function (props: CountryListProps) {
     return (
       <div>
         <CountryRowDivider title="Favorites"></CountryRowDivider>
-        <Row>{renderedFavorites}</Row>
+        {favoriteCountries.length > 0 ? (
+          <Row>{renderedFavorites}</Row>
+        ) : (
+          <p className="centered">No Favorites Selected</p>
+        )}
         <CountryRowDivider title="All Countries"></CountryRowDivider>
         <Row>{renderedNonFavorites}</Row>
       </div>

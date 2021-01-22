@@ -45,7 +45,7 @@ export function App() {
       if (!cookies[COOKIES.FAVORITE_COUNTRIES]) {
         setFavorites([]);
       } else {
-        setFavorites(cookies[COOKIES.FAVORITE_COUNTRIES]);
+        setFavorites([...cookies[COOKIES.FAVORITE_COUNTRIES]]);
       }
 
       ee.dispatch(EVTS.HIDE_LOADING);
@@ -58,7 +58,6 @@ export function App() {
     const fetchTranslations = async () => {
       ee.dispatch(EVTS.SHOW_LOADING);
       let translations = await api.getLanguage(lang);
-      console.log(translations);
       setTranslations(translations);
       ee.dispatch(EVTS.HIDE_LOADING);
     };
