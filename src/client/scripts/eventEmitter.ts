@@ -16,4 +16,6 @@ export const EVTS = {
   SHOW_LOADING: 'Show Loading',
   HIDE_LOADING: 'Hide Loading',
   CHANGE_LANGUAGE: 'Change Language',
+  ADD_FAVORITE: 'Add Favorite',
+  REMOVE_FAVORITE: 'Remove Favorite',
 };

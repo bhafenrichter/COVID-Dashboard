@@ -14,6 +14,8 @@ const NUM_COLUMNS = 3;
 export const CountryList = function (props: CountryListProps) {
   const { countries, singleCol } = props;
 
+  console.log('countrylist rendered');
+
   let renderedCountries: Array<Array<JSX.Element>> = [[]];
   let renderedColumns: Array<JSX.Element> = [];
   if (countries) {
