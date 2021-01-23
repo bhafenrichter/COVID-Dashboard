@@ -29,8 +29,8 @@ export function CountrySelector(props: CountrySelectorProps) {
   };
 
   // calculate the width and height of the modal
-  const width = utils.getPixelWidthByPercent(0.75);
-  const height = utils.getPixelHeightByPercent(0.75);
+  const width = utils.getPixelWidthByPercent(0.9);
+  const height = utils.getPixelHeightByPercent(0.9);
 
   return (
     <div className="country-selector">
