@@ -4,6 +4,7 @@ import { Country } from '../../../server/models/ICOVIDDataProvider';
 import { CountryRow } from './countryRow';
 import { CountryRowMin } from './countryRowMin';
 import { CountryRowDivider } from './countryRowDivider';
+import { COVIDTrend } from '../../../server/jobs/trendingCountries';
 
 export interface CountryListProps {
   countries: Array<Country>;
@@ -47,13 +48,14 @@ export const CountryList = function (props: CountryListProps) {
         );
       }
     } else {
-      let content = countries.map((country) => (
-        <CountryRowMin
-          key={country.name}
-          country={country.name}
-          logo={country.logo}
-          stat={country.trend}></CountryRowMin>
-      ));
+      let content = countries.map((country) => {
+        let trend: COVIDTrend = {
+          country: country.name,
+          trend: Number(country.trend) || 0,
+          logo: country.logo,
+        };
+        <CountryRowMin trend={trend}></CountryRowMin>;
+      });
       renderedColumns.push(<Col lg={12}>{content}</Col>);
       renderedCountries.push(renderedColumns);
     }

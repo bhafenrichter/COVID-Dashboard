@@ -54,7 +54,19 @@ router.get('/country', async (req, res) => {
   let trendingCountries = fileProvider.readJSON(
     'covid.json'
   ) as Array<COVIDTrend>;
-  trendingCountries.slice(0, 10);
+
+  trendingCountries = trendingCountries.map((x) => {
+    return {
+      ...x,
+      normalizedTrend: (Number(x.trend) / 100) * population,
+    };
+  });
+
+  trendingCountries
+    .sort((x, y) =>
+      Number(x.normalizedTrend) < Number(y.normalizedTrend) ? 1 : -1
+    )
+    .slice(0, 10);
 
   let trendingVaccinationCountries = fileProvider.readJSON(
     'vaccines.json'

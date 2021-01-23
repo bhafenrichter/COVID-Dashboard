@@ -1,7 +1,7 @@
-import { vaccineProvider } from "../scripts/vaccineProvider"
-import { fileProvider } from "../scripts/fileProvider";
-import { countryProvider } from "../scripts/countryProvider";
-import { COVIDTrend } from "./trendingCountries";
+import { vaccineProvider } from '../scripts/vaccineProvider';
+import { fileProvider } from '../scripts/fileProvider';
+import { countryProvider } from '../scripts/countryProvider';
+import { COVIDTrend } from './trendingCountries';
 
 export const getTopVaccinatingCountries = async () => {
   // get data for all countries
@@ -17,13 +17,13 @@ export const getTopVaccinatingCountries = async () => {
     vaccineResults.push({
       country: current,
       trend: ((data / population) * 100).toFixed(2),
-      logo: '',
+      logo: countryProvider.getLogo(current),
     });
   }
 
   // order the data and return it
-  vaccineResults.sort((x,y) => Number(x.trend) < Number(y.trend) ? 1 : -1);
+  vaccineResults.sort((x, y) => (Number(x.trend) < Number(y.trend) ? 1 : -1));
 
   // save the spreadsheet
   fileProvider.writeJSON('vaccines.json', vaccineResults);
-}
+};

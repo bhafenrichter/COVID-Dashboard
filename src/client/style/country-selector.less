@@ -25,6 +25,31 @@
     -webkit-scrollbar {
         display: none;
     }
+
+    .country-list {
+        margin: 15px;
+        
+        .divider {
+            margin-top: 15px;
+            margin-bottom: 15px;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            .divider-text {
+                color: white;
+                font-size: 12px;
+                text-align: center;
+                margin: 0px;
+                padding: 10px;
+            }
+            hr {
+                flex: 1;
+                max-width: 30%;
+                border-top-color: @text-color;
+            }
+        }
+    }
+    
     .country-row {
         justify-content: space-between;
         cursor: pointer;
@@ -73,31 +98,9 @@
         }
     }
 }
-
-.country-list {
-    margin: 15px;
-    .country-row-min:hover {
+.country-row-min:hover {
+    cursor: pointer;
+    .text {
         color: white;
-        cursor: pointer;
-    }
-    
-    .divider {
-        margin-top: 15px;
-        margin-bottom: 15px;
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        .divider-text {
-            color: white;
-            font-size: 12px;
-            text-align: center;
-            margin: 0px;
-            padding: 10px;
-        }
-        hr {
-            flex: 1;
-            max-width: 30%;
-            border-top-color: @text-color;
-        }
     }
 }

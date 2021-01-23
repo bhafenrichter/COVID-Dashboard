@@ -1,20 +1,19 @@
 import React from 'react';
 import { FaCaretDown, FaCaretUp } from 'react-icons/fa';
+import { COVIDTrend } from '../../../server/jobs/trendingCountries';
 import { ee, EVTS } from '../../scripts/eventEmitter';
 
 export interface CountryRowProps {
-  country: string;
-  stat?: string | number;
-  logo: string;
+  trend: COVIDTrend;
   colors?: boolean;
   icons?: boolean;
 }
 
 export const CountryRowMin = function (props: CountryRowProps) {
-  const { country, stat, colors, icons, logo } = props;
+  const { trend, colors, icons } = props;
   let trendClass;
 
-  if (Number(stat) >= 0 && colors) {
+  if (Number(trend.trend) >= 0 && colors) {
     trendClass = 'trend-up';
   } else if (colors) {
     trendClass = 'trend-down';
@@ -23,13 +22,18 @@ export const CountryRowMin = function (props: CountryRowProps) {
   return (
     <div
       className="country-row country-row-min"
-      onClick={() => ee.dispatch(EVTS.CHANGE_COUNTRY, { name: country, logo })}>
-      <p className="text">{country}</p>
+      onClick={() =>
+        ee.dispatch(EVTS.CHANGE_COUNTRY, {
+          name: trend.country,
+          logo: trend.logo,
+        })
+      }>
+      <p className="text">{trend.country}</p>
 
       <div className={trendClass + ' stat-body'}>
-        <p className="text">{stat}%</p>
+        <p className="text">{trend.trend}%</p>
         {icons ? (
-          Number(stat) < 0 ? (
+          Number(trend.trend) < 0 ? (
             <FaCaretDown
               color={colors ? 'rgba(150, 230, 161, 1)' : ''}></FaCaretDown>
           ) : (
