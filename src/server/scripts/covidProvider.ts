@@ -8,6 +8,7 @@ import {
   COVIDDay,
   ICOVIDDataProvider,
 } from '../models/ICOVIDDataProvider';
+import { fileProvider } from './fileProvider';
 
 class COVIDDataProvider implements ICOVIDDataProvider {
   BASE_URL = 'https://api.covid19api.com/';
@@ -20,12 +21,14 @@ class COVIDDataProvider implements ICOVIDDataProvider {
   getCOVIDCountries = async () => {
     let request = await fetch(`${this.BASE_URL}countries`);
     let response: Array<any> = await request.json();
-    return response
+    let allCountries = response
       .map((x: any) => ({
         name: x.Country,
         logo: `/static/svg/${x.ISO2}.svg`,
       }))
       .sort((x, y) => (x.name > y.name ? 1 : -1));
+    let selectedCountries : Array<string> = fileProvider.readJSON('countries.json').countries;
+    return allCountries.filter(x => selectedCountries.includes(x.name));
   };
 
   getCOVIDDataByDay = async (country: string, days: number) => {
@@ -47,11 +50,21 @@ class COVIDDataProvider implements ICOVIDDataProvider {
     )}&to=${endDate.format(this.URL_DATE_FORMAT)}`;
     deathUrl = deathUrl.replace('{country}', country);
 
-    const cases = await fetch(caseUrl);
-    const caseResults = (await cases.json()) as Array<any>;
+    // hackerman
+    let cases, caseResults, deaths, deathResults;
+    cases = caseResults = deaths = deathResults = [];
 
-    const deaths = await fetch(deathUrl);
-    const deathResults = await deaths.json();
+    try {
+      cases = await fetch(caseUrl);
+      caseResults = (await cases.json()) as Array<any>;
+  
+      deaths = await fetch(deathUrl);
+      deathResults = await deaths.json();
+    } catch (e) {
+      console.log('API down.  Time to take a break.');
+      return [];
+    }
+
 
     // merge the data together into a nice array
     if (caseResults.length === deathResults.length) {

@@ -4,6 +4,9 @@ dist
 *.log
 .idea
 server/**
-src/server/data/**
+src/server/data/covid.json
+src/server/data/populations.json
+src/server/data/vaccines.json
+src/server/data/test.json
 src/.DS_Store
 src/server/.DS_Store

@@ -1,0 +1,21 @@
+{
+  "casesThisWeek": "Fälle diese Woche",
+  "deathsThisWeek": "Todesfälle diese Woche",
+  "immunityPercent": "Immunität Prozent",
+  "deathRate": "Todesrate",
+  "casesByDay": "Fälle nach Tag",
+  "recovering": "Wiederherstellen",
+  "hotspots": "Hotspots",
+  "vaccinationsByDay": "Impfungen bei Tag",
+  "topVaccinatingCountries": "Top-Impfländer",
+  "noDataReported": "Keine Daten gemeldet",
+  "covidFiguresFor": "COVID Zahlen für ",
+  "selectACountry": "Wähle ein Land",
+  "cases": "Fälle",
+  "deaths": "Todesfälle",
+  "vaccinesAdministered": "Impfstoffe verabreicht",
+  "7DayAverage": "Durchschnittliche Umstände in den letzten 7 Tagen",
+  "en": "English",
+  "de": "German",
+  "ru": "Russian"
+}
