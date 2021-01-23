@@ -35,7 +35,7 @@ class VaccineProvider implements ICOVIDVaccineProvider {
             vaccinationDate > cutoffDate
           ) {
             let currentVaccine: VaccineDay = {
-              day: vaccinationDate.format('DD/MM'),
+              day: vaccinationDate.format('MMM Do'),
               vaccines: Number(json.daily_vaccinations) as number,
               immunityPercent:
                 results.reduce((x, y) => x + y.vaccines, 0) / population,

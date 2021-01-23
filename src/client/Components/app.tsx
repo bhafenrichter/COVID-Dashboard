@@ -168,6 +168,12 @@ export function App() {
                   },
                 ]}
                 data={data.covidData}></LineChart>
+              {/* Legend */}
+              <div className="legend-wrapper">
+                <p className="blue">{trans['cases']}</p>
+                <p className="white">{trans['deaths']}</p>
+                <p className="green">{trans['7DayAverage']}</p>
+              </div>
             </DataCard>
           </Col>
           <Col lg="3">
@@ -212,6 +218,9 @@ export function App() {
                   },
                 ]}
                 data={data.vaccines}></LineChart>
+              <div className="legend-wrapper">
+                <p className="blue">{trans['vaccinesAdministered']}</p>
+              </div>
             </DataCard>
           </Col>
           <Col lg="3">

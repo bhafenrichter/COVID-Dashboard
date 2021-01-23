@@ -19,23 +19,24 @@ class COVIDDataProvider implements ICOVIDDataProvider {
   constructor() {}
 
   getCOVIDCountries = async () => {
-    let selectedCountries : Array<string> = fileProvider.readJSON('countries.json').countries;
+    let selectedCountries: Array<string> = fileProvider.readJSON(
+      'countries.json'
+    ).countries;
     let results;
     try {
       let request = await fetch(`${this.BASE_URL}countries`);
       let response: Array<any> = await request.json();
-      let allCountries = response
-        .map((x: any) => ({
-          name: x.Country,
-          logo: `${x.ISO2}`,
-        }));
-      results = allCountries.filter(x => selectedCountries.includes(x.name));
+      let allCountries = response.map((x: any) => ({
+        name: x.Country,
+        logo: `${x.ISO2}`,
+      }));
+      results = allCountries.filter((x) => selectedCountries.includes(x.name));
     } catch (e) {
       results = selectedCountries.map((x: string) => {
         return {
           name: x,
           logo: '',
-        }
+        };
       });
     }
     return results.sort((x, y) => (x.name > y.name ? 1 : -1));
@@ -67,7 +68,7 @@ class COVIDDataProvider implements ICOVIDDataProvider {
     try {
       cases = await fetch(caseUrl);
       caseResults = (await cases.json()) as Array<any>;
-  
+
       deaths = await fetch(deathUrl);
       deathResults = await deaths.json();
     } catch (e) {
@@ -75,12 +76,11 @@ class COVIDDataProvider implements ICOVIDDataProvider {
       return [];
     }
 
-
     // merge the data together into a nice array
     if (caseResults.length === deathResults.length) {
       for (let i = 1; i < caseResults.length; i++) {
         let currentDay: COVIDDay = {
-          day: moment(caseResults[i].Date).format('DD/MM'),
+          day: moment(caseResults[i].Date).format('MMM D'),
           // cases returns the total number of cases, not for that specific day
           cases: caseResults[i].Cases - caseResults[i - 1].Cases,
           // will be populated later
