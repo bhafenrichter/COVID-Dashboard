@@ -1,7 +1,7 @@
 import React from 'react';
 import { Country } from '../../../server/models/ICOVIDDataProvider';
 import { ee, EVTS } from './../../scripts/eventEmitter';
-import LazyLoad from 'react-lazyload';
+import { FlagIcon } from './flagIcon';
 import { FaStar, FaRegStar } from 'react-icons/fa';
 
 export interface CountryRowProps {
@@ -27,9 +27,7 @@ export const CountryRow = function (props: CountryRowProps) {
           ee.dispatch(EVTS.CLOSE_MODAL, null);
         }}>
         <div className="country-flag">
-          <LazyLoad>
-            <img src={country.logo} />
-          </LazyLoad>
+          <FlagIcon name={country.logo}></FlagIcon>
         </div>
         <p className="text">{country.name}</p>
         <p className="text">{stat}</p>

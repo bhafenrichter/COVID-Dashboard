@@ -22,7 +22,7 @@ import { COOKIES } from './../scripts/cookie';
 export function App() {
   const [country, setCountry] = useState({
     name: 'Germany',
-    logo: '/static/svg/DE.svg',
+    logo: 'de',
   });
   let [data, setCOVIDData] = useState({ calculations: {} } as COVIDDataModel);
   let [countries, setCountries] = useState([] as Array<Country>);

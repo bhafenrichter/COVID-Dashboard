@@ -19,16 +19,26 @@ class COVIDDataProvider implements ICOVIDDataProvider {
   constructor() {}
 
   getCOVIDCountries = async () => {
-    let request = await fetch(`${this.BASE_URL}countries`);
-    let response: Array<any> = await request.json();
-    let allCountries = response
-      .map((x: any) => ({
-        name: x.Country,
-        logo: `/static/svg/${x.ISO2}.svg`,
-      }))
-      .sort((x, y) => (x.name > y.name ? 1 : -1));
     let selectedCountries : Array<string> = fileProvider.readJSON('countries.json').countries;
-    return allCountries.filter(x => selectedCountries.includes(x.name));
+    let results;
+    try {
+      let request = await fetch(`${this.BASE_URL}countries`);
+      let response: Array<any> = await request.json();
+      let allCountries = response
+        .map((x: any) => ({
+          name: x.Country,
+          logo: `${x.ISO2}`,
+        }));
+      results = allCountries.filter(x => selectedCountries.includes(x.name));
+    } catch (e) {
+      results = selectedCountries.map((x: string) => {
+        return {
+          name: x,
+          logo: '',
+        }
+      });
+    }
+    return results.sort((x, y) => (x.name > y.name ? 1 : -1));
   };
 
   getCOVIDDataByDay = async (country: string, days: number) => {

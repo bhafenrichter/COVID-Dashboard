@@ -2,7 +2,6 @@ import express from 'express';
 import moment from 'moment';
 import { COVIDTrend } from '../../jobs/trendingCountries';
 import { languageProvider } from '../../scripts/languageProvider';
-import { utils } from '../../scripts/utils';
 import { fileProvider } from "./../../scripts/fileProvider";
 
 export const router = express.Router();

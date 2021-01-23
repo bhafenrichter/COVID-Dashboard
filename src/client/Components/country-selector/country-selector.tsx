@@ -7,6 +7,7 @@ import { Country } from '../../../server/models/ICOVIDDataProvider';
 import { ee, EVTS } from '../../scripts/eventEmitter';
 import { utils } from '../../scripts/utils';
 import { forceVisible } from 'react-lazyload';
+import { FlagIcon } from '../country-list/flagIcon';
 interface CountrySelectorProps {
   country: Country;
   countries: Array<Country>;
@@ -39,7 +40,7 @@ export function CountrySelector(props: CountrySelectorProps) {
         <span className="country-selector-country">{country.name}</span>
       </h3>
       <div className="country-flag" onClick={toggleModal}>
-        <img src={country.logo} />
+        <FlagIcon name={country.logo} />
       </div>
       <div className="country-select" onClick={toggleModal}>
         <FaCaretDown />
