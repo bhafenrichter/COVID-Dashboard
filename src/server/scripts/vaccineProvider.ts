@@ -11,7 +11,11 @@ class VaccineProvider implements ICOVIDVaccineProvider {
   BASE_URL =
     'https://raw.githubusercontent.com/owid/covid-19-data/master/public/data/vaccinations/vaccinations.csv';
 
-  getVaccinationByDay = async (country: string, days: number) => {
+  getVaccinationByDay = async (
+    country: string,
+    days: number,
+    population: number
+  ) => {
     const cutoffDate = moment().subtract(days, 'days');
     let results: Array<VaccineDay> = [];
     let vaccineRequest = request.get(this.BASE_URL);
@@ -33,6 +37,8 @@ class VaccineProvider implements ICOVIDVaccineProvider {
             let currentVaccine: VaccineDay = {
               day: vaccinationDate.format('DD/MM'),
               vaccines: Number(json.daily_vaccinations) as number,
+              immunityPercent:
+                results.reduce((x, y) => x + y.vaccines, 0) / population,
             };
             results.push(currentVaccine);
           }
@@ -48,7 +54,7 @@ class VaccineProvider implements ICOVIDVaccineProvider {
     return results;
   };
   getVaccinationsByCountry = async (country: string) => {
-    const vaccines = await this.getVaccinationByDay(country, 9999);
+    const vaccines = await this.getVaccinationByDay(country, 9999, 0);
     let totalVaccines = 0;
     vaccines.forEach((entry) => {
       totalVaccines += entry.vaccines;

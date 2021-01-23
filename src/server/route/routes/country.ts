@@ -2,7 +2,7 @@ import express from 'express';
 import moment from 'moment';
 import { COVIDTrend } from '../../jobs/trendingCountries';
 import { languageProvider } from '../../scripts/languageProvider';
-import { fileProvider } from "./../../scripts/fileProvider";
+import { fileProvider } from './../../scripts/fileProvider';
 
 export const router = express.Router();
 
@@ -19,27 +19,30 @@ router.get('/countries', async (req, res) => {
 });
 
 router.get('/language', async (req, res) => {
-  const {lang} = req.query;
+  const { lang } = req.query;
 
   if (lang) {
     const translation = languageProvider.getLanguage(lang.toString());
-    res.send(translation); 
+    res.send(translation);
   }
-})
+});
 
 router.get('/country', async (req, res) => {
   res.header('Access-Control-Allow-Origin', '*');
   const { country, days } = req.query;
 
+  const population = await countryProvider.getPopulation(country as string);
+
   const vaccines = await vaccineProvider.getVaccinationByDay(
     country as string,
-    Number(days)
+    Number(days),
+    population
   );
+
   const covidData = await covidDataProvider.getCOVIDDataByDay(
     country as string,
     Number(days)
   );
-  const population = await countryProvider.getPopulation(country as string);
 
   const countryCOVIDTotals = await covidDataProvider.getCOVIDDataForCountry(
     country as string
@@ -48,11 +51,18 @@ router.get('/country', async (req, res) => {
     country as string
   );
 
-  let trendingCountries = fileProvider.readJSON('covid.json') as Array<COVIDTrend>;
+  let trendingCountries = fileProvider.readJSON(
+    'covid.json'
+  ) as Array<COVIDTrend>;
   trendingCountries.slice(0, 10);
 
-  let trendingVaccinationCountries = fileProvider.readJSON('vaccines.json') as Array<COVIDTrend>;
-  trendingVaccinationCountries.slice(trendingVaccinationCountries.length - 10, trendingVaccinationCountries.length - 1);
+  let trendingVaccinationCountries = fileProvider.readJSON(
+    'vaccines.json'
+  ) as Array<COVIDTrend>;
+  trendingVaccinationCountries.slice(
+    trendingVaccinationCountries.length - 10,
+    trendingVaccinationCountries.length - 1
+  );
 
   let totalCases = countryCOVIDTotals.cases;
   let totalDeaths = countryCOVIDTotals.deaths;
@@ -75,6 +85,6 @@ router.get('/country', async (req, res) => {
     calculations,
     trendingCountries,
     trendingVaccinationCountries,
-    createdOn
+    createdOn,
   });
 });
