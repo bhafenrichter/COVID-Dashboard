@@ -10,16 +10,12 @@ import compression from 'compression';
 // call express
 const app = express(); // define our app using express
 
-
-
 // configure app to use bodyParser()
 // this will let us get the data from a POST
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 const port: number = Number(process.env.PORT) || 3001; // set our port
-
-
 
 app.use(compression());
 /*
@@ -29,17 +25,16 @@ STATIC CONTENT
   the file that gets unzipped and served to the user
 */
 app.get('*.js', (req, res, next) => {
-    req.url += '.gz';
-    res.set('Content-Encoding', 'gzip');
-    res.set('Content-Type', 'application/javascript');
-    next();
+  req.url += '.gz';
+  res.set('Content-Encoding', 'gzip');
+  res.set('Content-Type', 'application/javascript');
+  next();
 });
 
 app.use('/static', express.static(path.join(__dirname, 'static')));
 app.use(express.static('dist'));
 
 app.get('/', (req, res) => {
-  console.log('sending index.html');
   res.sendFile('/dist/index.html');
 });
 

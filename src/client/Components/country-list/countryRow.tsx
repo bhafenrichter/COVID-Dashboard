@@ -13,11 +13,6 @@ export interface CountryRowProps {
 
 export const CountryRow = function (props: CountryRowProps) {
   const { country, stat, logo, showFavorite } = props;
-
-  if (country.isFavorite) {
-    console.log('favorite: ' + country.name);
-  }
-
   return (
     <div className="country-row">
       <div

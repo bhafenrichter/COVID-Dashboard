@@ -30,7 +30,6 @@ export const LineChart: React.SFC<LineChartProps> = (props) => {
   }, [data]);
 
   if (data && data.length === 0) {
-    console.log('no data reported');
     return (
       <div className="chart-wrapper">
         <p className="centered text">No Data Reported</p>

@@ -1,10 +1,7 @@
 export const api = {
   getCOVIDDate: async (country: string) => {
-    let request = await fetch(
-      `/api/country?country=${country}&days=30`
-    );
+    let request = await fetch(`/api/country?country=${country}&days=30`);
     let results = await request.json();
-    console.log(results);
     return results;
   },
   getCountries: async () => {
@@ -16,5 +13,5 @@ export const api = {
     let request = await fetch(`/api/language?lang=${lang}`);
     let results = await request.json();
     return results;
-  }
+  },
 };
