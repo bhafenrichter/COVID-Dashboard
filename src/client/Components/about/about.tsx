@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Modal } from './../modal/modal';
 import { utils } from './../../scripts/utils';
-import { CountryRowDivider } from '../country-list/countryRowDivider';
 import { Col, Row } from 'react-bootstrap';
 import { FaGithub, FaLinkedin, FaTwitter } from 'react-icons/fa';
 
@@ -11,7 +10,7 @@ interface AboutProps {
 
 export const About = (props: AboutProps) => {
   const { translations } = props;
-  const [modalVisible, setVisible] = useState(true);
+  const [modalVisible, setVisible] = useState(false);
 
   const toggleModal = () => {
     setVisible((prevVisible) => !prevVisible);
@@ -62,6 +61,14 @@ export const About = (props: AboutProps) => {
                     countries are represented here.
                   </p>
                 </li>
+                <li>
+                  <p>
+                    <b className="white">Leaderboards:</b> As the calculations
+                    for the trending countries and vaccine leaderboards can be a
+                    bit expensive, I only run those calculations once a day. If
+                    the numbers do not correlate completely, this is the reason.
+                  </p>
+                </li>
               </ul>
             </p>
             <h4 className="centered">Works Cited</h4>
@@ -103,23 +110,25 @@ export const About = (props: AboutProps) => {
               </a>
             </div>
             <Row>
+              <Col lg="1"></Col>
               <Col lg="2">
                 <img
                   src="http://localhost:3001/static/png/nerd.png"
                   className="image rounded"
                 />
               </Col>
-              <Col lg="10">
+              <Col lg="8">
                 <p>
                   Oh yeah, I'm Brandon. I'm a Technical Project Lead / Software
                   Developer based in Berlin, Germany. I hope this Dashboard can
                   help you navigate through this pandemic and give you a concise
                   snapshot of how we are looking so you can worry less and start
                   living more. If you have any feedback about how to make this
-                  project better, hit me up on any of the links below. God
+                  project better, hit me up on any of the links above. God
                   bless.
                 </p>
               </Col>
+              <Col lg="1"></Col>
             </Row>
           </div>
         </div>
