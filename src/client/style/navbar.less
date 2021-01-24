@@ -1,10 +1,28 @@
 .navbar {
-    height: 5em;
-    background-color: @primary-color;
-    margin-bottom: 2em;
+  background-color: @primary-color;
+  margin-bottom: 2em;
 }
 
-.navbar-headline {
-    color: white;
-    font-size: 1.5em;
+.navbar-brand {
+  color: white !important;
+  font-size: 1.5em;
+}
+
+.right-nav-menu {
+  flex-direction: row;
+  display: flex;
+  align-items: center;
+
+  a {
+    margin-right: 15px;
+  }
+}
+
+.navbar-toggler {
+  border-color: @text-color !important;
+}
+
+.navbar-mobile-icon {
+  font-size: 24px;
+  color: @text-color;
 }

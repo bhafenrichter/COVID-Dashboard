@@ -2,95 +2,97 @@
 }
 
 .nopadding {
-    padding: 0;
-    margin: 0;
+  padding: 0;
+  margin: 0;
 }
 
 .centered {
-    text-align: center;
+  text-align: center;
 }
 
 .covid-row {
-    margin-top: 15px;
-    margin-bottom: 15px;
+  margin-top: 15px;
+  margin-bottom: 15px;
 }
 
 .card {
-    background-color: @primary-color;
-    border: 1px solid @text-color;
-    border-radius: 15px;
-    margin-bottom: 15px;
+  background-color: @primary-color;
+  border: 1px solid @text-color;
+  border-radius: 15px;
+  margin-bottom: 15px;
 
-    .card-title {
-        color: @text-color;
-    }
-    .card-description {
-        color: white;
-        font-size: 0.75em;
-    }
+  .card-title {
+    color: @text-color;
+  }
+  .card-description {
+    color: white;
+    font-size: 0.75em;
+  }
 }
 
 .dropdown-button {
-    button {
-        background-color: transparent !important;
-        border-color: transparent;
-        color: @text-color;
+  button {
+    background-color: transparent !important;
+    border-color: transparent;
+    color: @text-color;
+    margin: 0px;
+    padding: 0px;
+  }
+  button:hover {
+    border-color: @primary-color;
+  }
+  .dropdown-menu {
+    background-color: @primary-color;
+    border: none;
+    .dropdown-item {
+      color: @text-color;
     }
-    button:hover {
-        border-color: @primary-color;
+    .dropdown-item:hover {
+      background-color: @background-color;
     }
-    .dropdown-menu {
-        background-color: @primary-color;
-        .dropdown-item {
-            color: @text-color
-        }
-        .dropdown-item:hover {
-            background-color: @background-color;
-        }
-    }
+  }
 }
 
 .text {
-    color: @text-color;
-    margin: 0;
+  color: @text-color;
+  margin: 0;
 }
 
 .country-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .country-flag {
-    display: inline;
-    img {
-        width: 2.5em;
-        height: auto;
-        border-radius: 15px;
-    }
+  display: inline;
+  img {
+    width: 2.5em;
+    height: auto;
+    border-radius: 15px;
+  }
 }
 
 .help-icon-topright {
-    position: absolute;
-    top: 15px;
-    right: 30px;
-    color: white;
+  position: absolute;
+  top: 15px;
+  right: 30px;
+  color: white;
 }
 
 .help-icon-bottomright {
-    position: absolute;
-    bottom: 15px;
-    right: 30px;
-    color: white;
+  position: absolute;
+  bottom: 15px;
+  right: 30px;
+  color: white;
 }
 
 .help-icon:hover {
-    cursor: pointer;
-    color: black;
+  cursor: pointer;
+  color: black;
 }
 
 .loading-indicator {
-  
 }
 
 .loading-img {
@@ -99,17 +101,17 @@
 }
 
 .favorite {
-    color: white;
+  color: white;
 }
 
 .favorite:hover {
-    color: yellow;
+  color: yellow;
 }
 
 .favorite-selected {
-    color: yellow;
+  color: yellow;
 }
 
 .favorite-selected:hover {
-    color: white;
+  color: white;
 }

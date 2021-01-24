@@ -23,5 +23,6 @@
   "deathRateHelp": "The Death Rate is calculated by taking the total number of cases and dividing it by the total number of COVID-related deaths.",
   "recoveringHelp": "This percentage is calculated by taking the 7 Day Average of a Country a week ago, and comparing it to the current day's 7 day average.",
   "hotspotHelp": "This percentage is calculated by taking the 7 Day Average of a Country a week ago, and comparing it to the current day's 7 day average.",
-  "vaccinationHelp": "This percentage is calculated based on the number of Vaccines administered and dividing by the countries total population."
+  "vaccinationHelp": "This percentage is calculated based on the number of Vaccines administered and dividing by the countries total population.",
+  "about": "About"
 }
