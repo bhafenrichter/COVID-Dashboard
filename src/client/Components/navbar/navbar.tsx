@@ -1,5 +1,6 @@
 import React from 'react';
 import { Container, Nav, Navbar as BSNavbar } from 'react-bootstrap';
+import { About } from './../about/about';
 import { LanguageSelector } from './../language-selector/languageSelector';
 import { FaBars } from 'react-icons/fa';
 
@@ -21,7 +22,7 @@ export function Navbar(props: NavbarProps) {
           <Nav className="mr-auto"></Nav>
           <Nav>
             <Nav.Link href="#about">
-              <p className="text">{translations['about']}</p>
+              <About translations={translations}></About>
             </Nav.Link>
             <Nav.Link href="#about">
               <LanguageSelector
