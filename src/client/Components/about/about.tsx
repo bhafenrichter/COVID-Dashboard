@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import { Modal } from './../modal/modal';
 import { utils } from './../../scripts/utils';
 import { Col, Row } from 'react-bootstrap';
-import { FaGithub, FaLinkedin, FaTwitter } from 'react-icons/fa';
-
+import { FaGithub, FaLinkedin } from 'react-icons/fa';
+import { tracking } from './../../scripts/ga';
 interface AboutProps {
   translations: any;
 }
@@ -13,6 +13,7 @@ export const About = (props: AboutProps) => {
   const [modalVisible, setVisible] = useState(false);
 
   const toggleModal = () => {
+    tracking.page('/about');
     setVisible((prevVisible) => !prevVisible);
   };
 
@@ -112,10 +113,7 @@ export const About = (props: AboutProps) => {
             <Row>
               <Col lg="1"></Col>
               <Col lg="2">
-                <img
-                  src="http://localhost:3001/static/png/nerd.png"
-                  className="image rounded"
-                />
+                <img src="/static/png/nerd.png" className="image rounded" />
               </Col>
               <Col lg="8">
                 <p>
