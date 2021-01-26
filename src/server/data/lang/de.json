@@ -13,9 +13,17 @@
   "selectACountry": "Wähle ein Land",
   "cases": "Fälle",
   "deaths": "Todesfälle",
-  "vaccinesAdministered": "Impfstoffe verabreicht",
-  "7DayAverage": "Durchschnittliche Umstände in den letzten 7 Tagen",
+  "language": "Sprache",
   "en": "English",
   "de": "German",
-  "ru": "Russian"
+  "es": "Spanish",
+  "vaccinesAdministered": "Impfstoffe verabreicht",
+  "7DayAverage": "7 Tage Durchschn.",
+  "immunityPercentHelp": "Der prozentuale Anteil der Immunität wird berechnet, indem die Gesamtzahl der Impfungen durch die Gesamtbevölkerung dividiert wird.",
+  "deathRateHelp": "Die Sterblichkeitsrate wird berechnet, indem die Gesamtzahl der Fälle durch die Gesamtzahl der COVID-Todesfälle dividiert wird.",
+  "recoveryHelp": "Dieser Prozentsatz wird berechnet, indem der 7-Tage-Durchschnitt eines Landes vor einer Woche mit dem 7-Tage-Durchschnitt des aktuellen Tages verglichen wird.",
+  "hotspotHelp": "Dieser Prozentsatz wird berechnet, indem der 7-Tage-Durchschnitt eines Landes vor einer Woche mit dem 7-Tage-Durchschnitt des aktuellen Tages verglichen wird.",
+  "vaccinationHelp": "Dieser Prozentsatz wird basierend auf der Anzahl der verabreichten Impfstoffe und der Division durch die Gesamtbevölkerung des Landes berechnet.",
+  "about": "über",
+  "asOf": "ab "
 }

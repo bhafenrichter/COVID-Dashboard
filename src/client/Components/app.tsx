@@ -151,7 +151,10 @@ export function App() {
           <Col lg="9">
             <DataCard
               title={trans['casesByDay']}
-              description={utils.getTimeDescription(data.createdOn)}>
+              description={utils.getTimeDescription(
+                data.createdOn,
+                trans['asOf']
+              )}>
               <LineChart
                 keys={[
                   {
@@ -209,7 +212,10 @@ export function App() {
           <Col lg="9">
             <DataCard
               title={trans['vaccinationsByDay']}
-              description={utils.getTimeDescription(data.createdOn)}>
+              description={utils.getTimeDescription(
+                data.createdOn,
+                trans['asOf']
+              )}>
               <LineChart
                 keys={[
                   {

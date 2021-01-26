@@ -1,4 +1,4 @@
-import moment, { Moment } from "moment";
+import moment, { Moment } from 'moment';
 
 export const utils = {
   getScreenWidth: () => {
@@ -16,8 +16,13 @@ export const utils = {
     return utils.getScreenHeight() * percent;
   },
 
-  getTimeDescription: (date: string) => {
+  getTimeDescription: (date: string, prefix: string) => {
     let momentDate = moment(date);
-    return 'as of ' + momentDate.format('MMMM Do YYYY') + ' at ' + momentDate.format('h:mm A');
-  }
+    return (
+      prefix +
+      momentDate.format('MMMM Do YYYY') +
+      ' at ' +
+      momentDate.format('h:mm A')
+    );
+  },
 };

@@ -24,6 +24,9 @@ export const LanguageSelector = (props: LanguageSelectorProps) => {
       <DropdownItem onClick={() => switchLanguage('de')}>
         {translations['de']}
       </DropdownItem>
+      <DropdownItem onClick={() => switchLanguage('es')}>
+        {translations['es']}
+      </DropdownItem>
     </DropdownButton>
   );
 };
