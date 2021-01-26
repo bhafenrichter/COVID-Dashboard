@@ -4,7 +4,7 @@ import { getTopVaccinatingCountries } from './topVaccinatingCountries';
 
 // run the job every day 1pm
 let rule = new Schedule.RecurrenceRule();
-rule.hour = 13;
+rule.hour = 6;
 
 export const initJobs = () => {
   Schedule.scheduleJob(rule, async () => {
