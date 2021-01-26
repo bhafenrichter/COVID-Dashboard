@@ -7,6 +7,8 @@ import path from 'path';
 
 import compression from 'compression';
 
+import { initJobs } from './jobs/scheduler';
+
 // call express
 const app = express(); // define our app using express
 
@@ -47,3 +49,6 @@ app.use('/api', routes);
 // START THE SERVER
 app.listen(port);
 console.log(`App listening on ${port}!`);
+
+// INITIALIZE JOBS
+initJobs();
