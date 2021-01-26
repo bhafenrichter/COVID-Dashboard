@@ -20,16 +20,28 @@ import { utils } from '../scripts/utils';
 import { COOKIES } from './../scripts/cookie';
 
 export function App() {
-  const [country, setCountry] = useState({
-    name: 'Germany',
-    logo: 'de',
-  });
   let [data, setCOVIDData] = useState({ calculations: {} } as COVIDDataModel);
   let [countries, setCountries] = useState([] as Array<Country>);
   let [lang, setLang] = useState('en');
   let [trans, setTranslations]: any = useState({});
-  let [favorites, setFavorites] = useState([] as Array<string>);
-  let [cookies, setCookie] = useCookies();
+  let [favorites, setFavorites] = useState([] as Array<Country>);
+  let [cookies, setCookie, removeCookie] = useCookies();
+
+  let initialCountry = {
+    name: 'United States of America',
+    logo: 'US',
+  };
+  if (cookies[COOKIES.FAVORITE_COUNTRIES]) {
+    // cleanup from older iteration
+    if (typeof cookies[COOKIES.FAVORITE_COUNTRIES][0] == 'string') {
+      removeCookie(COOKIES.FAVORITE_COUNTRIES);
+      location.reload();
+    } else if (cookies[COOKIES.FAVORITE_COUNTRIES].length > 0) {
+      initialCountry = cookies[COOKIES.FAVORITE_COUNTRIES][0];
+    }
+  }
+
+  const [country, setCountry] = useState(initialCountry);
   let { calculations } = data;
 
   // fetch covid and vaccine data
@@ -76,7 +88,7 @@ export function App() {
     }
 
     for (let i = 0; i < favorites.length; i++) {
-      updated.filter((x) => x.name === favorites[i])[0].isFavorite = true;
+      updated.filter((x) => x.name === favorites[i].name)[0].isFavorite = true;
     }
     setCountries([...updated]);
   }, [favorites]);
@@ -104,7 +116,7 @@ export function App() {
     // Remove a favorite country
     ee.subscribe(EVTS.REMOVE_FAVORITE, (args) => {
       setFavorites((old: Array<any>) => {
-        let filtered = old.filter((x) => x != args);
+        let filtered = old.filter((x) => x.name != args.name);
         setCookie(COOKIES.FAVORITE_COUNTRIES, filtered);
         return filtered;
       });

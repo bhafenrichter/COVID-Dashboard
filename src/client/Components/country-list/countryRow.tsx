@@ -32,12 +32,12 @@ export const CountryRow = function (props: CountryRowProps) {
           {country.isFavorite ? (
             <FaStar
               className="favorite-selected"
-              onClick={() => ee.dispatch(EVTS.REMOVE_FAVORITE, country.name)}
+              onClick={() => ee.dispatch(EVTS.REMOVE_FAVORITE, country)}
             />
           ) : (
             <FaRegStar
               className="favorite"
-              onClick={() => ee.dispatch(EVTS.ADD_FAVORITE, country.name)}
+              onClick={() => ee.dispatch(EVTS.ADD_FAVORITE, country)}
             />
           )}
         </div>
