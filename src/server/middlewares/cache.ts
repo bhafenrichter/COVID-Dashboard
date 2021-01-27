@@ -27,8 +27,11 @@ Cache.use((req, res, next) => {
     res.sendResponse = res.send;
     // @ts-ignore
     res.send = (body) => {
-      // cache the response, and send it
-      mcache.put(key, body, CACHE_TIMEOUT);
+      // @ts-ignore
+      if (!res.badResponse) {
+        // cache the response, and send it
+        mcache.put(key, body, CACHE_TIMEOUT);
+      }
       // @ts-ignore
       res.sendResponse(body);
     };

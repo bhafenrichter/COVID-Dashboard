@@ -1,7 +1,7 @@
 {
   "casesThisWeek": "Cases this Week",
   "deathsThisWeek": "Deaths this Week",
-  "immunityPercent": "Immunity Percent",
+  "immunityPercent": "Percent Vaccinated",
   "deathRate": "Death Rate",
   "casesByDay": "Cases by Day",
   "recovering": "Recovering",
@@ -19,7 +19,7 @@
   "es": "Spanish",
   "vaccinesAdministered": "Vaccines Administered",
   "7DayAverage": "7 Day Average",
-  "immunityPercentHelp": "Immunity Percentage is calculated by taking the total number of vaccinations and dividing it by the total population.",
+  "immunityPercentHelp": "Vaccination Percentage is calculated by taking the total number of vaccinations and dividing it by the total population.",
   "deathRateHelp": "The Death Rate is calculated by taking the total number of cases and dividing it by the total number of COVID-related deaths.",
   "recoveringHelp": "This percentage is calculated by taking the 7 Day Average of a Country a week ago, and comparing it to the current day's 7 day average.",
   "hotspotHelp": "This percentage is calculated by taking the 7 Day Average of a Country a week ago, and comparing it to the current day's 7 day average.",

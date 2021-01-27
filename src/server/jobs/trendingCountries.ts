@@ -34,9 +34,9 @@ export const trendingCountries = async (allCountries: boolean) => {
   // retrieve the important data
 
   for (let i = 0; i < countriesToCheck.length; i++) {
-    await utils.timeout(3000);
+    await utils.timeout(5000);
     let country = countriesToCheck[i];
-    let covidData = await covidDataProvider.getCOVIDDataByDay(country, 7);
+    let covidData = await covidDataProvider.getCOVIDDataByDay(country, 8);
     let firstDay = covidData[0];
     let lastDay = covidData[covidData.length - 1];
     let trend =

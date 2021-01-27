@@ -98,7 +98,7 @@ class COVIDDataProvider implements ICOVIDDataProvider {
       results[i].case7DayAvg = this.calculateAverage(i, results, 7).toFixed(0);
     }
 
-    results = results.slice(7, results.length);
+    results = results.slice(6, results.length);
     // results.sort((a, b) => (a.day > b.day ? -1 : 1));
 
     return results;
@@ -108,7 +108,7 @@ class COVIDDataProvider implements ICOVIDDataProvider {
     entries: Array<any>,
     daysToAverage: number
   ) => {
-    if (index < daysToAverage) {
+    if (index < daysToAverage - 1) {
       return 0;
     }
 

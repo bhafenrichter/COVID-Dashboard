@@ -59,7 +59,6 @@ export function App() {
       } else {
         setFavorites([...cookies[COOKIES.FAVORITE_COUNTRIES]]);
       }
-
       ee.dispatch(EVTS.HIDE_LOADING);
     };
     fetchCountryData(country);

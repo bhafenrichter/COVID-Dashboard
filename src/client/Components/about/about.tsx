@@ -39,7 +39,7 @@ export const About = (props: AboutProps) => {
               <ul>
                 <li>
                   <p>
-                    <b className="white">Immunity Percent:</b> This percentage
+                    <b className="white">Percent Vaccinated:</b> This percentage
                     is assumes that the patient has received their first dose of
                     the vaccine and has planned to receive the second in the
                     recommended amount of time after.
