@@ -64,7 +64,8 @@ describe('COVID Data Provider', () => {
     expect(data).toBeNull();
   });
 
-  it('Run Trending Countries', async () => {0
+  it('Run Trending Countries', async () => {
+    0;
     const provider = require('./../src/server/jobs/trendingCountries');
     await provider.trendingCountries(false);
     expect(true).toBe(true);

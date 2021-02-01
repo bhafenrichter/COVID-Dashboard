@@ -91,8 +91,7 @@ router.get('/country', async (req, res) => {
   const createdOn = moment();
 
   // return a bad value, we don't want to cache this!
-  if (true) {
-    //if (vaccines.length === 0 || covidData.length === 0) {
+  if (vaccines.length === 0 || covidData.length === 0) {
     // @ts-ignore
     res.badResponse = true;
   }
