@@ -1,6 +1,7 @@
 import Schedule from 'node-schedule';
 import { trendingCountries } from './trendingCountries';
 import { getTopVaccinatingCountries } from './topVaccinatingCountries';
+import mcache from 'memory-cache';
 
 // run the job every day 1pm
 let rule = new Schedule.RecurrenceRule();
@@ -17,5 +18,8 @@ export const initJobs = () => {
 
     console.log('Updating Vaccination Data');
     let vaccineResults = await getTopVaccinatingCountries();
+
+    console.log('Clearing Cache to freshen up data');
+    mcache.clear();
   });
 };
