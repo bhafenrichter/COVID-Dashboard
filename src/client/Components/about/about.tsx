@@ -56,7 +56,7 @@ export const About = (props: AboutProps) => {
                 </li>
                 <li>
                   <p>
-                    <b className="white">Viewable Countries:</b> We've
+                    <b className="white">Viewable Countries:</b> I've
                     selectively chosen what countries can be viewed based on the
                     reliability of the data submitted. Therefore not all
                     countries are represented here.

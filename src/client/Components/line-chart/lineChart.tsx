@@ -1,3 +1,4 @@
+import millify from 'millify';
 import React, { useEffect } from 'react';
 import { useState } from 'react';
 import {
@@ -8,19 +9,28 @@ import {
   XAxis,
   YAxis,
 } from 'recharts';
-
+import { utils } from './../../scripts/utils';
 export interface LineChartProps {
   keys: Array<{ key: string; displayName: string }>;
   data?: Array<any>;
 }
 
+const MIN_SCREEN_TOOLTIP_WIDTH = 991;
+
 export const LineChart: React.SFC<LineChartProps> = (props) => {
   const { data, keys } = props;
-  const [renderedData, setRenderedData] = useState([
-    { name: 'a', uv: 400, pv: 2400, amt: 3600 },
-    { name: 'a', uv: 400, pv: 2400, amt: 3600 },
-    { name: 'a', uv: 400, pv: 2400, amt: 3600 },
-  ]);
+  const [renderedData, setRenderedData] = useState([]);
+
+  // don't show tooltip on mobile
+  let showTooltip = utils.getScreenWidth() > MIN_SCREEN_TOOLTIP_WIDTH;
+
+  // cleanup the numbers for better mobile experience
+  const DataFormater = (number: number) => {
+    if (!isNaN(number) && isFinite(number)) {
+      return millify(number);
+    }
+    return number.toString();
+  };
 
   useEffect(() => {
     if (data !== []) {
@@ -70,8 +80,13 @@ export const LineChart: React.SFC<LineChartProps> = (props) => {
         ) : null}
 
         <XAxis dataKey="day" />
-        <YAxis />
-        <Tooltip wrapperClassName="tooltip-wrapper" />
+        <YAxis tickFormatter={DataFormater} />
+        {showTooltip ? (
+          <Tooltip
+            wrapperClassName="tooltip-wrapper"
+            formatter={DataFormater}
+          />
+        ) : null}
       </Rechart>
     </ResponsiveContainer>
   );

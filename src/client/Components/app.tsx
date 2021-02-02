@@ -161,7 +161,7 @@ export function App() {
         <Row className="covid-row">
           <Col lg="9">
             <DataCard
-              title={trans['casesByDay']}
+              title={trans['casesByDay'] + country.name}
               description={utils.getTimeDescription(
                 data.createdOn,
                 trans['asOf']
@@ -189,40 +189,8 @@ export function App() {
                 <p className="green">{trans['7DayAverage']}</p>
               </div>
             </DataCard>
-          </Col>
-          <Col lg="3">
             <DataCard
-              min={true}
-              title={trans['recovering']}
-              helpText={trans['recoveringHelp']}>
-              <CountryTrendList
-                colors={true}
-                icons={true}
-                countries={data.trendingCountries
-                  ?.slice(
-                    data.trendingCountries.length - 5,
-                    data.trendingCountries.length
-                  )
-                  .reverse()}></CountryTrendList>
-            </DataCard>
-            <DataCard
-              min={true}
-              title={trans['hotspots']}
-              helpText={trans['hotspotHelp']}>
-              <CountryTrendList
-                colors={true}
-                icons={true}
-                countries={data.trendingCountries?.slice(
-                  0,
-                  5
-                )}></CountryTrendList>
-            </DataCard>
-          </Col>
-        </Row>
-        <Row className="covid-row">
-          <Col lg="9">
-            <DataCard
-              title={trans['vaccinationsByDay']}
+              title={trans['vaccinationsByDay'] + country.name}
               description={utils.getTimeDescription(
                 data.createdOn,
                 trans['asOf']
@@ -241,6 +209,32 @@ export function App() {
             </DataCard>
           </Col>
           <Col lg="3">
+            <DataCard
+              title="World Figures"
+              helpText={trans['recoveringHelp'] + ' ' + trans['hotspotHelp']}>
+              <h5 className="text centered trending-headline">
+                {trans['hotspots']}
+              </h5>
+              <CountryTrendList
+                colors={true}
+                icons={true}
+                countries={data.trendingCountries
+                  ?.slice(
+                    data.trendingCountries.length - 5,
+                    data.trendingCountries.length
+                  )
+                  .reverse()}></CountryTrendList>
+              <h5 className="text centered trending-headline">
+                {trans['recovering']}
+              </h5>
+              <CountryTrendList
+                colors={true}
+                icons={true}
+                countries={data.trendingCountries?.slice(
+                  0,
+                  5
+                )}></CountryTrendList>
+            </DataCard>
             <DataCard
               min={true}
               title={trans['topVaccinatingCountries']}
