@@ -1,9 +1,17 @@
-<svg xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:svg="http://www.w3.org/2000/svg" xmlns="http://www.w3.org/2000/svg" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" viewBox="0 0 600 300" id="svg2" inkscape:version="0.91 r13725" sodipodi:docname="Ireland.svg">
-<defs id="defs4"/>
-<sodipodi:namedview id="base" pagecolor="#ffffff" bordercolor="#666666" borderopacity="1.0" inkscape:pageopacity="0.0" inkscape:pageshadow="2" inkscape:zoom="1.348785" inkscape:cx="187.47867" inkscape:cy="143.80555" inkscape:document-units="px" inkscape:current-layer="layer1" showgrid="false" units="px" inkscape:window-width="1440" inkscape:window-height="837" inkscape:window-x="-8" inkscape:window-y="-8" inkscape:window-maximized="1"/>
-<g inkscape:label="Layer 1" inkscape:groupmode="layer" id="layer1" transform="translate(0,-752.36216)">
-<rect style="fill:#169b62;fill-opacity:1;stroke:none" id="rect4148" width="200" height="300" x="0" y="752.36218"/>
-<rect style="fill:#ffffff;fill-opacity:1;stroke:none" id="rect4150" width="200" height="300" x="200" y="752.36212"/>
-<rect style="fill:#ff883e;fill-opacity:1;stroke:none" id="rect4152" width="200" height="300" x="400" y="752.36218"/>
-</g>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Sodipodi ("http://www.sodipodi.com/") -->
+<svg id="svg378" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns="http://www.w3.org/2000/svg" height="480" width="640" version="1" y="0" x="0" xmlns:cc="http://creativecommons.org/ns#" xmlns:dc="http://purl.org/dc/elements/1.1/">
+ <metadata id="metadata3817">
+  <rdf:RDF>
+   <cc:Work rdf:about="">
+    <dc:format>image/svg+xml</dc:format>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+   </cc:Work>
+  </rdf:RDF>
+ </metadata>
+ <g id="flag" fill-rule="evenodd" stroke-width="1pt" transform="matrix(.64234 0 0 .98016 0 -6.2203)">
+  <rect id="rect171" height="489.72" width="996.35" y="6.3462" x="0" fill="#fff"/>
+  <rect id="rect403" height="489.72" width="332.12" y="6.3462" x="0" fill="#319400"/>
+  <rect id="rect135" height="489.72" width="332.12" y="6.3462" x="664.24" fill="#e76310"/>
+ </g>
 </svg>

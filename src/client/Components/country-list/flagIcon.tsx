@@ -19,5 +19,13 @@ export const FlagIcon = (props: IconProps) => {
   let path = paths.filter((x) => x.includes(name.toLowerCase()))[0];
   let svg = svgs.filter((x) => x.key === path)[0];
   // @ts-ignore
-  return <img alt={name} src={svg?.body} />;
+  return (
+    <img
+      alt={name}
+      src={svg?.body}
+      className="flag-icon"
+      width="50"
+      height="50"
+    />
+  );
 };
