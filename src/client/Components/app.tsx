@@ -60,7 +60,6 @@ export function App() {
         setFavorites([...cookies[COOKIES.FAVORITE_COUNTRIES]]);
       }
       ee.dispatch(EVTS.HIDE_LOADING);
-      console.log(results);
     };
     fetchCountryData(country);
   }, [country]);
