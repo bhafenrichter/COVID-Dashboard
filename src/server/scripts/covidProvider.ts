@@ -9,6 +9,7 @@ import {
   ICOVIDDataProvider,
 } from '../models/ICOVIDDataProvider';
 import { fileProvider } from './fileProvider';
+import { getAlpha2Code } from 'i18n-iso-countries';
 
 class COVIDDataProvider implements ICOVIDDataProvider {
   BASE_URL = 'https://api.covid19api.com/';
@@ -22,24 +23,15 @@ class COVIDDataProvider implements ICOVIDDataProvider {
     let selectedCountries: Array<string> = fileProvider.readJSON(
       'countries.json'
     ).countries;
-    let results;
-    try {
-      let request = await fetch(`${this.BASE_URL}countries`);
-      let response: Array<any> = await request.json();
-      let allCountries = response.map((x: any) => ({
-        name: x.Country,
-        logo: `${x.ISO2}`,
-      }));
-      results = allCountries.filter((x) => selectedCountries.includes(x.name));
-    } catch (e) {
-      results = selectedCountries.map((x: string) => {
+    let results = selectedCountries
+      .map((x) => {
         return {
           name: x,
-          logo: '',
+          logo: getAlpha2Code(x, 'en'),
         };
-      });
-    }
-    return results.sort((x, y) => (x.name > y.name ? 1 : -1));
+      })
+      .sort((x, y) => (x.name > y.name ? 1 : -1));
+    return results;
   };
 
   getCOVIDDataByDay = async (country: string, days: number) => {
