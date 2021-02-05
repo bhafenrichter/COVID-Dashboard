@@ -3,6 +3,7 @@ import { Container, Nav, Navbar as BSNavbar } from 'react-bootstrap';
 import { About } from './../about/about';
 import { LanguageSelector } from './../language-selector/languageSelector';
 import { FaBars } from 'react-icons/fa';
+import { tracking } from '../../scripts/ga';
 
 interface NavbarProps {
   translations: any;
@@ -21,7 +22,9 @@ export function Navbar(props: NavbarProps) {
         <BSNavbar.Collapse id="basic-navbar-nav">
           <Nav className="mr-auto"></Nav>
           <Nav>
-            <Nav.Link href="#about">
+            <Nav.Link
+              href="#about"
+              onClick={() => tracking.track('Navbar Clicked', 'About')}>
               <About translations={translations}></About>
             </Nav.Link>
             <Nav.Link href="#about">

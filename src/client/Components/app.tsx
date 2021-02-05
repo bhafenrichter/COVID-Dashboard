@@ -96,16 +96,18 @@ export function App() {
   useEffect(() => {
     ee.subscribe(EVTS.CHANGE_COUNTRY, (args) => {
       setCountry(args);
-      tracking.track('Selected Country', args);
+      tracking.track('Selected Country', args.name);
     });
 
     // Change language
     ee.subscribe(EVTS.CHANGE_LANGUAGE, (args) => {
+      tracking.track('Changed Language', args);
       setLang(args);
     });
 
     // Add a favorite country
     ee.subscribe(EVTS.ADD_FAVORITE, (args) => {
+      tracking.track('Set Favorite', args.name);
       setFavorites((old) => {
         setCookie(COOKIES.FAVORITE_COUNTRIES, [...old, args]);
         return [...old, args];
@@ -114,6 +116,7 @@ export function App() {
 
     // Remove a favorite country
     ee.subscribe(EVTS.REMOVE_FAVORITE, (args) => {
+      tracking.track('Removed Favorite', args.name);
       setFavorites((old: Array<any>) => {
         let filtered = old.filter((x) => x.name != args.name);
         setCookie(COOKIES.FAVORITE_COUNTRIES, filtered);
