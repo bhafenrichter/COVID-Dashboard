@@ -25,5 +25,8 @@
   "hotspotHelp": "Este porcentaje se calcula tomando el promedio de 7 días de un país hace una semana y comparándolo con el promedio de 7 días del día actual.",
   "vaccinationHelp": "Este porcentaje se calcula en base al número de vacunas administradas y dividiendo por la población total del país",
   "about": "Acerca de",
-  "asOf": "ab "
+  "asOf": "ab ",
+  "up": "aumento de",
+  "down": "disminución de",
+  "fromLastWeek": "en comparación con la semana pasada"
 }

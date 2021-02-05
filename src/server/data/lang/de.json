@@ -25,5 +25,8 @@
   "hotspotHelp": "Dieser Prozentsatz wird berechnet, indem der 7-Tage-Durchschnitt eines Landes vor einer Woche mit dem 7-Tage-Durchschnitt des aktuellen Tages verglichen wird.",
   "vaccinationHelp": "Dieser Prozentsatz wird basierend auf der Anzahl der verabreichten Impfstoffe und der Division durch die Gesamtbevölkerung des Landes berechnet.",
   "about": "über",
-  "asOf": "ab "
+  "asOf": "ab ",
+  "up": "Anstieg von",
+  "down": "Rückgang von",
+  "fromLastWeek": "gegenüber der letzten Woche"
 }

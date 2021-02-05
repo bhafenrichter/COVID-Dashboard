@@ -8,10 +8,12 @@ export interface ICalculationsProvider {
     totalDeaths: number,
     totalVaccinations: number
   ) => any;
-  getCasesThisWeek: (cases: Array<COVIDDay>) => number;
-  getCasesTrendingDirection: (cases: Array<COVIDDay>) => TRENDING_STATE;
-  getDeathsThisWeek: (cases: Array<COVIDDay>) => number;
-  getDeathsTrendingDirection: (cases: Array<COVIDDay>) => TRENDING_STATE;
+  getCOVIDTrend: (cases: Array<COVIDDay>, attribute: string) => number;
+  getStatisticThisWeek: (
+    cases: Array<COVIDDay>,
+    attribute: string,
+    offset?: number
+  ) => number;
   getPopulationImmunity: (
     population: number,
     totalVaccinations: number,

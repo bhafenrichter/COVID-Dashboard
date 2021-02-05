@@ -8,6 +8,7 @@ interface InfoCardProps {
   helpText?: string;
   wrapperClass: string;
   content?: string | number;
+  subContent?: any;
   description?: string;
 }
 
@@ -20,7 +21,7 @@ export default function InfoCard(props: InfoCardProps) {
   const right = useRef<HTMLDivElement>(null);
   const [height, setHeight] = useState('');
   const [flipped, setFlipped] = useState(false);
-  const { wrapperClass, content, description, helpText } = props;
+  const { wrapperClass, content, subContent, description, helpText } = props;
 
   // sets the height of the back of the card to be the same
   useLayoutEffect(() => {
@@ -45,6 +46,7 @@ export default function InfoCard(props: InfoCardProps) {
             <div>
               <p className="info-box-description">{description}</p>
               <h3 className="info-box-content">{content}</h3>
+              {subContent}
             </div>
           </div>
           <div ref={right} className={wrapperClass + ' info-card'}>

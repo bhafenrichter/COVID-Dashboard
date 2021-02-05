@@ -25,5 +25,8 @@
   "hotspotHelp": "Hotspots are countries who's 7 day average today is significantly greater than their 7 day average a week ago.",
   "vaccinationHelp": "This percentage is calculated based on the number of Vaccines administered and dividing by the countries total population.",
   "about": "About",
-  "asOf": "as of "
+  "asOf": "as of ",
+  "up": "Up",
+  "down": "Down",
+  "fromLastWeek": "from last week"
 }

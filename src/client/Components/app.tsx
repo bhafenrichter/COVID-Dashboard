@@ -12,7 +12,7 @@ import { DataCard } from './data-card/dataCard';
 import { LineChart } from './line-chart/lineChart';
 import { CountryTrendList } from './country-list/countryTrendList';
 import { LoadingIndicator } from './loading-indicator/loadingIndicator';
-
+import { TrendRow } from './trend-row/trendRow';
 import { api } from './../scripts/api';
 import { COVIDDataModel } from '../../../types';
 import { Country } from '../../server/models/ICOVIDDataProvider';
@@ -60,6 +60,7 @@ export function App() {
         setFavorites([...cookies[COOKIES.FAVORITE_COUNTRIES]]);
       }
       ee.dispatch(EVTS.HIDE_LOADING);
+      console.log(results);
     };
     fetchCountryData(country);
   }, [country]);
@@ -140,10 +141,20 @@ export function App() {
         <Row className="covid-row">
           <InfoCard
             content={calculations.casesThisWeek || ''}
+            subContent={
+              <TrendRow
+                statistic={data.calculations.casesTrending}
+                translations={trans}></TrendRow>
+            }
             description={trans['casesThisWeek']}
             wrapperClass="purple-gradient"></InfoCard>
           <InfoCard
             content={calculations.deathsThisWeek || ''}
+            subContent={
+              <TrendRow
+                statistic={data.calculations.deathsTrending}
+                translations={trans}></TrendRow>
+            }
             description={trans['deathsThisWeek']}
             wrapperClass="blue-gradient"></InfoCard>
           <InfoCard
@@ -213,7 +224,7 @@ export function App() {
               title="World Figures"
               helpText={trans['recoveringHelp'] + ' ' + trans['hotspotHelp']}>
               <h5 className="text centered trending-headline">
-                {trans['hotspots']}
+                {trans['recovering']}
               </h5>
               <CountryTrendList
                 colors={true}
@@ -225,7 +236,7 @@ export function App() {
                   )
                   .reverse()}></CountryTrendList>
               <h5 className="text centered trending-headline">
-                {trans['recovering']}
+                {trans['hotspots']}
               </h5>
               <CountryTrendList
                 colors={true}
