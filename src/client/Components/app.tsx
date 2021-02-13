@@ -14,20 +14,20 @@ import { CountryTrendList } from './country-list/countryTrendList';
 import { LoadingIndicator } from './loading-indicator/loadingIndicator';
 import { TrendRow } from './trend-row/trendRow';
 import { api } from './../scripts/api';
-import { COVIDDataModel } from '../../../types';
-import { Country } from '../../server/models/ICOVIDDataProvider';
+import { COVIDDataModel, COVIDPlaceModel } from '../../../types';
+import { Place } from '../../server/models/ICOVIDDataProvider';
 import { utils } from '../scripts/utils';
 import { COOKIES } from './../scripts/cookie';
 
 export function App() {
   let [data, setCOVIDData] = useState({ calculations: {} } as COVIDDataModel);
-  let [countries, setCountries] = useState([] as Array<Country>);
+  let [places, setPlaces] = useState({} as COVIDPlaceModel);
   let [lang, setLang] = useState('en');
   let [trans, setTranslations]: any = useState({});
-  let [favorites, setFavorites] = useState([] as Array<Country>);
+  let [favorites, setFavorites] = useState([] as Array<Place>);
   let [cookies, setCookie, removeCookie] = useCookies();
 
-  let initialCountry = {
+  let initialCountry: Place = {
     name: 'United States of America',
     logo: 'US',
   };
@@ -46,12 +46,16 @@ export function App() {
 
   // fetch covid and vaccine data
   useEffect(() => {
-    const fetchCountryData = async (newCountry: Country) => {
+    const fetchCountryData = async (x: Place) => {
       ee.dispatch(EVTS.SHOW_LOADING);
-      let results: COVIDDataModel = await api.getCOVIDDate(country.name);
-      let fetchedCountries: Array<Country> = await api.getCountries();
+      let placeType: string = utils.getPlaceType(places, country.name);
+      let results: COVIDDataModel = await api.getCOVIDDate(
+        country.id || country.name,
+        placeType
+      );
+      let fetchedPlaces: COVIDPlaceModel = await api.getPlaces();
       setCOVIDData(results);
-      setCountries(fetchedCountries);
+      setPlaces(fetchedPlaces);
 
       // read cookies to get favorite countries
       if (!cookies[COOKIES.FAVORITE_COUNTRIES]) {
@@ -77,37 +81,28 @@ export function App() {
 
   // update countries with favorites
   useEffect(() => {
-    let updated = countries;
-    if (countries.length === 0) {
+    if (!places || !places.countries || !places.states) {
       return;
     }
-
-    for (let i = 0; i < updated.length; i++) {
-      updated[i].isFavorite = false;
-    }
-
-    for (let i = 0; i < favorites.length; i++) {
-      updated.filter((x) => x.name === favorites[i].name)[0].isFavorite = true;
-    }
-    setCountries([...updated]);
+    setPlaces(utils.appendFavorites(places, favorites));
   }, [favorites]);
 
   // initialize events
   useEffect(() => {
-    ee.subscribe(EVTS.CHANGE_COUNTRY, (args) => {
+    ee.subscribe(EVTS.CHANGE_PLACE, (args) => {
       setCountry(args);
-      tracking.track('Selected Country', args.name);
+      tracking.track('selected_country', args.name);
     });
 
     // Change language
     ee.subscribe(EVTS.CHANGE_LANGUAGE, (args) => {
-      tracking.track('Changed Language', args);
+      tracking.track('changed_language', args);
       setLang(args);
     });
 
     // Add a favorite country
     ee.subscribe(EVTS.ADD_FAVORITE, (args) => {
-      tracking.track('Set Favorite', args.name);
+      tracking.track('set_favorite', args.name);
       setFavorites((old) => {
         setCookie(COOKIES.FAVORITE_COUNTRIES, [...old, args]);
         return [...old, args];
@@ -116,7 +111,7 @@ export function App() {
 
     // Remove a favorite country
     ee.subscribe(EVTS.REMOVE_FAVORITE, (args) => {
-      tracking.track('Removed Favorite', args.name);
+      tracking.track('removed_favorite', args.name);
       setFavorites((old: Array<any>) => {
         let filtered = old.filter((x) => x.name != args.name);
         setCookie(COOKIES.FAVORITE_COUNTRIES, filtered);
@@ -137,7 +132,7 @@ export function App() {
           <CountrySelector
             translations={trans}
             country={country}
-            countries={countries}
+            places={places}
           />
         </Row>
         <Row className="covid-row">

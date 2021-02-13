@@ -3,18 +3,19 @@ import { FaCaretDown } from 'react-icons/fa';
 
 import { Modal } from './../modal/modal';
 import { CountryListModal } from './../country-list/countryListModal';
-import { Country } from '../../../server/models/ICOVIDDataProvider';
+import { Place } from '../../../server/models/ICOVIDDataProvider';
 import { ee, EVTS } from '../../scripts/eventEmitter';
 import { utils } from '../../scripts/utils';
 import { FlagIcon } from '../country-list/flagIcon';
+import { COVIDPlaceModel } from '../../../../types';
 interface CountrySelectorProps {
-  country: Country;
-  countries: Array<Country>;
+  country: Place;
+  places: COVIDPlaceModel;
   translations: any;
 }
 
 export function CountrySelector(props: CountrySelectorProps) {
-  const { country, countries, translations } = props;
+  const { country, places, translations } = props;
   const [modalVisible, setVisible] = useState(false);
 
   useEffect(() => {
@@ -48,7 +49,7 @@ export function CountrySelector(props: CountrySelectorProps) {
         onClose={toggleModal}
         width={width}
         height={height}>
-        <CountryListModal translations={translations} countries={countries} />
+        <CountryListModal translations={translations} places={places} />
       </Modal>
     </div>
   );

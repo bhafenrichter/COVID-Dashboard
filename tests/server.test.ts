@@ -3,11 +3,23 @@ import 'regenerator-runtime/runtime';
 const TIMEOUT = 10000;
 describe('COVID Data Provider', () => {
   it(
-    'Connect to COVID Data Provider',
+    'Connect to COVID Country Data Provider',
     async () => {
-      const dataProvider = require('./../src/server/scripts/covidProvider');
+      const dataProvider = require('./../src/server/scripts/covidCountryProvider');
       const req = await dataProvider.covidDataProvider.getCOVIDDataByDay(
         'germany',
+        30
+      );
+      expect(req).toBeDefined();
+    },
+    TIMEOUT
+  );
+  it(
+    'Connect to COVID State Data Provider',
+    async () => {
+      const dataProvider = require('./../src/server/scripts/covidStateProvider');
+      const req = await dataProvider.covidStateDataProvider.getCOVIDDataByDay(
+        'MO',
         30
       );
       expect(req).toBeDefined();

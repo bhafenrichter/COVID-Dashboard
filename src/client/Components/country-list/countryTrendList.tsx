@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Col } from 'react-bootstrap';
 import { COVIDTrend } from '../../../server/jobs/trendingCountries';
-import { Country } from '../../../server/models/ICOVIDDataProvider';
+import { Place } from '../../../server/models/ICOVIDDataProvider';
 import { CountryRowMin } from './countryRowMin';
 
 export interface CountryListProps {

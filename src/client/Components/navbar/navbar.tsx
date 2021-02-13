@@ -22,9 +22,7 @@ export function Navbar(props: NavbarProps) {
         <BSNavbar.Collapse id="basic-navbar-nav">
           <Nav className="mr-auto"></Nav>
           <Nav>
-            <Nav.Link
-              href="#about"
-              onClick={() => tracking.track('Navbar Clicked', 'About')}>
+            <Nav.Link href="#about">
               <About translations={translations}></About>
             </Nav.Link>
             <Nav.Link href="#about">

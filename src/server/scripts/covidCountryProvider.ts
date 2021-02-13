@@ -8,8 +8,7 @@ import {
   COVIDDay,
   ICOVIDDataProvider,
 } from '../models/ICOVIDDataProvider';
-import { fileProvider } from './fileProvider';
-import { getAlpha2Code } from 'i18n-iso-countries';
+import { calculationsProvider } from './calculationsProvider';
 
 class COVIDDataProvider implements ICOVIDDataProvider {
   BASE_URL = 'https://api.covid19api.com/';
@@ -18,21 +17,6 @@ class COVIDDataProvider implements ICOVIDDataProvider {
   URL_DATE_FORMAT = 'YYYY-MM-DD';
 
   constructor() {}
-
-  getCOVIDCountries = async () => {
-    let selectedCountries: Array<string> = fileProvider.readJSON(
-      'countries.json'
-    ).countries;
-    let results = selectedCountries
-      .map((x) => {
-        return {
-          name: x,
-          logo: getAlpha2Code(x, 'en'),
-        };
-      })
-      .sort((x, y) => (x.name > y.name ? 1 : -1));
-    return results;
-  };
 
   getCOVIDDataByDay = async (country: string, days: number) => {
     // for 7 day averages, we need to get data from previous days too
@@ -70,6 +54,17 @@ class COVIDDataProvider implements ICOVIDDataProvider {
 
     // merge the data together into a nice array
     if (caseResults.length === deathResults.length) {
+      if (caseResults.length > days) {
+        caseResults = caseResults.splice(
+          caseResults.length - days,
+          caseResults.length
+        );
+        deathResults = deathResults.splice(
+          deathResults.length - days,
+          deathResults.length
+        );
+      }
+
       for (let i = 1; i < caseResults.length; i++) {
         let currentDay: COVIDDay = {
           day: moment(caseResults[i].Date).format('M/D'),
@@ -87,32 +82,15 @@ class COVIDDataProvider implements ICOVIDDataProvider {
 
     // calculate the averages
     for (let i = 0; i < results.length; i++) {
-      results[i].case7DayAvg = this.calculateAverage(i, results, 7).toFixed(0);
+      results[i].case7DayAvg = calculationsProvider
+        .calculateAverage(i, results, 7)
+        .toFixed(0);
     }
 
     results = results.slice(6, results.length);
     // results.sort((a, b) => (a.day > b.day ? -1 : 1));
 
     return results;
-  };
-  calculateAverage = (
-    index: number,
-    entries: Array<any>,
-    daysToAverage: number
-  ) => {
-    if (index < daysToAverage - 1) {
-      return 0;
-    }
-
-    let casesToAverage = entries.slice(index - daysToAverage + 1, index + 1);
-    let sum: number = casesToAverage.reduce(
-      (total: number, current: any, i: number) => {
-        return total + current.cases;
-      },
-      0
-    );
-
-    return sum / daysToAverage;
   };
   getCOVIDDataForCountry = async (country: string) => {
     const results = await this.getCOVIDDataByDay(country, 9999);
@@ -133,4 +111,4 @@ class COVIDDataProvider implements ICOVIDDataProvider {
   };
 }
 
-export const covidDataProvider = new COVIDDataProvider();
+export const covidCountryProvider = new COVIDDataProvider();

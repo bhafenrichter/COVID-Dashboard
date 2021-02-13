@@ -1,13 +1,14 @@
 import React from 'react';
-import { Country } from '../../../server/models/ICOVIDDataProvider';
+import { Place } from '../../../server/models/ICOVIDDataProvider';
 import { ee, EVTS } from './../../scripts/eventEmitter';
 import { FlagIcon } from './flagIcon';
 import { FaStar, FaRegStar } from 'react-icons/fa';
 
 export interface CountryRowProps {
-  country: Country;
+  country: Place;
   stat?: string | number;
   logo?: string;
+  placeType?: string;
   showFavorite?: boolean;
 }
 
@@ -18,7 +19,7 @@ export const CountryRow = function (props: CountryRowProps) {
       <div
         className="country"
         onClick={() => {
-          ee.dispatch(EVTS.CHANGE_COUNTRY, country);
+          ee.dispatch(EVTS.CHANGE_PLACE, country);
           ee.dispatch(EVTS.CLOSE_MODAL, null);
         }}>
         <div className="country-flag">

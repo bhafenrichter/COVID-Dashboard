@@ -3,19 +3,25 @@ import moment from 'moment';
 import { COVIDTrend } from '../../jobs/trendingCountries';
 import { languageProvider } from '../../scripts/languageProvider';
 import { fileProvider } from './../../scripts/fileProvider';
-
+import { COVIDPlaceModel } from './../../../../types/index';
 export const router = express.Router();
 
 import {
-  covidDataProvider,
+  covidCountryProvider,
+  covidStateDataProvider,
   vaccineProvider,
   countryProvider,
   calculationsProvider,
 } from './../../scripts/index';
 
-router.get('/countries', async (req, res) => {
-  const countries = await covidDataProvider.getCOVIDCountries();
-  res.send(countries);
+router.get('/places', async (req, res) => {
+  const states = await countryProvider.getCOVIDStates();
+  const countries = await countryProvider.getCOVIDCountries();
+  const model: COVIDPlaceModel = {
+    states,
+    countries,
+  };
+  res.send(model);
 });
 
 router.get('/language', async (req, res) => {
@@ -29,26 +35,35 @@ router.get('/language', async (req, res) => {
 
 router.get('/country', async (req, res) => {
   res.header('Access-Control-Allow-Origin', '*');
-  const { country, days } = req.query;
+  const { country, state, days } = req.query;
 
-  const population = await countryProvider.getPopulation(country as string);
+  let vaccines,
+    population: number,
+    covidData,
+    countryCOVIDTotals,
+    countryVaccinationTotal;
+  vaccines = covidData = countryCOVIDTotals = countryVaccinationTotal = {};
 
-  const vaccines = await vaccineProvider.getVaccinationByDay(
-    country as string,
+  let place = (country as string) || (state as string);
+
+  population = await countryProvider.getPopulation(place);
+
+  let dataProvider =
+    typeof country === 'undefined'
+      ? covidStateDataProvider
+      : covidCountryProvider;
+
+  vaccines = await vaccineProvider.getVaccinationByDay(
+    place,
     Number(days),
     population
   );
 
-  const covidData = await covidDataProvider.getCOVIDDataByDay(
-    country as string,
-    Number(days)
-  );
+  covidData = await dataProvider.getCOVIDDataByDay(place, Number(days));
 
-  const countryCOVIDTotals = await covidDataProvider.getCOVIDDataForCountry(
-    country as string
-  );
-  const countryVaccinationTotal = await vaccineProvider.getVaccinationsByCountry(
-    country as string
+  countryCOVIDTotals = await dataProvider.getCOVIDDataForCountry(place);
+  countryVaccinationTotal = await vaccineProvider.getVaccinationsByCountry(
+    place
   );
 
   let trendingCountries = fileProvider.readJSON(

@@ -11,7 +11,7 @@ export const ee = {
 };
 
 export const EVTS = {
-  CHANGE_COUNTRY: 'Change Country',
+  CHANGE_PLACE: 'Change Place',
   CLOSE_MODAL: 'Close Modal',
   SHOW_LOADING: 'Show Loading',
   HIDE_LOADING: 'Hide Loading',

@@ -7,12 +7,16 @@ export const tracking = {
   },
 
   track: (category: string, action: string) => {
-    ReactGA.event({
-      category: category,
-      action: action,
-    });
+    if ('gtag' in window) {
+      // @ts-ignore
+      gtag('event', category, {
+        event_category: action,
+        eventLabel: 'custom_event',
+      });
+    }
   },
   page: (path: string) => {
+    tracking.init();
     ReactGA.pageview(path);
   },
 };

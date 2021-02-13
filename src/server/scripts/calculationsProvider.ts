@@ -40,7 +40,7 @@ class CalculationsProvider implements ICalculationsProvider {
     }
 
     const thisWeek = this.getStatisticThisWeek(cases, attribute);
-    const lastWeek = this.getStatisticThisWeek(cases, attribute, 6);
+    const lastWeek = this.getStatisticThisWeek(cases, attribute, 7);
     return thisWeek - lastWeek;
   };
   getStatisticThisWeek = (cases: COVIDDay[], attribute: string, offset = 0) => {
@@ -48,7 +48,7 @@ class CalculationsProvider implements ICalculationsProvider {
       return 0;
     }
     const thisWeek = cases
-      .slice(cases.length - 6 - offset, cases.length - offset)
+      .slice(cases.length - 7 - offset, cases.length - offset)
       // @ts-ignore
       .map((x) => x[attribute]);
     return thisWeek.reduce((x, y) => x + y);
@@ -62,6 +62,25 @@ class CalculationsProvider implements ICalculationsProvider {
   };
   getDeathRate = (totalDeaths: number, totalCases: number) => {
     return (totalDeaths / totalCases).toFixed(3);
+  };
+  calculateAverage = (
+    index: number,
+    entries: Array<any>,
+    daysToAverage: number
+  ) => {
+    if (index < daysToAverage - 1) {
+      return 0;
+    }
+
+    let casesToAverage = entries.slice(index - daysToAverage + 1, index + 1);
+    let sum: number = casesToAverage.reduce(
+      (total: number, current: any, i: number) => {
+        return total + current.cases;
+      },
+      0
+    );
+
+    return sum / daysToAverage;
   };
 }
 

@@ -1,106 +1,130 @@
 .country-selector {
-    justify-content: flex-start;
-    align-items: center;
-    display: flex;
-    margin: 15px;
-    cursor: pointer;
+  justify-content: flex-start;
+  align-items: center;
+  display: flex;
+  margin: 15px;
+  cursor: pointer;
 
-    h3, div {
-        margin-left: 15px;
-    }
+  h3,
+  div {
+    margin-left: 15px;
+  }
 
-    .country-selector-country {
-        text-decoration: underline;
-    }
+  .country-selector-country {
+    text-decoration: underline;
+  }
 
-    .country-select {
-        color: white;
-    }
+  .country-select {
+    color: white;
+  }
 }
 
 .rodal-dialog {
-    overflow-y: scroll;
-    -ms-overflow-style: none;  /* IE and Edge */
-    scrollbar-width: none;  /* Firefox */
-    -webkit-scrollbar {
-        display: none;
+  overflow-y: scroll;
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+  -webkit-scrollbar {
+    display: none;
+  }
+
+  .country-list {
+    margin: 15px;
+
+    .divider {
+      margin-top: 15px;
+      margin-bottom: 15px;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      .divider-text {
+        color: white;
+        font-size: 12px;
+        text-align: center;
+        margin: 0px;
+        padding: 10px;
+      }
+      hr {
+        flex: 1;
+        max-width: 30%;
+        border-top-color: @text-color;
+      }
     }
 
-    .country-list {
-        margin: 15px;
-        
-        .divider {
-            margin-top: 15px;
-            margin-bottom: 15px;
-            display: flex;
-            flex-direction: row;
-            align-items: center;
-            .divider-text {
-                color: white;
-                font-size: 12px;
-                text-align: center;
-                margin: 0px;
-                padding: 10px;
-            }
-            hr {
-                flex: 1;
-                max-width: 30%;
-                border-top-color: @text-color;
-            }
-        }
-    }
-    
-    .country-row {
-        justify-content: space-between;
-        cursor: pointer;
-        margin-bottom: 15px;
-        
-        .country {
-            display: flex;
-            flex-wrap: nowrap;
-            justify-content: center;
-            align-items: center;
-        }
+    .country-list-button-group {
+      margin-top: 15px;
+      margin-bottom: 15px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      button {
+        background-color: @text-color;
+        border: none;
+        flex: 0;
+        min-width: 100px;
+      }
 
-        div svg {
-            font-size: 24px;
-        }
+      button:hover {
+        background-color: @primary-color;
+      }
+
+      .selected {
+        background-color: @primary-color;
+      }
     }
-    .country-flag {
-        margin-right: 15px;
-        margin-top: 0.25em;
+  }
+
+  .country-row {
+    justify-content: space-between;
+    cursor: pointer;
+    margin-bottom: 15px;
+
+    .country {
+      display: flex;
+      flex-wrap: nowrap;
+      justify-content: center;
+      align-items: center;
     }
-    .country-row:hover {
-        .text {
-            color: white;
-        }
+
+    div svg {
+      font-size: 24px;
     }
+  }
+  .country-flag {
+    margin-right: 15px;
+    margin-top: 0.25em;
+  }
+  .country-row:hover {
+    .text {
+      color: white;
+    }
+  }
 }
 
-.country-row-min { 
-    margin-bottom: 5px;
-    .stat-body {
-        display: flex;
-        align-items: center;
-        justify-content: flex-end;
+.country-row-min {
+  margin-bottom: 5px;
+  .stat-body {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+  }
+
+  .trend-down {
+    p,
+    i {
+      color: @green;
     }
-    
-    .trend-down {
-        p, i {
-            color: @green;
-        }
-        
+  }
+
+  .trend-up {
+    p,
+    i {
+      color: @red;
     }
-    
-    .trend-up {
-        p, i {
-            color: @red;
-        }
-    }
+  }
 }
 .country-row-min:hover {
-    cursor: pointer;
-    .text {
-        color: white;
-    }
+  cursor: pointer;
+  .text {
+    color: white;
+  }
 }

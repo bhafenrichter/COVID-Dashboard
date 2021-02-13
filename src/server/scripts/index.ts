@@ -2,13 +2,15 @@
     Provides the implementations of the scripts to the controllers
 */
 
-import { covidDataProvider } from './covidProvider';
+import { covidCountryProvider } from './covidCountryProvider';
+import { covidStateDataProvider } from './covidStateProvider';
 import { vaccineProvider } from './vaccineProvider';
 import { countryProvider } from './countryProvider';
 import { calculationsProvider } from './calculationsProvider';
 
 export {
-  covidDataProvider,
+  covidCountryProvider,
+  covidStateDataProvider,
   vaccineProvider,
   countryProvider,
   calculationsProvider,

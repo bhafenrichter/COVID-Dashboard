@@ -7,6 +7,7 @@ export interface CountryRowProps {
   trend: COVIDTrend;
   colors?: boolean;
   icons?: boolean;
+  placeType?: string;
 }
 
 export const CountryRowMin = function (props: CountryRowProps) {
@@ -22,12 +23,12 @@ export const CountryRowMin = function (props: CountryRowProps) {
   return (
     <div
       className="country-row country-row-min"
-      onClick={() =>
-        ee.dispatch(EVTS.CHANGE_COUNTRY, {
+      onClick={() => {
+        ee.dispatch(EVTS.CHANGE_PLACE, {
           name: trend.country,
           logo: trend.logo,
-        })
-      }>
+        });
+      }}>
       <p className="text">{trend.country}</p>
 
       <div className={trendClass + ' stat-body'}>

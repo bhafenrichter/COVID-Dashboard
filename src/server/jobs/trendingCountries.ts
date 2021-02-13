@@ -1,6 +1,6 @@
 import { fileProvider } from '../scripts/fileProvider';
 import { utils } from '../scripts/utils';
-import { covidDataProvider } from './../scripts/covidProvider';
+import { covidCountryProvider } from '../scripts/covidCountryProvider';
 import { countryProvider } from './../scripts/countryProvider';
 import { COVIDDay } from '../models/ICOVIDDataProvider';
 
@@ -21,7 +21,7 @@ export const trendingCountries = async (allCountries: boolean) => {
   let config;
   let countriesToCheck;
   if (allCountries) {
-    config = await covidDataProvider.getCOVIDCountries();
+    config = await countryProvider.getCOVIDCountries();
     countriesToCheck = config.map((x) => x.name);
   } else {
     const config = fileProvider.readJSON('countries.json');
@@ -36,7 +36,7 @@ export const trendingCountries = async (allCountries: boolean) => {
   for (let i = 0; i < countriesToCheck.length; i++) {
     await utils.timeout(5000);
     let country = countriesToCheck[i];
-    let covidData = await covidDataProvider.getCOVIDDataByDay(country, 8);
+    let covidData = await covidCountryProvider.getCOVIDDataByDay(country, 8);
     let firstDay = covidData[0];
     let lastDay = covidData[covidData.length - 1];
     let trend =
