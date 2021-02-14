@@ -13,8 +13,6 @@ export interface CountryListProps {
   singleCol?: boolean;
 }
 
-const NUM_COLUMNS = 3;
-
 export const CountryList = function (props: CountryListProps) {
   const { places, singleCol } = props;
   const [selectedList, setSelectedList] = useState('state');
@@ -23,17 +21,21 @@ export const CountryList = function (props: CountryListProps) {
     setSelectedList(list);
   };
 
-  let renderRows = (countriesToRender: Array<Place>, placeType: string) => {
+  let renderRows = (
+    countriesToRender: Array<Place>,
+    columns: number,
+    placeType: string
+  ) => {
     let renderedCountries: Array<Array<JSX.Element>> = [[]];
     let renderedColumns: Array<JSX.Element> = [];
     if (!singleCol) {
       // generate the columns
       let itemsPerRow =
-        countriesToRender.length >= NUM_COLUMNS
-          ? Math.ceil(countriesToRender.length / NUM_COLUMNS)
-          : NUM_COLUMNS;
+        countriesToRender.length >= columns
+          ? Math.ceil(countriesToRender.length / columns)
+          : columns;
 
-      for (let i = 0; i < NUM_COLUMNS; i++) {
+      for (let i = 0; i < columns; i++) {
         renderedCountries[i] = [];
         // render vertical row by vertical row
         for (let j = 0; j < itemsPerRow; j++) {
@@ -50,9 +52,9 @@ export const CountryList = function (props: CountryListProps) {
       }
 
       // render the columns
-      for (let i = 0; i < NUM_COLUMNS; i++) {
+      for (let i = 0; i < columns; i++) {
         renderedColumns.push(
-          <Col key={i.toString()} lg={12 / NUM_COLUMNS}>
+          <Col key={i.toString()} lg={12 / columns}>
             {renderedCountries[i]}
           </Col>
         );
@@ -86,14 +88,16 @@ export const CountryList = function (props: CountryListProps) {
 
     let renderedFavoriteCountries = renderRows(
       favoriteCountries.concat(favoriteStates),
+      3,
       'country'
     );
     let renderedNonFavoriteCountries = renderRows(
       nonFavoriteCountries,
+      3,
       'country'
     );
 
-    let renderedNonFavoriteStates = renderRows(nonFavoriteStates, 'state');
+    let renderedNonFavoriteStates = renderRows(nonFavoriteStates, 4, 'state');
 
     return (
       <div className="country-list">

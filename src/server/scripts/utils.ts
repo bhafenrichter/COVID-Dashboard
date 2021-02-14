@@ -4,6 +4,9 @@ export const utils = {
   },
 
   formatPercent: (x: string) => {
+    if (isNaN(Number(x))) {
+      return x;
+    }
     return (Number(x) * 100).toFixed(2) + '%';
   },
 

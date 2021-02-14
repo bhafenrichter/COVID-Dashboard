@@ -13,7 +13,7 @@ export interface CountryRowProps {
 }
 
 export const CountryRow = function (props: CountryRowProps) {
-  const { country, stat, logo, showFavorite } = props;
+  const { country, stat, placeType } = props;
   return (
     <div className="country-row">
       <div
@@ -23,7 +23,7 @@ export const CountryRow = function (props: CountryRowProps) {
           ee.dispatch(EVTS.CLOSE_MODAL, null);
         }}>
         <div className="country-flag">
-          <FlagIcon name={country.logo}></FlagIcon>
+          <FlagIcon name={country.logo} placeType={placeType || ''}></FlagIcon>
         </div>
         <p className="text">{country.name}</p>
         <p className="text">{stat}</p>

@@ -39,7 +39,10 @@ export function CountrySelector(props: CountrySelectorProps) {
         <span className="country-selector-country">{country.name}</span>
       </h3>
       <div className="country-flag" onClick={toggleModal}>
-        <FlagIcon name={country.logo} />
+        <FlagIcon
+          name={country.logo}
+          placeType={utils.getPlaceType(places, country.name)}
+        />
       </div>
       <div className="country-select" onClick={toggleModal}>
         <FaCaretDown />

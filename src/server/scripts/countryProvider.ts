@@ -67,7 +67,7 @@ class CountryProvider implements ICountryDataProvider {
       results.push({
         id: x,
         name: states[x],
-        logo: '',
+        logo: x,
       });
     });
     results.sort((x: Place, y: Place) => (x.name > y.name ? 1 : -1));
