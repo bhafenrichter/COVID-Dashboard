@@ -1,15 +1,16 @@
 import millify from 'millify';
-import React, { useLayoutEffect, useRef, useState } from 'react';
+import React, { useContext, useLayoutEffect, useRef, useState } from 'react';
+import { TranslationContext } from '../app';
 
 interface TrendRowProps {
   statistic: number;
-  translations: any;
 }
 
 interface TrendRowState {}
 
 export const TrendRow = (props: TrendRowProps) => {
-  const { statistic, translations } = props;
+  const { statistic } = props;
+  const translations = useContext(TranslationContext);
 
   let isPositive = Number(statistic) > 0;
   let renderedStatistic;
@@ -24,8 +25,7 @@ export const TrendRow = (props: TrendRowProps) => {
     <div className="info-card-subtext">
       <p>
         <span>
-          {translations[isPositive ? 'up' : 'down']}{' '}
-            {renderedStatistic}{' '}
+          {translations[isPositive ? 'up' : 'down']} {renderedStatistic}{' '}
           {translations['fromLastWeek']}
         </span>
       </p>

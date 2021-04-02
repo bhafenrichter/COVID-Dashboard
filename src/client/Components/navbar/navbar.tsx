@@ -6,12 +6,11 @@ import { FaBars } from 'react-icons/fa';
 import { tracking } from '../../scripts/ga';
 
 interface NavbarProps {
-  translations: any;
   language: string;
 }
 
 export function Navbar(props: NavbarProps) {
-  const { translations, language } = props;
+  const { language } = props;
   return (
     <BSNavbar className="navbar" expand="lg">
       <Container>
@@ -23,12 +22,10 @@ export function Navbar(props: NavbarProps) {
           <Nav className="mr-auto"></Nav>
           <Nav>
             <Nav.Link href="#about">
-              <About translations={translations}></About>
+              <About></About>
             </Nav.Link>
             <Nav.Link href="#about">
-              <LanguageSelector
-                language={language}
-                translations={translations}></LanguageSelector>
+              <LanguageSelector language={language}></LanguageSelector>
             </Nav.Link>
           </Nav>
         </BSNavbar.Collapse>

@@ -1,15 +1,16 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { DropdownButton } from 'react-bootstrap';
 import DropdownItem from 'react-bootstrap/esm/DropdownItem';
 import { ee, EVTS } from '../../scripts/eventEmitter';
+import { TranslationContext } from './../app';
 
 interface LanguageSelectorProps {
-  translations: any;
   language: string;
 }
 
 export const LanguageSelector = (props: LanguageSelectorProps) => {
-  const { translations, language } = props;
+  const { language } = props;
+  const translations = useContext(TranslationContext);
   const switchLanguage = (lang: string) => {
     ee.dispatch(EVTS.CHANGE_LANGUAGE, lang);
   };
@@ -17,6 +18,7 @@ export const LanguageSelector = (props: LanguageSelectorProps) => {
   return (
     <DropdownButton
       className={'dropdown-button'}
+      // @ts-ignore
       title={translations[language]}>
       <DropdownItem onClick={() => switchLanguage('en')}>
         {translations['en']}

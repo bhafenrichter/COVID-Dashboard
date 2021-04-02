@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { FaCaretDown } from 'react-icons/fa';
 
 import { Modal } from './../modal/modal';
@@ -8,14 +8,15 @@ import { ee, EVTS } from '../../scripts/eventEmitter';
 import { utils } from '../../scripts/utils';
 import { FlagIcon } from '../country-list/flagIcon';
 import { COVIDPlaceModel } from '../../../../types';
+import { TranslationContext } from './../app';
 interface CountrySelectorProps {
   country: Place;
   places: COVIDPlaceModel;
-  translations: any;
 }
 
 export function CountrySelector(props: CountrySelectorProps) {
-  const { country, places, translations } = props;
+  const { country, places } = props;
+  const translations = useContext(TranslationContext);
   const [modalVisible, setVisible] = useState(false);
 
   useEffect(() => {
@@ -52,7 +53,7 @@ export function CountrySelector(props: CountrySelectorProps) {
         onClose={toggleModal}
         width={width}
         height={height}>
-        <CountryListModal translations={translations} places={places} />
+        <CountryListModal places={places} />
       </Modal>
     </div>
   );

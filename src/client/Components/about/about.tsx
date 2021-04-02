@@ -1,15 +1,15 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { Modal } from './../modal/modal';
 import { utils } from './../../scripts/utils';
 import { Col, Row } from 'react-bootstrap';
 import { FaGithub, FaLinkedin } from 'react-icons/fa';
 import { tracking } from './../../scripts/ga';
-interface AboutProps {
-  translations: any;
-}
+import { TranslationContext } from './../app';
+interface AboutProps {}
 
 export const About = (props: AboutProps) => {
-  const { translations } = props;
+  const translations = useContext(TranslationContext);
+
   const [modalVisible, setVisible] = useState(false);
 
   const toggleModal = () => {
