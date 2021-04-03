@@ -18,49 +18,16 @@ import { COVIDDataModel, COVIDPlaceModel } from '../../../types';
 import { Place } from '../../server/models/ICOVIDDataProvider';
 import { utils } from '../scripts/utils';
 import { COOKIES } from './../scripts/cookie';
+import defaultTranslations from './../static/json/en.json';
 
-export const TranslationContext = createContext<Translations>({
-  home: 'Home',
-  casesThisWeek: 'Cases this Week',
-  deathsThisWeek: 'Deaths this Week',
-  immunityPercent: 'Percent Vaccinated',
-  deathRate: 'Death Rate',
-  casesByDay: 'Cases by Day for ',
-  recovering: 'Recovering',
-  hotspots: 'Hotspots',
-  vaccinationsByDay: 'Vaccinations by Day for ',
-  topVaccinatingCountries: 'Top Vaccinating Countries',
-  noDataReported: 'No Data Reported',
-  covidFiguresFor: 'COVID Figures for ',
-  selectACountry: 'Select a Country',
-  cases: 'Cases',
-  deaths: 'Deaths',
-  language: 'Language',
-  en: 'English',
-  de: 'German',
-  es: 'Spanish',
-  vaccinesAdministered: 'Vaccines Administered',
-  '7DayAverage': '7 Day Average',
-  immunityPercentHelp:
-    'Vaccination Percentage is calculated by taking the total number of vaccinations and dividing it by the total population.',
-  deathRateHelp:
-    'The Death Rate is calculated by taking the total number of cases and dividing it by the total number of COVID-related deaths.',
-  recoveringHelp:
-    'Recovering countries have a significantly lower 7 day average than they did a week ago.',
-  hotspotHelp:
-    "Hotspots are countries who's 7 day average today is significantly greater than their 7 day average a week ago.",
-  vaccinationHelp:
-    'This percentage is calculated based on the number of Vaccines administered and dividing by the countries total population.',
-  about: 'About',
-  asOf: 'as of ',
-  up: 'Up',
-  down: 'Down',
-  fromLastWeek: 'from last week',
-});
+export const TranslationContext = createContext<Translations>(
+  defaultTranslations
+);
 
 export function App() {
   let [data, setCOVIDData] = useState({ calculations: {} } as COVIDDataModel);
   let [places, setPlaces] = useState({} as COVIDPlaceModel);
+  let [firstRender, setFirstRender] = useState<boolean>(false);
   let [lang, setLang] = useState('en');
   let [trans, setTranslations]: any = useState({});
   let [favorites, setFavorites] = useState([] as Array<Place>);
@@ -115,7 +82,13 @@ export function App() {
       setTranslations(translations);
       ee.dispatch(EVTS.HIDE_LOADING);
     };
-    fetchTranslations();
+
+    if (!firstRender) {
+      fetchTranslations();
+    } else {
+      setFirstRender(false);
+      setTranslations(defaultTranslations);
+    }
   }, [lang]);
 
   // update countries with favorites
