@@ -58,10 +58,10 @@ class CalculationsProvider implements ICalculationsProvider {
       return '-';
     }
     let immunityRate = totalVaccinations / population;
-    return immunityRate.toFixed(3);
+    return immunityRate.toFixed(4);
   };
   getDeathRate = (totalDeaths: number, totalCases: number) => {
-    return (totalDeaths / totalCases).toFixed(3);
+    return (totalDeaths / totalCases).toFixed(4);
   };
   calculateAverage = (
     index: number,
