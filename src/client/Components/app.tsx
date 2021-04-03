@@ -20,6 +20,7 @@ import { utils } from '../scripts/utils';
 import { COOKIES } from './../scripts/cookie';
 
 export const TranslationContext = createContext<Translations>({
+  home: 'Home',
   casesThisWeek: 'Cases this Week',
   deathsThisWeek: 'Deaths this Week',
   immunityPercent: 'Percent Vaccinated',

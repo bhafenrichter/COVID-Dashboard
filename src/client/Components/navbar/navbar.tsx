@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Container, Nav, Navbar as BSNavbar } from 'react-bootstrap';
-import { About } from './../about/about';
 import { LanguageSelector } from './../language-selector/languageSelector';
 import { FaBars } from 'react-icons/fa';
-import { tracking } from '../../scripts/ga';
+import { Link } from 'react-router-dom';
+import { TranslationContext } from '../app';
 
 interface NavbarProps {
   language: string;
@@ -11,6 +11,8 @@ interface NavbarProps {
 
 export function Navbar(props: NavbarProps) {
   const { language } = props;
+  const translations = useContext(TranslationContext);
+
   return (
     <BSNavbar className="navbar" expand="lg">
       <Container>
@@ -21,10 +23,17 @@ export function Navbar(props: NavbarProps) {
         <BSNavbar.Collapse id="basic-navbar-nav">
           <Nav className="mr-auto"></Nav>
           <Nav>
-            <Nav.Link href="#about">
-              <About></About>
+            <Nav.Link></Nav.Link>
+            <Link to="/" className="text">
+              {translations['home']}
+            </Link>
+            <Nav.Link>
+              <Link to="/about" className="text">
+                {translations['about']}
+              </Link>
             </Nav.Link>
-            <Nav.Link href="#about">
+
+            <Nav.Link>
               <LanguageSelector language={language}></LanguageSelector>
             </Nav.Link>
           </Nav>

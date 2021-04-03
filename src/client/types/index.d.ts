@@ -10,6 +10,7 @@ declare module '*.less';
 declare module 'rodal';
 
 interface Translations {
+  home: string;
   casesThisWeek: string;
   deathsThisWeek: string;
   immunityPercent: string;

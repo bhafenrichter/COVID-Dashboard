@@ -23,6 +23,7 @@
         "src"
     ],
     "dependencies": {
+        "@types/react-router-dom": "^5.1.7",
         "body-parser": "^1.19.0",
         "eventemitter3": "^4.0.7",
         "express": "^4.16.3",
@@ -41,6 +42,7 @@
         "react-ga": "^3.3.0",
         "react-icons": "^4.1.0",
         "react-lazyload": "^3.1.0",
+        "react-router-dom": "^5.2.0",
         "recharts": "^2.0.2",
         "request": "^2.88.2",
         "rodal": "^1.8.1",
