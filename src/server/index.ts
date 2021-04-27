@@ -13,7 +13,7 @@ import { initJobs } from './jobs/scheduler';
 const app = express(); // define our app using express
 
 // configure app to use bodyParser()
-// this will let us get the data from a POST
+// this will let us get the data from a POST or PUT
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
